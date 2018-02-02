@@ -79,7 +79,7 @@
       </div>
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Resident Profiling</li>
-        <li><a href="{{ url('/Resident') }}"><i class="fa fa-book"></i> <span>Constituent</span></a></li>
+        <li><a class="active" href="{{ url('/Resident') }}"><i class="fa fa-book"></i> <span>Constituent</span></a></li>
         <li><a href="{{ url('/Household') }}"><i class="fa fa-home"></i> <span>Household</span></a></li>
       </ul>
     </section>
@@ -105,6 +105,7 @@
 <script src="{{ asset('/assets/AdminLte/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 <script src="{{ asset('/assets/AdminLte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
 <script src="{{ asset('/assets/AdminLte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
+<script src="{{ asset('/assets/AdminLte/dist/js/adminlte.min.js') }}"></script>
 <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('js/select2.min.js') }}"></script>
 <script>
@@ -114,7 +115,9 @@
          responsive: true
        } );
 
-       $('.select2').select2();
+       $('.select2').select2({
+        theme: "classic"
+       });
        $('.date').datepicker({
         format: 'yyyy-mm-dd',
        });

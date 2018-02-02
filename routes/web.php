@@ -33,3 +33,5 @@ Route::post('/Resident/Update/id={id}','ResidentController@update');
 
 //Household
 Route::get('/Household','HouseholdController@index');
+Route::get('/Household/Create','HouseholdController@create');
+Route::get('/Household/Inhabitant/id={id}','HouseholdController@inhabitant');

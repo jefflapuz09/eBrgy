@@ -21,7 +21,7 @@
     <div class="box-header with-border">
       <h3 class="box-title">Household Management</h3>
       <div class="box-tools pull-right">
-        <a href="{{ url('/Resident/Create') }}" class="btn btn-xs btn-success">New Household</a>
+        <a href="{{ url('/Household/Create') }}" class="btn btn-xs btn-success">New Household</a>
       </div>
     </div>
     <div class="box-body">

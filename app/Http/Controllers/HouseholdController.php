@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Household;
+use App\Resident;
 
 class HouseholdController extends Controller
 {
@@ -25,7 +26,14 @@ class HouseholdController extends Controller
      */
     public function create()
     {
-        return view('Household.create');
+        $resident = Resident::where('isActive',1)->get();
+        return view('Household.create',compact('resident'));
+    }
+
+    public function inhabitant($id)
+    {
+        $post = Resident::where('id',$id)->get();
+        return response()->json($post);
     }
 
     /**
