@@ -22,31 +22,33 @@
       <h3 class="box-title">New Household</h3>
     </div>
     <div class="box-body">
-        <form action="{{ url('/Household/Store') }}" method="post">
+        <form action="{{ url('/Household/Update/id='.$post->id) }}" method="post">
+        <input type="text" value="{{$post->id}}" name="householdId">
+        <input type="text" value="{{$inhabitant->id}}" name="inhabitantId">
         <div class="row" style="padding:20px;">
             <div class="col-sm-6">
                 <div class="" style="padding:10px; background:#252525; color:white;">
                     Household Information
                 </div>
                 <div class="form-group" style="margin-top:20px;">
-                    <input type="text" class="form-control" id="formGroupExampleInput" name="id" placeholder="Household No.">
+                    <input type="text" class="form-control" id="formGroupExampleInput" value="{{$post->id}}" name="id" placeholder="Household No.">
                 </div>
                 <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-5">
-                                    <input type="text" class="col-sm-6 form-control" id="exampleInputEmail1" placeholder="Street" name="street" >
+                                    <input type="text" class="col-sm-6 form-control" value="{{$post->street}}" id="exampleInputEmail1" placeholder="Street" name="street" >
                                 </div>
                                 <div class="col-sm-4">
-                                    <input type="text" class="col-sm-6 form-control" id="exampleInputEmail1" placeholder="Brgy" name="brgy">
+                                    <input type="text" class="col-sm-6 form-control" value="{{$post->brgy}}" id="exampleInputEmail1" placeholder="Brgy" name="brgy">
                                 </div>
                                 <div class="col-sm-3">
-                                    <input type="text" class="col-sm-6 form-control" id="exampleInputEmail1" placeholder="City" name="city">
+                                    <input type="text" class="col-sm-6 form-control" value="{{$post->city}}" id="exampleInputEmail1" placeholder="City" name="city">
                                 </div>
                             </div>
                 </div>
                 <div class="form-group">
                     <label for="formGroupExampleInput">Inhabitants</label>
-                    <select class="form-control select2" name="inhabitantss[]" multiple="multiple">
+                    <select class="form-control select2" name="inhabitantss[]" value="" multiple="multiple">
                         @foreach($resident as $res)
                             <option value="{{$res->id}}">{{$res->firstName}} {{$res->middleName}} {{$res->lastName}}</option>
                         @endforeach

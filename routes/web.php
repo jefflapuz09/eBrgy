@@ -35,3 +35,10 @@ Route::post('/Resident/Update/id={id}','ResidentController@update');
 Route::get('/Household','HouseholdController@index');
 Route::get('/Household/Create','HouseholdController@create');
 Route::get('/Household/Inhabitant/id={id}','HouseholdController@inhabitant');
+Route::get('/Household/Edit/id={id}','HouseholdController@edit');
+Route::get('/Household/Deactivate/id={id}', 'HouseholdController@destroy');
+Route::get('/Household/Soft', 'HouseholdController@soft');
+Route::get('/Household/Reactivate/id={id}', 'HouseholdController@reactivate');
+
+Route::post('/Household/Store','HouseholdController@store');
+Route::post('/Household/Update/id={id}','HouseholdController@update');

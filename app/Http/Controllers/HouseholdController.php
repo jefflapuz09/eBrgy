@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Household;
 use App\Resident;
+use App\Inhabitant;
+use DB;
+use Validator;
+use Redirect;
+use Illuminate\Validation\Rule;
 
 class HouseholdController extends Controller
 {
@@ -44,7 +49,59 @@ class HouseholdController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'id' => 'required',
+            'street' => 'required',
+            'brgy' => 'required',
+            'city' => 'required'
+        ];
+        $messages = [
+            'unique' => ':attribute already exists.',
+            'required' => 'The :attribute field is required.',
+            'max' => 'The :attribute field must be no longer than :max characters.',
+            'regex' => 'The :attribute must not contain special characters.'              
+        ];
+        $niceNames = [
+            'id' => 'Household No.',
+            'street' => 'Street',
+            'brgy' => 'Brgy',
+            'city' => 'City'
+        ];
+        $validator = Validator::make($request->all(),$rules,$messages);
+        $validator->setAttributeNames($niceNames); 
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+        else
+        {
+            $household = Household::create([
+                'id' => $request->id,
+                'street' => $request->street,
+                'brgy' => $request->brgy,
+                'city' => $request->city,
+            ]);
+
+            $id = DB::table('households')
+                ->select('id')
+                ->orderBy('id', 'desc')
+                ->limit(1)
+                ->get();
+            
+            foreach($id as $id2)
+            {
+                foreach($request->inhabitantss as $inhabitant)
+                {
+                    Inhabitant::create([
+                        'residentId' => $inhabitant,
+                        'householdId' => $id2->id
+                    ]);
+                }
+            }
+
+            return redirect('/Household')->withSuccess('Successfully inserted into the database.');
+        }
+        
+        
     }
 
     /**
@@ -66,7 +123,10 @@ class HouseholdController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Household::find($id);
+        $resident = Resident::where('isActive',1)->get();
+        $inhabitant = Inhabitant::where('householdId',$id)->first();
+        return view('Household.update',compact('post','resident','inhabitant'));
     }
 
     /**
@@ -78,7 +138,52 @@ class HouseholdController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'id' => 'required',
+            'street' => 'required',
+            'brgy' => 'required',
+            'city' => 'required'
+        ];
+        $messages = [
+            'unique' => ':attribute already exists.',
+            'required' => 'The :attribute field is required.',
+            'max' => 'The :attribute field must be no longer than :max characters.',
+            'regex' => 'The :attribute must not contain special characters.'              
+        ];
+        $niceNames = [
+            'id' => 'Household No.',
+            'street' => 'Street',
+            'brgy' => 'Brgy',
+            'city' => 'City'
+        ];
+        $validator = Validator::make($request->all(),$rules,$messages);
+        $validator->setAttributeNames($niceNames); 
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+        else
+        {
+            $household = Household::find($id)->update([
+                'id' => $request->id,
+                'street' => $request->street,
+                'brgy' => $request->brgy,
+                'city' => $request->city,
+            ]);
+
+            $id = $request->householdId;
+            $resid = $request->inhabitantId;
+
+            Inhabitant::where('householdId',$id)->delete();
+
+            foreach($request->inhabitantss as $inhabitant)
+            {
+                    Inhabitant::updateOrCreate([
+                        'residentId' => $inhabitant,
+                        'householdId' => $id
+                    ]);
+            }
+            return redirect('/Household')->withSuccess('Successfully updated into the database.');
+        }
     }
 
     /**
@@ -89,6 +194,20 @@ class HouseholdController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        Household::find($id)->update(['isActive' => 0]);
+            return redirect('/Household');    
+    }
+
+    public function soft()
+    {
+        $post = Household::where('isActive',0)->get();
+        return view('Household.soft',compact('post'));
+    }
+
+    public function reactivate($id)
+    {
+        Household::find($id)->update(['isActive' => 1]);
+        return redirect('/Household');
     }
 }

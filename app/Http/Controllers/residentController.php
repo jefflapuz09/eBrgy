@@ -66,7 +66,23 @@ class residentController extends Controller
             'regex' => 'The :attribute must not contain special characters.'              
         ];
         $niceNames = [
-            'name' => 'Service Category',
+            'firstName' => 'First Name',
+            'middleName' => 'Middle Name',
+            'lastName' => 'Last Name',
+            'street' => 'Street',
+            'brgy' => 'Brgy',
+            'city' => 'City',
+            'gender' => 'Gender',
+            'province' => 'Province',
+            'citizenship' => 'Citizenship',
+            'religion' => 'Religion',
+            'birthdate' => 'Birthdate',
+            'birthPlace' => 'Birthplace',
+            'civilStatus' => 'Civil Status',
+            'occupation' => 'Occupation',
+            'tinNo' => 'Tin No.',
+            'periodResidence' => 'Period of Residence',
+            'image' => 'Image'
         ];
         $validator = Validator::make($request->all(),$rules,$messages);
         $validator->setAttributeNames($niceNames); 
@@ -241,7 +257,7 @@ class residentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,$id)
+    public function destroy($id)
     {
 
         Resident::find($id)->update(['isActive' => 0]);
