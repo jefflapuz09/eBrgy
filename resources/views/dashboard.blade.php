@@ -81,6 +81,8 @@
         <li class="header">Resident Profiling</li>
         <li><a class="active" href="{{ url('/Resident') }}"><i class="fa fa-book"></i> <span>Constituent</span></a></li>
         <li><a href="{{ url('/Household') }}"><i class="fa fa-home"></i> <span>Household</span></a></li>
+        <li class="header">Barangay Issues</li>
+        <li><a href="{{ url('/Blotter') }}"><i class="fa fa-home"></i> <span>Blotter</span></a></li>
       </ul>
     </section>
   </aside>
@@ -115,9 +117,7 @@
          responsive: true
        } );
 
-       $('.select2').select2({
-        theme: "classic"
-       });
+       $('.select2').select2();
        $('.date').datepicker({
         format: 'yyyy-mm-dd',
        });

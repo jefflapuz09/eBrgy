@@ -42,3 +42,7 @@ Route::get('/Household/Reactivate/id={id}', 'HouseholdController@reactivate');
 
 Route::post('/Household/Store','HouseholdController@store');
 Route::post('/Household/Update/id={id}','HouseholdController@update');
+
+//Blotter
+Route::get('/Blotter','BlotterController@index');
+Route::get('/Blotter/Create','BlotterController@create');
