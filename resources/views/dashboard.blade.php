@@ -85,7 +85,8 @@
         <li class="header">Barangay Issues</li>
         <li><a href="{{ url('/Blotter') }}"><i class="fa fa-file"></i> <span>Blotter</span></a></li>
         <li class="header">Others</li>
-        <li><a href="{{ url('/Resident/NotResident') }}"><i class="fa fa-user"></i> <span>Non-resident</span></a></li>
+        <li><a href="{{ url('/Resident/NotResident') }}"><i class="fa fa-book"></i> <span>Non-resident</span></a></li>
+        <li><a href="{{ url('/Officer') }}"><i class="fa fa-user"></i> <span>Officers</span></a></li>
       </ul>
     </section>
   </aside>

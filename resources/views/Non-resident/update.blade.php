@@ -19,7 +19,7 @@
 @endif
 <div class="box box-primary">
     <div class="box-header with-border">
-      <h3 class="box-title">Update Resident</h3>
+      <h3 class="box-title">Update Non-Resident</h3>
 
     </div>
     <div class="box-body">

@@ -50,7 +50,7 @@ class HouseholdController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'id' => 'required',
+            'id' => ['required','unique:households'],
             'street' => 'required',
             'brgy' => 'required',
             'city' => 'required'
@@ -139,7 +139,7 @@ class HouseholdController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'id' => 'required',
+            'id' => ['required',Rule::unique('households')->ignore($id)],
             'street' => 'required',
             'brgy' => 'required',
             'city' => 'required'

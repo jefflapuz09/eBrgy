@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Officer;
+use App\Resident;
+use App\User;
+use Validator;
+use Redirect;
+use Illuminate\Validation\Rule;
 
 class OfficerController extends Controller
 {
@@ -13,7 +19,9 @@ class OfficerController extends Controller
      */
     public function index()
     {
-        //
+        
+        $post = Officer::where('isActive',1)->get();
+        return view('Officer.index',compact('post'));
     }
 
     /**
@@ -23,7 +31,8 @@ class OfficerController extends Controller
      */
     public function create()
     {
-        //
+        $resident = Resident::where('isActive',1)->get();
+       return view('Officer.create',compact('resident'));
     }
 
     /**
@@ -34,7 +43,53 @@ class OfficerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'residentId' => ['required','unique:officers'],
+            'position' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'conpassword' => 'required',
+        ];
+        $messages = [
+            'unique' => ':attribute already exists.',
+            'required' => 'The :attribute field is required.',
+            'max' => 'The :attribute field must be no longer than :max characters.',
+            'regex' => 'The :attribute must not contain special characters.'              
+        ];
+        $niceNames = [
+            'residentId' => 'Resident',
+            'position' => 'Position',
+            'email' => 'Email Address',
+            'password' => 'Password',
+            'conpassword' => 'Password Confirmation',
+        ];
+        $validator = Validator::make($request->all(),$rules,$messages);
+        $validator->setAttributeNames($niceNames); 
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+        else
+        {
+            if($request->password && $request->conpassword)
+            {
+                $officer = Officer::create([
+                    'residentId' => $request->residentId,
+                    'position' => $request->position
+                ]);
+    
+                User::create([
+                    'officerId' => $officer->id,
+                    'email' => $request->email,
+                    'password' => bcrypt($request->password)
+                ]);
+
+                return redirect('/Officer')->withSuccess('Successfully inserted into the database.');
+            }
+            else
+            {
+                return Redirect::back()->withErrors('The password does not match');
+            }
+        }
     }
 
     /**
@@ -56,7 +111,9 @@ class OfficerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $resident = Resident::where('isActive',1)->get();
+        $post = Officer::with('User')->find($id);
+        return view('Officer.update',compact('resident','post'));
     }
 
     /**
@@ -68,7 +125,53 @@ class OfficerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'residentId' => ['required',Rule::unique('officers')->ignore($id)],
+            'position' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'conpassword' => 'required',
+        ];
+        $messages = [
+            'unique' => ':attribute already exists.',
+            'required' => 'The :attribute field is required.',
+            'max' => 'The :attribute field must be no longer than :max characters.',
+            'regex' => 'The :attribute must not contain special characters.'              
+        ];
+        $niceNames = [
+            'residentId' => 'Resident',
+            'position' => 'Position',
+            'email' => 'Email Address',
+            'password' => 'Password',
+            'conpassword' => 'Password Confirmation',
+        ];
+        $validator = Validator::make($request->all(),$rules,$messages);
+        $validator->setAttributeNames($niceNames); 
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+        else
+        {
+            if($request->password && $request->conpassword)
+            {
+                $officer = Officer::find($id)->update([
+                    'residentId' => $request->residentId,
+                    'position' => $request->position
+                ]);
+    
+                User::find($request->userId)->update([
+                    'officerId' => $request->officerId,
+                    'email' => $request->email,
+                    'password' => bcrypt($request->password)
+                ]);
+
+                return redirect('/Officer')->withSuccess('Successfully inserted into the database.');
+            }
+            else
+            {
+                return Redirect::back()->withErrors('The password does not match');
+            }
+        }
     }
 
     /**
@@ -79,6 +182,20 @@ class OfficerController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        Officer::find($id)->update(['isActive' => 0]);
+            return redirect('/Officer');    
+    }
+
+    public function soft()
+    {
+        $post = Officer::where('isActive',0)->get();
+        return view('Officer.soft',compact('post'));
+    }
+
+    public function reactivate($id)
+    {
+        Officer::find($id)->update(['isActive' => 1]);
+        return redirect('/Officer');
     }
 }

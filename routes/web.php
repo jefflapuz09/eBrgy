@@ -61,3 +61,14 @@ Route::get('/Blotter/Reactivate/id={id}', 'BlotterController@reactivate');
 
 Route::post('/Blotter/Store','BlotterController@store');
 Route::post('/Blotter/Update/id={id}','BlotterController@update');
+
+//Officer
+Route::get('/Officer','OfficerController@index');
+Route::get('/Officer/Create','OfficerController@create');
+Route::get('/Officer/Edit/id={id}','OfficerController@edit');
+Route::get('/Officer/Deactivate/id={id}', 'OfficerController@destroy');
+Route::get('/Officer/Soft', 'OfficerController@soft');
+Route::get('/Officer/Reactivate/id={id}', 'OfficerController@reactivate');
+
+Route::post('/Officer/Store','OfficerController@store');
+Route::post('/Officer/Update/id={id}','OfficerController@update');

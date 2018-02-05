@@ -51,7 +51,11 @@
                     </div>
                     <div class="form-group">
                         <label>Officer-in-charge</label>
-                        <input type="text" class="form-control" name="officerCharge" value="{{$post->officerCharge}}" placeholder="Officer-in-charge">
+                        <select class="form-control select2" name="officerCharge">
+                                @foreach($resident2 as $res)
+                                    <option value="{{$res->firstName}} {{$res->middleName}} {{$res->lastName}}">{{$res->firstName}} {{$res->middleName}} {{$res->lastName}}</option>
+                                @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="col-sm-6">

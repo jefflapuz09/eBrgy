@@ -21,7 +21,7 @@
     <div class="box-header with-border">
       <h3 class="box-title">Non-resident Management</h3>
       <div class="box-tools pull-right">
-        <a href="{{ url('/Resident/NotResident/Create') }}" class="btn btn-xs btn-success">New Resident</a>
+        <a href="{{ url('/Resident/NotResident/Create') }}" class="btn btn-xs btn-success">New Non-Resident</a>
       </div>
     </div>
     <div class="box-body">

@@ -19,7 +19,7 @@
 @endif
 <div class="box box-primary">
     <div class="box-header with-border">
-      <h3 class="box-title">Constituent Management</h3>
+      <h3 class="box-title">Non-resident Management</h3>
       <div class="box-tools pull-right">
         <a href="{{ url('/Resident/Create') }}" class="btn btn-xs btn-success">New Resident</a>
       </div>

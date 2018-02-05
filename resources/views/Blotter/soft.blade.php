@@ -19,7 +19,7 @@
 @endif
 <div class="box box-primary">
     <div class="box-header with-border">
-      <h3 class="box-title">Household Management</h3>
+      <h3 class="box-title">Blotter Records</h3>
       <div class="box-tools pull-right">
         <a href="{{ url('/Household/Create') }}" class="btn btn-xs btn-success">New Household</a>
       </div>

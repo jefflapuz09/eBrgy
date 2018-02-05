@@ -17,4 +17,8 @@ class Officer extends Model
     public function Resident(){
         return $this->belongsTo('App\Resident','residentId');
     }
+
+    public function User(){
+        return $this->hasMany('App\User','officerId');
+    }
 }

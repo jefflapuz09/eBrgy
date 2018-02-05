@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Blotter;
 use App\Resident;
+use App\Officer;
 use Validator;
 use Redirect;
 use Illuminate\Validation\Rule;
@@ -32,7 +33,8 @@ class BlotterController extends Controller
     {
         $resident = Resident::where('isActive',1)->get();
         $resident2 = Resident::where('isActive',1)->orderBy('id', 'desc')->get();
-        return view('Blotter.create',compact('resident','resident2'));
+        $officer = Officer::where('isActive',1)->get();
+        return view('Blotter.create',compact('resident','resident2','officer'));
     }
 
     /**
@@ -44,7 +46,7 @@ class BlotterController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'id' => 'required',
+            'id' => ['required','unique:blotters'],
             'complainant' => 'required',
             'complainedResident' => 'required',
             'officerCharge' => 'required',
@@ -119,7 +121,7 @@ class BlotterController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'id' => 'required',
+            'id' => ['required',Rule::unique('blotters')->ignore($id)],
             'complainant' => 'required',
             'complainedResident' => 'required',
             'officerCharge' => 'required',
