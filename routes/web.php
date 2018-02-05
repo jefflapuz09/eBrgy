@@ -22,15 +22,22 @@ Route::get('/admin','HomeController@index');
 
 //Residents
 Route::get('/Resident','ResidentController@index');
+Route::get('/Resident/NotResident','ResidentController@index2');
 Route::get('/Resident/Create','ResidentController@create');
+Route::get('/Resident/NotResident/Create','ResidentController@create2');
 Route::get('/Resident/Edit/id={id}','ResidentController@edit');
+Route::get('/Resident/NotResident/Edit/id={id}','ResidentController@edit2');
 Route::get('/Resident/Deactivate/id={id}', 'ResidentController@destroy');
+Route::get('/Resident/NotResident/Deactivate/id={id}', 'ResidentController@destroy2');
 Route::get('/Resident/Soft', 'ResidentController@soft');
+Route::get('/Resident/NotResident/Soft', 'ResidentController@soft2');
 Route::get('/Resident/Reactivate/id={id}', 'ResidentController@reactivate');
+Route::get('/Resident/NotResident/Reactivate/id={id}', 'ResidentController@reactivate2');
 
 Route::post('/Resident/Store','ResidentController@store');
 Route::post('/Resident/NotResident/Store','ResidentController@notResident');
 Route::post('/Resident/Update/id={id}','ResidentController@update');
+Route::post('/Resident/NotResident/Update/id={id}','ResidentController@update2');
 
 //Household
 Route::get('/Household','HouseholdController@index');

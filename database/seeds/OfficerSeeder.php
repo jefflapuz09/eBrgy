@@ -3,8 +3,7 @@
 use Illuminate\Database\Seeder;
 use Carbon\Carbon as Carbon;
 
-
-class UserSeeder extends Seeder
+class OfficerSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,11 +12,10 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        DB::table('officers')->insert([
             'id' => '1',
-            'officerId' => '1',
-            'email' => 'jeff.lapuz09@gmail.com',
-            'password' => bcrypt('qweqwe'),
+            'residentid' => '1',
+            'position' => 'Kagawad',
             'isActive' => 1,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

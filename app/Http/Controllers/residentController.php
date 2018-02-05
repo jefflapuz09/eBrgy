@@ -22,6 +22,12 @@ class residentController extends Controller
         return view('Resident.index',compact('post'));
     }
 
+    public function index2()
+    {
+        $post = Resident::where('isActive',1)->where('isRegistered',0)->get();
+        return view('Non-resident.index',compact('post'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -30,6 +36,11 @@ class residentController extends Controller
     public function create()
     {
         return view('Resident.create');
+    }
+
+    public function create2()
+    {
+        return view('Non-resident.create');
     }
 
     /**
@@ -234,7 +245,7 @@ class residentController extends Controller
                 'fatherLastName' => $request->fatherLastName,
             ]);
 
-            return redirect('/Resident')->withSuccess('Successfully inserted into the database.');
+            return redirect('/Resident/NotResident')->withSuccess('Successfully inserted into the database.');
         }
     }
     /**
@@ -260,6 +271,12 @@ class residentController extends Controller
         return view('Resident.update',compact('post'));
     }
 
+
+    public function edit2($id)
+    {
+        $post = Resident::find($id);
+        return view('Non-resident.update',compact('post'));
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -351,6 +368,90 @@ class residentController extends Controller
         }
     }
 
+
+    public function update2(Request $request, $id)
+    {
+        $rules = [
+            'firstName' => ['required','max:50',Rule::unique('residents')->ignore($id), 'regex:/^[^~`!@#*_={}|\;<>,?()$%&^]+$/'],
+            'middleName' => ['nullable','max:50', 'regex:/^[^~`!@#*_={}|\;<>,?()$%&^]+$/'],
+            'lastName' => ['required','max:50', 'regex:/^[^~`!@#*_={}|\;<>,?()$%&^]+$/'],
+            'street' => 'required',
+            'brgy' => 'required',
+            'city' => 'required',
+            'gender' => 'required',
+            'province' => 'nullable',
+            'citizenship' => 'required',
+            'religion' => 'required',
+            'birthdate' => 'required',
+            'birthPlace' => 'required',
+            'civilStatus' => 'required',
+            'occupation' => 'nullable',
+            'tinNo' => 'nullable',
+            'periodResidence' => 'required',
+            'image' => 'nullable'
+        ];
+        $messages = [
+            'unique' => ':attribute already exists.',
+            'required' => 'The :attribute field is required.',
+            'max' => 'The :attribute field must be no longer than :max characters.',
+            'regex' => 'The :attribute must not contain special characters.'              
+        ];
+        $niceNames = [
+            'name' => 'Service Category',
+        ];
+        $validator = Validator::make($request->all(),$rules,$messages);
+        $validator->setAttributeNames($niceNames); 
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+        else
+        {
+            $file = $request->file('image');
+            $pic = "";
+            if($file == '' || $file == null){
+                $nullpic = Resident::find($id);
+                $pic = $nullpic->image;
+            }else{
+                $date = date("Ymdhis");
+                $extension = $request->file('image')->getClientOriginalExtension();
+                $pic = "img/".$date.'.'.$extension;
+                $request->file('image')->move("img",$pic);    
+                // $request->file('photo')->move(public_path("/uploads"), $newfilename);
+            }
+
+            Resident::find($id)->update([
+                'firstName' => $request->firstName,
+                'middleName' => $request->middleName,
+                'lastName' => $request->lastName,
+                'street' => $request->street,
+                'brgy' => $request->brgy,
+                'city' => $request->city,
+                'gender' => $request->gender,
+                'province' => $request->province,
+                'citizenship' => $request->citizenship,
+                'religion' => $request->religion,
+                'birthdate' => $request->birthdate,
+                'birthPlace' => $request->birthPlace,
+                'civilStatus' => $request->civilStatus,
+                'occupation' => $request->occupation,
+                'tinNo' => $request->tinNo,
+                'periodResidence' => $request->periodResidence,
+                'image' => $pic
+            ]);
+
+            parentModel::find($request->parentid)->update([
+                'residentId' => $request->residentId,
+                'motherFirstName' => $request->motherFirstName,
+                'motherMiddleName' => $request->motherMiddleName,
+                'motherLastName' => $request->motherLastName,
+                'fatherFirstName' => $request->fatherFirstName,
+                'fatherMiddleName' => $request->fatherMiddleName,
+                'fatherLastName' => $request->fatherLastName,
+            ]);
+
+            return redirect('/Resident/NotResident')->withSuccess('Successfully updated into the database.');
+        }
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -374,5 +475,24 @@ class residentController extends Controller
     {
         Resident::find($id)->update(['isActive' => 1]);
         return redirect('/Resident');
+    }
+
+    public function destroy2($id)
+    {
+
+        Resident::find($id)->update(['isActive' => 0]);
+            return redirect('/Resident/NotResident');    
+    }
+
+    public function soft2()
+    {
+        $post = Resident::where('isActive',0)->get();
+        return view('Non-resident.soft',compact('post'));
+    }
+
+    public function reactivate2($id)
+    {
+        Resident::find($id)->update(['isActive' => 1]);
+        return redirect('/Resident/NotResident');
     }
 }
