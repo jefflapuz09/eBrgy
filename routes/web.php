@@ -29,6 +29,7 @@ Route::get('/Resident/Soft', 'ResidentController@soft');
 Route::get('/Resident/Reactivate/id={id}', 'ResidentController@reactivate');
 
 Route::post('/Resident/Store','ResidentController@store');
+Route::post('/Resident/NotResident/Store','ResidentController@notResident');
 Route::post('/Resident/Update/id={id}','ResidentController@update');
 
 //Household
@@ -46,3 +47,10 @@ Route::post('/Household/Update/id={id}','HouseholdController@update');
 //Blotter
 Route::get('/Blotter','BlotterController@index');
 Route::get('/Blotter/Create','BlotterController@create');
+Route::get('/Blotter/Edit/id={id}','BlotterController@edit');
+Route::get('/Blotter/Deactivate/id={id}', 'BlotterController@destroy');
+Route::get('/Blotter/Soft', 'BlotterController@soft');
+Route::get('/Blotter/Reactivate/id={id}', 'BlotterController@reactivate');
+
+Route::post('/Blotter/Store','BlotterController@store');
+Route::post('/Blotter/Update/id={id}','BlotterController@update');

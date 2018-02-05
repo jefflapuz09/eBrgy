@@ -47,10 +47,10 @@
                     <td>{{$posts->officerCharge}}</td>
                     <td>{{$posts->description}}</td>
                     <td>
-                        <a href="{{ url('/Household/Edit/id='.$posts->id) }}" onclick="return updateForm()" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Update record">
+                        <a href="{{ url('/Blotter/Edit/id='.$posts->id) }}" onclick="return updateForm()" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Update record">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </a>
-                        <a href="{{ url('/Household/Deactivate/id='.$posts->id) }}"  onclick="return deleteForm()" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Deactivate record">
+                        <a href="{{ url('/Blotter/Deactivate/id='.$posts->id) }}"  onclick="return deleteForm()" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Deactivate record">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
                     </td>
@@ -59,7 +59,7 @@
             </tbody>
         </table>
         <div class="form-group pull-right">
-            <label class="checkbox-inline"><input type="checkbox"  onclick="document.location='{{ url('/Household/Soft') }}';" id="showDeactivated"> Show deactivated records</label>
+            <label class="checkbox-inline"><input type="checkbox"  onclick="document.location='{{ url('/Blotter/Soft') }}';" id="showDeactivated"> Show deactivated records</label>
          </div>
     </div>
 </div>

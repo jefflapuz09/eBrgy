@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Blotter;
 use App\Resident;
+use Validator;
+use Redirect;
+use Illuminate\Validation\Rule;
+use DB;
 
 class BlotterController extends Controller
 {
@@ -27,7 +31,8 @@ class BlotterController extends Controller
     public function create()
     {
         $resident = Resident::where('isActive',1)->get();
-        return view('Blotter.create',compact('resident'));
+        $resident2 = Resident::where('isActive',1)->orderBy('id', 'desc')->get();
+        return view('Blotter.create',compact('resident','resident2'));
     }
 
     /**
@@ -38,7 +43,45 @@ class BlotterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'id' => 'required',
+            'complainant' => 'required',
+            'complainedResident' => 'required',
+            'officerCharge' => 'required',
+            'description' => 'required'
+        ];
+        $messages = [
+            'unique' => ':attribute already exists.',
+            'required' => 'The :attribute field is required.',
+            'max' => 'The :attribute field must be no longer than :max characters.',
+            'regex' => 'The :attribute must not contain special characters.'              
+        ];
+        $niceNames = [
+            'id' => 'Case No.',
+            'complainant' => 'Complainant',
+            'complainedResident' => 'Complained Resident',
+            'officerCharge' => 'Officer-in-Charge',
+            'description' => 'Description'
+        ];
+        $validator = Validator::make($request->all(),$rules,$messages);
+        $validator->setAttributeNames($niceNames); 
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+        else
+        {
+            Blotter::create([
+                'id' => $request->id,
+                'complainant' => $request->complainant,
+                'complainedResident' => $request->complainedResident,
+                'officerCharge' => $request->officerCharge,
+                'description' => $request->description
+            ]);
+
+            Resident::find($request->complainedResident)->update(['isDerogatory' => 0 ]);
+
+            return redirect('/Blotter')->withSuccess('Successfully inserted into the database.');
+        }
     }
 
     /**
@@ -60,7 +103,10 @@ class BlotterController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Blotter::find($id);
+        $resident = Resident::where('isActive',1)->get();
+        $resident2 = Resident::where('isActive',1)->orderBy('id', 'desc')->get();
+        return view('Blotter.update',compact('resident','resident2','post'));
     }
 
     /**
@@ -72,7 +118,50 @@ class BlotterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'id' => 'required',
+            'complainant' => 'required',
+            'complainedResident' => 'required',
+            'officerCharge' => 'required',
+            'description' => 'required'
+        ];
+        $messages = [
+            'unique' => ':attribute already exists.',
+            'required' => 'The :attribute field is required.',
+            'max' => 'The :attribute field must be no longer than :max characters.',
+            'regex' => 'The :attribute must not contain special characters.'              
+        ];
+        $niceNames = [
+            'id' => 'Case No.',
+            'complainant' => 'Complainant',
+            'complainedResident' => 'Complained Resident',
+            'officerCharge' => 'Officer-in-Charge',
+            'description' => 'Description'
+        ];
+        $validator = Validator::make($request->all(),$rules,$messages);
+        $validator->setAttributeNames($niceNames); 
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+        else
+        {
+             DB::table('residents')->where('id',$request->complainant)->update(['isDerogatory' => 1]);
+             DB::table('residents')->where('id',$request->complainedResident)->update(['isDerogatory' => 1]);
+        
+            Blotter::find($id)->update([
+                'id' => $request->id,
+                'complainant' => $request->complainant,
+                'complainedResident' => $request->complainedResident,
+                'officerCharge' => $request->officerCharge,
+                'description' => $request->description
+            ]);
+            
+            
+
+            Resident::find($request->complainedResident)->update(['isDerogatory' => 0 ]);
+
+            return redirect('/Blotter')->withSuccess('Successfully updated into the database.');
+        }
     }
 
     /**
@@ -83,6 +172,20 @@ class BlotterController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        Blotter::find($id)->update(['isActive' => 0]);
+            return redirect('/Blotter');    
+    }
+
+    public function soft()
+    {
+        $post = Blotter::where('isActive',0)->get();
+        return view('Blotter.soft',compact('post'));
+    }
+
+    public function reactivate($id)
+    {
+        Blotter::find($id)->update(['isActive' => 1]);
+        return redirect('/Blotter');
     }
 }

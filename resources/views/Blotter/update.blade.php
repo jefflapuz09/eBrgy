@@ -19,25 +19,25 @@
 @endif
 <div class="box box-primary">
     <div class="box-header with-border">
-      <h3 class="box-title">New Blotter</h3>
+      <h3 class="box-title">Update Blotter</h3>
       <div class="box-tools pull-right">
         <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-xs btn-success"><i class="fa fa-user"></i></a>
       </div>
     </div>
     <div class="box-body">
-        <form action="{{ url('/Blotter/Store') }}" method="post">
+        <form action="{{ url('/Blotter/Update/id='.$post->id) }}" method="post">
             {{csrf_field()}}
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label><span style="color:red;">Case No.</span></label>
-                        <input type="text" class="form-control" placeholder="Case No." name="id">
+                        <input type="text" class="form-control" placeholder="Case No." value="{{$post->id}}" name="id">
                     </div>
                     <div class="form-group">
                             <label>Complainant</label>
                             <select class="form-control select2" name="complainant">
                                 @foreach($resident as $res)
-                                    <option value="{{$res->id}}">{{$res->firstName}} {{$res->middleName}} {{$res->lastName}}</option>
+                                    <option value="{{$res->id}}" @if($post->complainant == $res->id) selected="selected" @endif>{{$res->firstName}} {{$res->middleName}} {{$res->lastName}}</option>
                                 @endforeach
                             </select>
                     </div>
@@ -45,18 +45,18 @@
                             <label>Complained Resident</label>
                             <select class="form-control select2" name="complainedResident">
                                 @foreach($resident2 as $res)
-                                    <option value="{{$res->id}}">{{$res->firstName}} {{$res->middleName}} {{$res->lastName}}</option>
+                                    <option value="{{$res->id}}" @if($post->complainant == $res->id) selected="selected" @endif>{{$res->firstName}} {{$res->middleName}} {{$res->lastName}}</option>
                                 @endforeach
                             </select>
                     </div>
                     <div class="form-group">
                         <label>Officer-in-charge</label>
-                        <input type="text" class="form-control" name="officerCharge" placeholder="Officer-in-charge">
+                        <input type="text" class="form-control" name="officerCharge" value="{{$post->officerCharge}}" placeholder="Officer-in-charge">
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <label for="comment">Description:</label>
-                    <textarea class="form-control" rows="5" name="description" id="comment"></textarea>
+                    <textarea class="form-control" rows="5" name="description" id="comment">{{$post->description}}</textarea>
                 </div>
                 <div class="form-group">
                     <div class="pull-right">

@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="box-body">
-        <table id="example" class="display" cellspacing="0" width="100%">
+        <table id="example" class="display table" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th>Image</th>
@@ -39,7 +39,11 @@
             </thead>
             <tbody>
                 @foreach($post as $posts)
+                @if($posts->isDerogatory == 1)
                 <tr>
+                @else
+                <tr style="" class="danger">
+                @endif
                     <td><img src="{{ asset($posts->image) }}" width="100px" style="max-width:100px;"></td>
                     <td>{{$posts->firstName}} {{$posts->middleName}} {{$posts->lastName}}</td>
                     <td>

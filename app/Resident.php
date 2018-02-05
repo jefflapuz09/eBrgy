@@ -29,7 +29,9 @@ class Resident extends Model
         'civilStatus',
         'periodResidence',
         'image',
-        'isActive'
+        'isActive',
+        'isRegistered',
+        'isDerogatory'
     ];
 
     public function Parents(){

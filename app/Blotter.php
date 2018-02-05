@@ -9,9 +9,11 @@ class Blotter extends Model
     protected $table = 'blotters';
 
     protected $fillable = [
+        'id',
         'complainant',
         'complainedResident',
         'officerCharge',
+        'description',
         'isActive'
     ];
 

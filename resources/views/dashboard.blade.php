@@ -17,8 +17,9 @@
   <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/toastr.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   @yield('style')
-
+  <link rel="icon" href="{{ asset('img/logo.png') }}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-purple-light sidebar-mini">

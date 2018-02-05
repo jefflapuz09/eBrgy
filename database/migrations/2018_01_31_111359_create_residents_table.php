@@ -36,6 +36,8 @@ class CreateResidentsTable extends Migration
             $table->string('civilStatus');
             $table->string('periodResidence');
             $table->string('image')->nullable();
+            $table->boolean('isDerogatory')->default(1);
+            $table->boolean('isRegistered')->default(1);
             $table->boolean('isActive')->default(1);
             $table->timestamps();
         });

@@ -19,7 +19,7 @@
 @endif
 <div class="box box-primary">
     <div class="box-header with-border">
-      <h3 class="box-title">New Household</h3>
+      <h3 class="box-title">Update Household</h3>
     </div>
     <div class="box-body">
         <form action="{{ url('/Household/Update/id='.$post->id) }}" method="post">
