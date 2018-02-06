@@ -29,6 +29,9 @@
             {{csrf_field()}}
             <div class="row">
                 <div class="col-sm-6">
+                    <div class="" style="padding:10px; background:#252525; color:white; margin-bottom:20px;">
+                    Blotter Information
+                    </div>
                     <div class="form-group">
                         <label><span style="color:red;">Case No.</span></label>
                         <input type="text" class="form-control" placeholder="Case No." name="id">

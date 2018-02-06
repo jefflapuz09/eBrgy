@@ -23,8 +23,8 @@
     </div>
     <div class="box-body">
         <form action="{{ url('/Household/Update/id='.$post->id) }}" method="post">
-        <input type="text" value="{{$post->id}}" name="householdId">
-        <input type="text" value="{{$inhabitant->id}}" name="inhabitantId">
+        <input type="hidden" value="{{$post->id}}" name="householdId">
+        <input type="hidden" value="{{$inhabitant->id}}" name="inhabitantId">
         <div class="row" style="padding:20px;">
             <div class="col-sm-6">
                 <div class="" style="padding:10px; background:#252525; color:white;">

@@ -14,6 +14,7 @@ class Blotter extends Model
         'complainedResident',
         'officerCharge',
         'description',
+        'status',
         'isActive'
     ];
 

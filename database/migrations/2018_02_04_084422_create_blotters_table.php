@@ -22,6 +22,7 @@ class CreateBlottersTable extends Migration
             $table->foreign('complainedResident')->references('id')->on('residents');
             $table->string('officerCharge');
             $table->text('description');
+            $table->integer('status')->default(1);
             $table->boolean('isActive')->default(1);
             $table->timestamps();
         });

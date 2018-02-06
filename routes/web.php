@@ -73,5 +73,16 @@ Route::get('/Officer/Reactivate/id={id}', 'OfficerController@reactivate');
 Route::post('/Officer/Store','OfficerController@store');
 Route::post('/Officer/Update/id={id}','OfficerController@update');
 
+//Projects
+Route::get('/Project','ProjectController@index');
+Route::get('/Project/Create','ProjectController@create');
+Route::get('/Project/Edit/id={id}','ProjectController@edit');
+Route::get('/Project/Deactivate/id={id}', 'ProjectController@destroy');
+Route::get('/Project/Soft', 'ProjectController@soft');
+Route::get('/Project/Reactivate/id={id}', 'ProjectController@reactivate');
+
+Route::post('/Project/Store','ProjectController@store');
+Route::post('/Project/Update/id={id}','ProjectController@update');
+
 //Forms
 Route::get('/BarangayClearance/Print/{id}','PdfController@index');
