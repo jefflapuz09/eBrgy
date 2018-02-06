@@ -72,3 +72,6 @@ Route::get('/Officer/Reactivate/id={id}', 'OfficerController@reactivate');
 
 Route::post('/Officer/Store','OfficerController@store');
 Route::post('/Officer/Update/id={id}','OfficerController@update');
+
+//Forms
+Route::get('/BarangayClearance/Print/{id}','PdfController@index');

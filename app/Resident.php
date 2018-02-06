@@ -37,4 +37,8 @@ class Resident extends Model
     public function Parents(){
         return $this->hasMany('App\parentModel','residentId');
     }
+
+    public function Officer(){
+        return $this->hasMany('App\Officer','officerId');
+    }
 }

@@ -63,6 +63,9 @@
                         <a href="{{ url('/Resident/Deactivate/id='.$posts->id) }}"  onclick="return deleteForm()" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Deactivate record">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
+                        <a href="{{ url('/BarangayClearance/Print/'.$posts->id) }}"  type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Print">
+                            <i class="fa fa-print" aria-hidden="true"></i>
+                        </a>
                     </td>
                 </tr>
                 @endforeach
