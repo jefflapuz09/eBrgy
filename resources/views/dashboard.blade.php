@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{{ asset('/assets/AdminLte/bower_components/font-awesome/css/font-awesome.min.css') }}">
   <link rel="stylesheet" href="{{ asset('/assets/AdminLte/bower_components/Ionicons/css/ionicons.min.css') }}">
   <link rel="stylesheet" href="{{ asset('/assets/AdminLte/dist/css/AdminLTE.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('/assets/AdminLte/dist/css/skins/_all-skins.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('/assets/AdminLte/dist/css/skins/_all-skins.css') }}">
   <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
   <link rel="stylesheet" href="{{ asset('/assets/AdminLte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
   <link rel="stylesheet" href="{{ asset('/assets/AdminLte/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">

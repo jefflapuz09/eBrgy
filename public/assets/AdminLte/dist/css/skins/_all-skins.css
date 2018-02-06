@@ -1632,7 +1632,7 @@
  * ------------
  */
 .skin-purple-light .main-header .navbar {
-  background-color: #605ca8;
+  background-color: #252525;
 }
 .skin-purple-light .main-header .navbar .nav > li > a {
   color: #ffffff;
@@ -1658,7 +1658,7 @@
   color: #fff;
 }
 .skin-purple-light .main-header .navbar .sidebar-toggle:hover {
-  background-color: #555299;
+  background-color: black;
 }
 @media (max-width: 767px) {
   .skin-purple-light .main-header .navbar .dropdown-menu li.divider {
@@ -1668,19 +1668,19 @@
     color: #fff;
   }
   .skin-purple-light .main-header .navbar .dropdown-menu li a:hover {
-    background: #555299;
+    background: black;
   }
 }
 .skin-purple-light .main-header .logo {
-  background-color: #605ca8;
+  background-color: #252525;
   color: #ffffff;
   border-bottom: 0 solid transparent;
 }
 .skin-purple-light .main-header .logo:hover {
-  background-color: #5d59a6;
+  background-color: black;
 }
 .skin-purple-light .main-header li.user-header {
-  background-color: #605ca8;
+  background-color: #252525;
 }
 .skin-purple-light .content-header {
   background: transparent;
