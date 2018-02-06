@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/toastr.css') }}">
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/clockpicker.css') }}">
   @yield('style')
   <link rel="icon" href="{{ asset('img/logo.png') }}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -87,6 +88,7 @@
         <li><a href="{{ url('/Blotter') }}"><i class="fa fa-file"></i> <span>Blotter</span></a></li>
         <li class="header">Management</li>
         <li><a href="{{ url('/Project') }}"><i class="fa fa-cogs"></i> <span>Barangay Projects</span></a></li>
+        <li><a href="{{ url('/Schedule') }}"><i class="fa fa-calendar"></i> <span>Court Schedule</span></a></li>
         <li class="header">Others</li>
         <li><a href="{{ url('/Resident/NotResident') }}"><i class="fa fa-book"></i> <span>Non-resident</span></a></li>
         <li><a href="{{ url('/Officer') }}"><i class="fa fa-user"></i> <span>Officers</span></a></li>
@@ -117,6 +119,7 @@
 <script src="{{ asset('/assets/AdminLte/dist/js/adminlte.min.js') }}"></script>
 <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('js/select2.min.js') }}"></script>
+<script src="{{ asset('js/clockpicker.js') }}"></script>
 <script>
     $(document).ready(function() {
          $('#example').DataTable( {
@@ -125,6 +128,7 @@
        } );
 
        $('.select2').select2();
+       $('.clockpicker').clockpicker();
        $('.date').datepicker({
         format: 'yyyy-mm-dd',
        });

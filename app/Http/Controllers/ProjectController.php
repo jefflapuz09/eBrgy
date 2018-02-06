@@ -117,7 +117,7 @@ class ProjectController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'projectName' => ['required','unique:projects'],
+            'projectName' => ['required',Rule::unique('projects')->ignore($id)],
             'projectDev'=> 'required',
             'description' => 'nullable',
             'officerCharge' =>  'required',

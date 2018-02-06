@@ -84,5 +84,17 @@ Route::get('/Project/Reactivate/id={id}', 'ProjectController@reactivate');
 Route::post('/Project/Store','ProjectController@store');
 Route::post('/Project/Update/id={id}','ProjectController@update');
 
+//Schedule
+Route::get('/Schedule','ScheduleController@index');
+Route::get('/Schedule/Create','ScheduleController@create');
+Route::get('/Schedule/Edit/id={id}','ScheduleController@edit');
+Route::get('/Schedule/Deactivate/id={id}', 'ScheduleController@destroy');
+Route::get('/Schedule/Soft', 'ScheduleController@soft');
+Route::get('/Schedule/Reactivate/id={id}', 'ScheduleController@reactivate');
+
+Route::post('/Schedule/Store','ScheduleController@store');
+Route::post('/Schedule/Update/id={id}','ScheduleController@update');
+
+
 //Forms
 Route::get('/BarangayClearance/Print/{id}','PdfController@index');
