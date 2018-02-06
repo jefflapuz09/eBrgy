@@ -28,7 +28,7 @@
   <header class="main-header">
     <a href="index2.html" class="logo">
       <span class="logo-mini"><img src="{{ asset('img/logo.png') }}" height="30px"></span>
-      <span class="logo-lg"><img src="{{ asset('img/logo.png') }}" height="30px"></span>
+      <span class="logo-lg">EBRGY</span>
     </a>
     <nav class="navbar navbar-static-top">
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -76,7 +76,7 @@
         </div>
         <div class="pull-left info">
           <p>{{Auth::user()->Officer->Resident->firstName}} {{Auth::user()->Officer->Resident->middleName}} {{Auth::user()->Officer->Resident->lastName}}</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <a href="#"><i class="fa fa-circle text-success"></i>{{Auth::user()->Officer->position}}</a>
         </div>
       </div>
       <ul class="sidebar-menu" data-widget="tree">
@@ -101,7 +101,7 @@
   </div>
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 0.0.1
+        <div id="timediv"></div>
     </div>
     <strong>Copyright &copy; 2018 Lapuz Family.</strong> All rights
     reserved.
@@ -128,6 +128,14 @@
        $('.date').datepicker({
         format: 'yyyy-mm-dd',
        });
+
+       var interval = setInterval(timestamphome, 1000);
+        function timestamphome(){
+        var date;
+       date = new Date();
+        var time = document.getElementById('timediv'); 
+        time.innerHTML = date.toLocaleTimeString();
+         }
     });
 </script>
 @yield('script')
