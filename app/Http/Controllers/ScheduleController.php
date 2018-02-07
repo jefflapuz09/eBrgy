@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Schedule;
 use App\Resident;
 use App\Officer;
+use Validator;
+use Redirect;
+use Illuminate\Validation\Rule;
 
 class ScheduleController extends Controller
 {
@@ -16,10 +19,8 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $post = Schedule::where('isActive',1)->get();
-        $resident = Resident::where('isActive',1)->get();
-        $officer = Officer::where('isActive',1)->get();
-        return view('Schedule.index',compact('post','resident','officer'));
+        $post = Schedule::where('isActive',1)->get();    
+        return view('Schedule.index',compact('post'));
     }
 
     /**
@@ -29,8 +30,9 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        // $resident = Resident::where('isActive',1)->get();
-        // return view('Schedule.create',compact('resident'));
+        $resident = Resident::where('isActive',1)->get();
+        $officer = Officer::where('isActive',1)->get();
+        return view('Schedule.create',compact('resident','resident','officer'));
     }
 
     /**
@@ -99,7 +101,10 @@ class ScheduleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Schedule::find($id);
+        $resident = Resident::where('isActive',1)->get();
+        $officer = Officer::where('isActive',1)->get();
+        return view('Schedule.update',compact('post','resident','officer'));
     }
 
     /**
@@ -111,7 +116,43 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'residentId' => ['required'],
+            'officerId' => 'required',
+            'date' => 'required',
+            'start' => 'required',
+            'end' => 'required',
+        ];
+        $messages = [
+            'unique' => ':attribute already exists.',
+            'required' => 'The :attribute field is required.',
+            'max' => 'The :attribute field must be no longer than :max characters.',
+            'regex' => 'The :attribute must not contain special characters.'              
+        ];
+        $niceNames = [
+            'residentId' => 'Resident',
+            'officerId' => 'Person-in-Charge',
+            'date' => 'Date',
+            'start' => 'Time Started',
+            'end' => 'Time Ended',
+        ];
+        $validator = Validator::make($request->all(),$rules,$messages);
+        $validator->setAttributeNames($niceNames); 
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+        else
+        {
+            Schedule::find($id)->update([
+                'residentId' => $request->residentId,
+                'officerId' => $request->officerId,
+                'date' => $request->date,
+                'start' => $request->start,
+                'end' => $request->end
+            ]);
+
+            return redirect('/Schedule')->withSuccess('Successfully updated into the database.');
+        }
     }
 
     /**

@@ -21,7 +21,7 @@
     <div class="box-header with-border">
       <h3 class="box-title">Basketball Court Scheduling</h3>
       <div class="box-tools pull-right">
-        <a href="" data-target="#myModal" data-toggle="modal" class="btn btn-xs btn-success">New Schedule</a>
+        <a href="{{ url('/Schedule/Create') }}" class="btn btn-xs btn-success">New Schedule</a>
       </div>
     </div>
     <div class="box-body">
@@ -44,7 +44,7 @@
                     <td>{{ Carbon\Carbon::parse($posts->end)->toTimeString()  }}</td>
                     <td>{{$posts->Officer->Resident->firstName}} {{$posts->Officer->Resident->middleName}} {{$posts->Officer->Resident->lastName}}</td>
                     <td>
-                        <a href="#" data-toggle="modal" data-target="#myModal2" onclick="return updateForm()" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Update record">
+                        <a href="{{ url('/Schedule/Edit/id='.$posts->id) }}" onclick="return updateForm()" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Update record">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </a>
                         <a href="{{ url('/Schedule/Deactivate/id='.$posts->id) }}"  onclick="return deleteForm()" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Deactivate record">
@@ -60,9 +60,6 @@
          </div>
     </div>
 </div>
-
-@include('Schedule.create')
-@include('Schedule.update')
 
 @endsection
 
