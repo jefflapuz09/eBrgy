@@ -95,6 +95,16 @@ Route::get('/Schedule/Reactivate/id={id}', 'ScheduleController@reactivate');
 Route::post('/Schedule/Store','ScheduleController@store');
 Route::post('/Schedule/Update/id={id}','ScheduleController@update');
 
+//Business
+Route::get('/Business','BusinessController@index');
+Route::get('/Business/Create','BusinessController@create');
+Route::get('/Business/Edit/id={id}','BusinessController@edit');
+Route::get('/Business/Deactivate/id={id}', 'BusinessController@destroy');
+Route::get('/Business/Soft', 'BusinessController@soft');
+Route::get('/Business/Reactivate/id={id}', 'BusinessController@reactivate');
+
+Route::post('/Business/Store','BusinessController@store');
+Route::post('/Business/Update/id={id}','BusinessController@update');
 
 //Forms
 Route::get('/BarangayClearance/Print/{id}','PdfController@index');

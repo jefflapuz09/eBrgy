@@ -88,6 +88,7 @@
         <li class="header">Barangay Issues</li>
         <li><a href="{{ url('/Blotter') }}"><i class="fa fa-file"></i> <span>Blotter</span></a></li>
         <li class="header">Management</li>
+        <li><a href="{{ url('/Business') }}"><i class="fa fa-briefcase"></i> <span>Business</span></a></li>
         <li><a href="{{ url('/Project') }}"><i class="fa fa-cogs"></i> <span>Barangay Projects</span></a></li>
         <li><a href="{{ url('/Schedule') }}"><i class="fa fa-calendar"></i> <span>Court Schedule</span></a></li>
         <li class="header">Others</li>
