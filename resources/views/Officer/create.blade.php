@@ -20,14 +20,14 @@
 <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="box-title">New Officer</h3>
-
+      <p class="pull-right"><b>Note</b>: Fields with <span style="color:red;">*</span> are needed to filled out.</p>
     </div>
     <div class="box-body">
         <div class="row" style="padding:20px;">
         <form action="{{ url('/Officer/Store') }}" method="post" files="true" enctype="multipart/form-data">
             <div class="col-sm-3">
                 <div class="form-group">
-                    <label>Position:</label>
+                    <label>Position<span style="color:Red;">*</span></label>
                     <select class="form-control" name="position">
                         <option value="Chairman">Chairman</option>
                         <option value="Kagawad">Kagawad</option>
@@ -36,7 +36,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Resident:</label>
+                    <label>Resident<span style="color:Red;">*</span></label>
                     <select class="form-control select2" name="residentId">
                         @foreach($resident as $res)
                             <option value="{{$res->id}}">{{$res->firstName}} {{$res->middleName}} {{$res->lastName}}</option>
@@ -51,15 +51,15 @@
                     Account Information
                 </div>
                 <div class="form-group">
-                    <label>Email Address:</label>
+                    <label>Email Address<span style="color:Red;">*</span></label>
                     <input type="text" class="form-control" name="email" placeholder="Email Address">
                 </div>
                 <div class="form-group">
-                    <label>Password:</label>
+                    <label>Password<span style="color:Red;">*</span></label>
                     <input type="password" class="form-control" name="password" placeholder="Password">
                 </div>
                 <div class="form-group">
-                    <label>Confirm Password:</label>
+                    <label>Confirm Password<span style="color:Red;">*</span></label>
                     <input type="password" class="form-control" name="conpassword" placeholder="Confirm Password">
                 </div>
                     <div class="pull-right">

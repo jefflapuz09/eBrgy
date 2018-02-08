@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Resident;
 use App\parentModel;
+use App\Voter;
+use DB;
 use Validator;
 use Redirect;
 use Illuminate\Validation\Rule;
@@ -68,7 +70,8 @@ class residentController extends Controller
             'occupation' => 'nullable',
             'tinNo' => 'nullable',
             'periodResidence' => 'required',
-            'image' => 'nullable'
+            'image' => 'nullable',
+            'contactNumber' => 'nullable'
         ];
         $messages = [
             'unique' => ':attribute already exists.',
@@ -93,107 +96,8 @@ class residentController extends Controller
             'occupation' => 'Occupation',
             'tinNo' => 'Tin No.',
             'periodResidence' => 'Period of Residence',
-            'image' => 'Image'
-        ];
-        $validator = Validator::make($request->all(),$rules,$messages);
-        $validator->setAttributeNames($niceNames); 
-        if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator)->withInput();
-        }
-        else
-        {
-            $file = $request->file('image');
-            $pic = "";
-            if($file == '' || $file == null){
-                $pic = "img/steve.jpg";
-            }else{
-                $date = date("Ymdhis");
-                $extension = $request->file('image')->getClientOriginalExtension();
-                $pic = "img/".$date.'.'.$extension;
-                $request->file('image')->move("img",$pic);    
-                // $request->file('photo')->move(public_path("/uploads"), $newfilename);
-            }
-
-            $resident = Resident::create([
-                'firstName' => $request->firstName,
-                'middleName' => $request->middleName,
-                'lastName' => $request->lastName,
-                'street' => $request->street,
-                'brgy' => $request->brgy,
-                'city' => $request->city,
-                'gender' => $request->gender,
-                'province' => $request->province,
-                'citizenship' => $request->citizenship,
-                'religion' => $request->religion,
-                'birthdate' => $request->birthdate,
-                'birthPlace' => $request->birthPlace,
-                'civilStatus' => $request->civilStatus,
-                'occupation' => $request->occupation,
-                'tinNo' => $request->tinNo,
-                'periodResidence' => $request->periodResidence,
-                'image' => $pic
-            ]);
-
-            parentModel::create([
-                'residentId' => $resident->id,
-                'motherFirstName' => $request->motherFirstName,
-                'motherMiddleName' => $request->motherMiddleName,
-                'motherLastName' => $request->motherLastName,
-                'fatherFirstName' => $request->fatherFirstName,
-                'fatherMiddleName' => $request->fatherMiddleName,
-                'fatherLastName' => $request->fatherLastName,
-            ]);
-
-            return redirect('/Resident')->withSuccess('Successfully inserted into the database.');
-        }
-    }
-
-
-    public function notResident(Request $request)
-    {
-        $rules = [
-            'firstName' => ['required','max:50','unique:residents', 'regex:/^[^~`!@#*_={}|\;<>,?()$%&^]+$/'],
-            'middleName' => ['nullable','max:50', 'regex:/^[^~`!@#*_={}|\;<>,?()$%&^]+$/'],
-            'lastName' => ['required','max:50', 'regex:/^[^~`!@#*_={}|\;<>,?()$%&^]+$/'],
-            'street' => 'required',
-            'brgy' => 'required',
-            'city' => 'required',
-            'gender' => 'required',
-            'province' => 'nullable',
-            'citizenship' => 'required',
-            'religion' => 'required',
-            'birthdate' => 'required',
-            'birthPlace' => 'required',
-            'civilStatus' => 'required',
-            'occupation' => 'nullable',
-            'tinNo' => 'nullable',
-            'periodResidence' => 'required',
-            'image' => 'nullable'
-        ];
-        $messages = [
-            'unique' => ':attribute already exists.',
-            'required' => 'The :attribute field is required.',
-            'max' => 'The :attribute field must be no longer than :max characters.',
-            'regex' => 'The :attribute must not contain special characters.'              
-        ];
-        $niceNames = [
-            'firstName' => 'First Name',
-            'middleName' => 'Middle Name',
-            'lastName' => 'Last Name',
-            'street' => 'Street',
-            'brgy' => 'Brgy',
-            'city' => 'City',
-            'gender' => 'Gender',
-            'province' => 'Province',
-            'citizenship' => 'Citizenship',
-            'religion' => 'Religion',
-            'birthdate' => 'Birthdate',
-            'birthPlace' => 'Birthplace',
-            'civilStatus' => 'Civil Status',
-            'occupation' => 'Occupation',
-            'tinNo' => 'Tin No.',
-            'periodResidence' => 'Period of Residence',
-            'image' => 'Image'
+            'image' => 'Image',
+            'contactNumber' => 'Contact Number'
         ];
         $validator = Validator::make($request->all(),$rules,$messages);
         $validator->setAttributeNames($niceNames); 
@@ -232,7 +136,7 @@ class residentController extends Controller
                 'tinNo' => $request->tinNo,
                 'periodResidence' => $request->periodResidence,
                 'image' => $pic,
-                'isRegistered' => 0
+                'contactNumber' => $request->contactNumber
             ]);
 
             parentModel::create([
@@ -243,6 +147,122 @@ class residentController extends Controller
                 'fatherFirstName' => $request->fatherFirstName,
                 'fatherMiddleName' => $request->fatherMiddleName,
                 'fatherLastName' => $request->fatherLastName,
+            ]);
+
+            Voter::create([
+                'residentId' => $resident->id,
+                'voterId' => $request->voterId,
+                'precintNo' => $request->precintNo
+            ]);
+
+            return redirect('/Resident')->withSuccess('Successfully inserted into the database.');
+        }
+    }
+
+
+    public function notResident(Request $request)
+    {
+        $rules = [
+            'firstName' => ['required','max:50','unique:residents', 'regex:/^[^~`!@#*_={}|\;<>,?()$%&^]+$/'],
+            'middleName' => ['nullable','max:50', 'regex:/^[^~`!@#*_={}|\;<>,?()$%&^]+$/'],
+            'lastName' => ['required','max:50', 'regex:/^[^~`!@#*_={}|\;<>,?()$%&^]+$/'],
+            'street' => 'required',
+            'brgy' => 'required',
+            'city' => 'required',
+            'gender' => 'required',
+            'province' => 'nullable',
+            'citizenship' => 'required',
+            'religion' => 'required',
+            'birthdate' => 'required',
+            'birthPlace' => 'required',
+            'civilStatus' => 'required',
+            'occupation' => 'nullable',
+            'tinNo' => 'nullable',
+            'periodResidence' => 'required',
+            'image' => 'nullable',
+            'contactNumber' => 'nullable'
+        ];
+        $messages = [
+            'unique' => ':attribute already exists.',
+            'required' => 'The :attribute field is required.',
+            'max' => 'The :attribute field must be no longer than :max characters.',
+            'regex' => 'The :attribute must not contain special characters.'              
+        ];
+        $niceNames = [
+            'firstName' => 'First Name',
+            'middleName' => 'Middle Name',
+            'lastName' => 'Last Name',
+            'street' => 'Street',
+            'brgy' => 'Brgy',
+            'city' => 'City',
+            'gender' => 'Gender',
+            'province' => 'Province',
+            'citizenship' => 'Citizenship',
+            'religion' => 'Religion',
+            'birthdate' => 'Birthdate',
+            'birthPlace' => 'Birthplace',
+            'civilStatus' => 'Civil Status',
+            'occupation' => 'Occupation',
+            'tinNo' => 'Tin No.',
+            'periodResidence' => 'Period of Residence',
+            'image' => 'Image',
+            'contactNumber' => 'Contact Number'
+        ];
+        $validator = Validator::make($request->all(),$rules,$messages);
+        $validator->setAttributeNames($niceNames); 
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+        else
+        {
+            $file = $request->file('image');
+            $pic = "";
+            if($file == '' || $file == null){
+                $pic = "img/steve.jpg";
+            }else{
+                $date = date("Ymdhis");
+                $extension = $request->file('image')->getClientOriginalExtension();
+                $pic = "img/".$date.'.'.$extension;
+                $request->file('image')->move("img",$pic);    
+                // $request->file('photo')->move(public_path("/uploads"), $newfilename);
+            }
+
+            $resident = Resident::create([
+                'firstName' => $request->firstName,
+                'middleName' => $request->middleName,
+                'lastName' => $request->lastName,
+                'street' => $request->street,
+                'brgy' => $request->brgy,
+                'city' => $request->city,
+                'gender' => $request->gender,
+                'province' => $request->province,
+                'citizenship' => $request->citizenship,
+                'religion' => $request->religion,
+                'birthdate' => $request->birthdate,
+                'birthPlace' => $request->birthPlace,
+                'civilStatus' => $request->civilStatus,
+                'occupation' => $request->occupation,
+                'tinNo' => $request->tinNo,
+                'periodResidence' => $request->periodResidence,
+                'image' => $pic,
+                'isRegistered' => 0,
+                'contactNumber' => $request->contactNumber
+            ]);
+
+            parentModel::create([
+                'residentId' => $resident->id,
+                'motherFirstName' => $request->motherFirstName,
+                'motherMiddleName' => $request->motherMiddleName,
+                'motherLastName' => $request->motherLastName,
+                'fatherFirstName' => $request->fatherFirstName,
+                'fatherMiddleName' => $request->fatherMiddleName,
+                'fatherLastName' => $request->fatherLastName,
+            ]);
+
+            Voter::create([
+                'residentId' => $resident->id,
+                'voterId' => $request->voterId,
+                'precintNo' => $request->precintNo
             ]);
 
             return redirect('/Resident/NotResident')->withSuccess('Successfully inserted into the database.');
@@ -303,7 +323,8 @@ class residentController extends Controller
             'occupation' => 'nullable',
             'tinNo' => 'nullable',
             'periodResidence' => 'required',
-            'image' => 'nullable'
+            'image' => 'nullable',
+            'contactNumber' => 'nullable'
         ];
         $messages = [
             'unique' => ':attribute already exists.',
@@ -312,7 +333,24 @@ class residentController extends Controller
             'regex' => 'The :attribute must not contain special characters.'              
         ];
         $niceNames = [
-            'name' => 'Service Category',
+            'firstName' => 'First Name',
+            'middleName' => 'Middle Name',
+            'lastName' => 'Last Name',
+            'street' => 'Street',
+            'brgy' => 'Brgy',
+            'city' => 'City',
+            'gender' => 'Gender',
+            'province' => 'Province',
+            'citizenship' => 'Citizenship',
+            'religion' => 'Religion',
+            'birthdate' => 'Birthdate',
+            'birthPlace' => 'Birthplace',
+            'civilStatus' => 'Civil Status',
+            'occupation' => 'Occupation',
+            'tinNo' => 'Tin No.',
+            'periodResidence' => 'Period of Residence',
+            'image' => 'Image',
+            'contactNumber' => 'Contact Number'
         ];
         $validator = Validator::make($request->all(),$rules,$messages);
         $validator->setAttributeNames($niceNames); 
@@ -334,7 +372,7 @@ class residentController extends Controller
                 // $request->file('photo')->move(public_path("/uploads"), $newfilename);
             }
 
-            Resident::find($id)->update([
+            $resident = Resident::find($id)->update([
                 'firstName' => $request->firstName,
                 'middleName' => $request->middleName,
                 'lastName' => $request->lastName,
@@ -354,15 +392,40 @@ class residentController extends Controller
                 'image' => $pic
             ]);
 
-            parentModel::find($request->parentid)->update([
-                'residentId' => $request->residentId,
-                'motherFirstName' => $request->motherFirstName,
-                'motherMiddleName' => $request->motherMiddleName,
-                'motherLastName' => $request->motherLastName,
-                'fatherFirstName' => $request->fatherFirstName,
-                'fatherMiddleName' => $request->fatherMiddleName,
-                'fatherLastName' => $request->fatherLastName,
-            ]);
+            $chkVoter = DB::table('residents as r')
+            ->join('voters as v','v.residentId','r.id')
+            ->select('r.*')
+            ->where('r.id',$id)
+            ->get();
+
+            $chkParent = DB::table('residents as r')
+            ->join('parents as p','p.residentId','r.id')
+            ->select('r.*')
+            ->where('r.id',$id)
+            ->get();
+
+            if(count($chkParent)!=0)
+            {
+                parentModel::find($request->parentid)->updateOrCreate([
+                    'residentId' => $request->residentId,
+                    'motherFirstName' => $request->motherFirstName,
+                    'motherMiddleName' => $request->motherMiddleName,
+                    'motherLastName' => $request->motherLastName,
+                    'fatherFirstName' => $request->fatherFirstName,
+                    'fatherMiddleName' => $request->fatherMiddleName,
+                    'fatherLastName' => $request->fatherLastName,
+                ]);
+            }
+            
+
+            if(count($chkVoter) != 0)
+            {
+                Voter::find($request->vId)->updateOrCreate([
+                    'residentId' => $request->residentId,
+                    'voterId' => $request->voterId,
+                    'precintNo' => $request->precintNo
+                ]);
+            }
 
             return redirect('/Resident')->withSuccess('Successfully updated into the database.');
         }
@@ -388,7 +451,8 @@ class residentController extends Controller
             'occupation' => 'nullable',
             'tinNo' => 'nullable',
             'periodResidence' => 'required',
-            'image' => 'nullable'
+            'image' => 'nullable',
+            'contactNumber' => 'nullable'
         ];
         $messages = [
             'unique' => ':attribute already exists.',
@@ -397,7 +461,24 @@ class residentController extends Controller
             'regex' => 'The :attribute must not contain special characters.'              
         ];
         $niceNames = [
-            'name' => 'Service Category',
+            'firstName' => 'First Name',
+            'middleName' => 'Middle Name',
+            'lastName' => 'Last Name',
+            'street' => 'Street',
+            'brgy' => 'Brgy',
+            'city' => 'City',
+            'gender' => 'Gender',
+            'province' => 'Province',
+            'citizenship' => 'Citizenship',
+            'religion' => 'Religion',
+            'birthdate' => 'Birthdate',
+            'birthPlace' => 'Birthplace',
+            'civilStatus' => 'Civil Status',
+            'occupation' => 'Occupation',
+            'tinNo' => 'Tin No.',
+            'periodResidence' => 'Period of Residence',
+            'image' => 'Image',
+            'contactNumber' => 'Contact Number'
         ];
         $validator = Validator::make($request->all(),$rules,$messages);
         $validator->setAttributeNames($niceNames); 
@@ -439,15 +520,40 @@ class residentController extends Controller
                 'image' => $pic
             ]);
 
-            parentModel::find($request->parentid)->update([
-                'residentId' => $request->residentId,
-                'motherFirstName' => $request->motherFirstName,
-                'motherMiddleName' => $request->motherMiddleName,
-                'motherLastName' => $request->motherLastName,
-                'fatherFirstName' => $request->fatherFirstName,
-                'fatherMiddleName' => $request->fatherMiddleName,
-                'fatherLastName' => $request->fatherLastName,
-            ]);
+            $chkVoter = DB::table('residents as r')
+            ->join('voters as v','v.residentId','r.id')
+            ->select('r.*')
+            ->where('r.id',$id)
+            ->get();
+
+            $chkParent = DB::table('residents as r')
+            ->join('parents as p','p.residentId','r.id')
+            ->select('r.*')
+            ->where('r.id',$id)
+            ->get();
+
+            if(count($chkParent)!=0)
+            {
+                parentModel::find($request->parentid)->updateOrCreate([
+                    'residentId' => $request->residentId,
+                    'motherFirstName' => $request->motherFirstName,
+                    'motherMiddleName' => $request->motherMiddleName,
+                    'motherLastName' => $request->motherLastName,
+                    'fatherFirstName' => $request->fatherFirstName,
+                    'fatherMiddleName' => $request->fatherMiddleName,
+                    'fatherLastName' => $request->fatherLastName,
+                ]);
+            }
+            
+
+            if(count($chkVoter) != 0)
+            {
+                Voter::find($request->vId)->updateOrCreate([
+                    'residentId' => $request->residentId,
+                    'voterId' => $request->voterId,
+                    'precintNo' => $request->precintNo
+                ]);
+            }
 
             return redirect('/Resident/NotResident')->withSuccess('Successfully updated into the database.');
         }

@@ -20,7 +20,7 @@
 <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="box-title">Update Project</h3>
-
+      <p class="pull-right"><b>Note</b>: Fields with <span style="color:red;">*</span> are needed to filled out.</p>
     </div>
     <div class="box-body">
       <form action="{{ url('/Project/Update/id='.$post->id) }}" method="post">
@@ -31,13 +31,16 @@
                 </div>
                 {{csrf_field()}}
                 <div class="form-group" style="margin-top:20px;">
+                    <label>Project Name<span style="color:Red;">*</span></label>
                     <input type="text" class="form-control" name="projectName" value="{{$post->projectName}}" placeholder="Project Name">
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
+                        <label>Project Developer<span style="color:Red;">*</span></label>
                         <input type="text" class="form-control" name="projectDev" value="{{$post->projectDev}}" placeholder="Project Developer">
                     </div>
                     <div class="col-sm-6">
+                        <label>Officer-in-Charge<span style="color:Red;">*</span></label>
                         <select class="form-control select2" name="officerCharge">
                             @foreach($officer as $of)
                                 <option value="{{$of->Resident->firstName}}" @if($of->Resident->firstName == $post->officerCharge) selected @endif>{{$of->Resident->firstName}} {{$of->Resident->middleName}} {{$of->Resident->lastName}}</option>
@@ -50,6 +53,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
+                            <label>Project Started<span style="color:Red;">*</span></label>
                             <div class='input-group date' id="">
                                     <input type='text' name="dateStarted" value="{{$post->dateStarted}}" placeholder="Date Started"  class="form-control" />
                                     <span class="input-group-addon">
@@ -60,6 +64,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
+                            <label>Project Ended<span style="color:Red;">*</span></label>
                             <div class='input-group date' id="">
                                     <input type='text' name="dateEnded" placeholder="Date Ended"  value="{{$post->dateEnded}}" class="form-control" />
                                     <span class="input-group-addon">
@@ -69,6 +74,7 @@
                         </div>
                     </div>
                 </div>
+                <label>Description<span style="color:Red;"></span></label>
                 <textarea class="form-control" rows="5" name="description" placeholder="Project Description" id="comment">{{$post->description}}</textarea>
                 <div class="pull-right">
                         <button class="btn btn-primary" style="margin-right:10px; margin-top:20px;">Submit</a>

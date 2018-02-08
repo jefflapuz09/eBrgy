@@ -22,6 +22,7 @@
         <div class="box box-primary">
             <div class="box-header with-border">
             <h3 class="box-title">New Schedule</h3>
+            <p class="pull-right"><b>Note</b>: Fields with <span style="color:red;">*</span> are needed to filled out.</p>
             </div>
             <div class="box-body">
                 <div class="" style="padding:10px; background:#252525; margin-bottom:20px; color:white;">
@@ -30,6 +31,7 @@
                 <form action="{{ url('/Schedule/Store') }}" method="post">
                     {{csrf_field()}}
                     <div class="form-group">
+                            <label>Resident<span style="color:red;">*</span></label>
                             <select class="form-control select2" style="width:100%;" name="residentId">
                                 @foreach($resident as $res)
                                   <option value="{{$res->id}}">{{$res->firstName}} {{$res->middleName}} {{$res->lastName}}</option>
@@ -37,6 +39,7 @@
                             </select>
                         </div>
                         <div class="form-group">
+                             <label>Date<span style="color:red;">*</span></label>
                               <div class='input-group date' id='datetimepicker1'>
                                       <input type='text' name="date" placeholder="YYYY-MM-DD"  class="form-control" />
                                       <span class="input-group-addon">
@@ -45,6 +48,7 @@
                                   </div>
                           </div>
                         <div class="form-group">
+                                <label>Start<span style="color:red;">*</span></label>
                               <div class="input-group clockpicker">
                                     <input type="text" name="start" class="form-control">
                                     <span class="input-group-addon">
@@ -53,6 +57,7 @@
                                 </div>
                           </div>
                           <div class="form-group">
+                              <label>End<span style="color:red;">*</span></label>
                             <div class="input-group clockpicker">
                                   <input type="text" class="form-control" name="end">
                                   <span class="input-group-addon">
@@ -61,6 +66,7 @@
                               </div>
                         </div>
                         <div class="form-group">
+                            <label>Officer-in-Charge<span style="color:red;">*</span></label>
                             <select class="form-control select2" name="officerId" style="width:100%;">
                                 @foreach($officer as $of)
                                   <option value="{{$of->id}}">{{$of->Resident->firstName}} {{$of->Resident->middleName}} {{$of->Resident->lastName}}</option>

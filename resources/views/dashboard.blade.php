@@ -81,6 +81,7 @@
         </div>
       </div>
       <ul class="sidebar-menu" data-widget="tree">
+        <li><a href="{{ url('/admin') }}"><i class="fa fa-bar-chart"></i> <span>Dashboard</span></a></li>
         <li class="header">Resident Profiling</li>
         <li><a class="active" href="{{ url('/Resident') }}"><i class="fa fa-book"></i> <span>Constituent</span></a></li>
         <li><a href="{{ url('/Household') }}"><i class="fa fa-home"></i> <span>Household</span></a></li>

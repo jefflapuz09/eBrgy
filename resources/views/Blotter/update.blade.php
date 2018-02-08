@@ -21,7 +21,7 @@
     <div class="box-header with-border">
       <h3 class="box-title">Update Blotter</h3>
       <div class="box-tools pull-right">
-        <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-xs btn-success"><i class="fa fa-user"></i></a>
+            <p class="pull-right"><b>Note</b>: Fields with <span style="color:red;">*</span> are needed to filled out.</p>
       </div>
     </div>
     <div class="box-body">
@@ -32,12 +32,27 @@
                     <div class="" style="padding:10px; background:#252525; color:white; margin-bottom:20px;">
                     Blotter Information
                     </div>
-                    <div class="form-group">
-                        <label><span style="color:red;">Case No.</span></label>
-                        <input type="text" class="form-control" placeholder="Case No." value="{{$post->id}}" name="id">
+                    <div class="row">
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <label><span style="color:red;">Case No.*</span></label>
+                                    <input type="text" class="form-control" value="{{$post->id}}" placeholder="Case No." name="id">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                    <div class="form-group">
+                                            <label>Status<span style="color:Red;">*</span></label>
+                                            <select class="form-control" name="status">
+                                                <option value="1">Pending</option>
+                                                <option value="2">Ongoing</option>
+                                                <option value="3">Resolved Issue</option>
+                                                <option value="4">File to Action</option>
+                                            </select>
+                                    </div>
+                            </div>
                     </div>
                     <div class="form-group">
-                            <label>Complainant</label>
+                            <label>Complainant<span style="color:Red;">*</span></label>
                             <select class="form-control select2" name="complainant">
                                 @foreach($resident as $res)
                                     <option value="{{$res->id}}" @if($post->complainant == $res->id) selected="selected" @endif>{{$res->firstName}} {{$res->middleName}} {{$res->lastName}}</option>
@@ -45,7 +60,7 @@
                             </select>
                     </div>
                     <div class="form-group">
-                            <label>Complained Resident</label>
+                            <label>Complained Resident<span style="color:Red;">*</span></label>
                             <select class="form-control select2" name="complainedResident">
                                 @foreach($resident2 as $res)
                                     <option value="{{$res->id}}" @if($post->complainant == $res->id) selected="selected" @endif>{{$res->firstName}} {{$res->middleName}} {{$res->lastName}}</option>
@@ -53,7 +68,7 @@
                             </select>
                     </div>
                     <div class="form-group">
-                        <label>Officer-in-charge</label>
+                        <label>Officer-in-charge<span style="color:Red;">*</span></label>
                         <select class="form-control select2" name="officerCharge">
                                 @foreach($resident2 as $res)
                                     <option value="{{$res->firstName}} {{$res->middleName}} {{$res->lastName}}">{{$res->firstName}} {{$res->middleName}} {{$res->lastName}}</option>
@@ -62,7 +77,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <label for="comment">Description:</label>
+                    <label for="comment">Description<span style="color:Red;">*</span></label>
                     <textarea class="form-control" rows="5" name="description" id="comment">{{$post->description}}</textarea>
                 </div>
                 <div class="form-group">

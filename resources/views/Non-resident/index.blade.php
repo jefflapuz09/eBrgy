@@ -58,7 +58,7 @@
                     <td>{{ Carbon\Carbon::parse($posts->created_at)->toFormattedDateString()  }}</td>
                     <td>
                         <a href="{{ url('/Resident/NotResident/Edit/id='.$posts->id) }}" onclick="return updateForm()" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Update record">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            <i class="fa fa-edit" aria-hidden="true"></i>
                         </a>
                         <a href="{{ url('/Resident/NotResident/Deactivate/id='.$posts->id) }}"  onclick="return deleteForm()" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Deactivate record">
                             <i class="fa fa-trash" aria-hidden="true"></i>

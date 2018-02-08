@@ -77,7 +77,7 @@ class BlotterController extends Controller
                 'complainant' => $request->complainant,
                 'complainedResident' => $request->complainedResident,
                 'officerCharge' => $request->officerCharge,
-                'description' => $request->description
+                'description' => $request->description,
             ]);
 
             Resident::find($request->complainedResident)->update(['isDerogatory' => 0 ]);
@@ -155,7 +155,8 @@ class BlotterController extends Controller
                 'complainant' => $request->complainant,
                 'complainedResident' => $request->complainedResident,
                 'officerCharge' => $request->officerCharge,
-                'description' => $request->description
+                'description' => $request->description,
+                'status' => $request->status
             ]);
             
             

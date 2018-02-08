@@ -33,7 +33,8 @@
                     <th>Complained Resident</th>
                     <th>Date of Filing</th>
                     <th>Person-in-charge</th>
-                    <th>Description</th>
+
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -45,10 +46,20 @@
                     <td>{{$posts->comRes->firstName}} {{$posts->comRes->middleName}} {{$posts->comRes->lastName}}</td>                    
                     <td>{{ Carbon\Carbon::parse($posts->created_at)->toFormattedDateString()  }}</td>
                     <td>{{$posts->officerCharge}}</td>
-                    <td>{{$posts->description}}</td>
+                    <td>
+                        @if($posts->status == 1)
+                        Pending
+                        @elseif($posts->status == 2)
+                        Ongoing
+                        @elseif($posts->status == 3)
+                        Resolved Issue
+                        @else
+                        File to Action 
+                        @endif
+                    </td>
                     <td>
                         <a href="{{ url('/Blotter/Edit/id='.$posts->id) }}" onclick="return updateForm()" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Update record">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            <i class="fa fa-edit" aria-hidden="true"></i>
                         </a>
                         <a href="{{ url('/Blotter/Deactivate/id='.$posts->id) }}"  onclick="return deleteForm()" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Deactivate record">
                             <i class="fa fa-trash" aria-hidden="true"></i>

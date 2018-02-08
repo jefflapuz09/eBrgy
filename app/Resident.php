@@ -31,7 +31,8 @@ class Resident extends Model
         'image',
         'isActive',
         'isRegistered',
-        'isDerogatory'
+        'isDerogatory',
+        'contactNumber'
     ];
 
     public function Parents(){
@@ -40,5 +41,9 @@ class Resident extends Model
 
     public function Officer(){
         return $this->hasMany('App\Officer','officerId');
+    }
+
+    public function Voter(){
+        return $this->hasMany('App\Voter','residentId');
     }
 }

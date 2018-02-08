@@ -20,6 +20,7 @@
 <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="box-title">New Household</h3>
+      <p class="pull-right"><b>Note</b>: Fields with <span style="color:red;">*</span> are needed to filled out.</p>
     </div>
     <div class="box-body">
         <form action="{{ url('/Household/Store') }}" method="post">
@@ -29,23 +30,27 @@
                     Household Information
                 </div>
                 <div class="form-group" style="margin-top:20px;">
+                    <label>Household No.<span style="color:red;">*</span></label>
                     <input type="text" class="form-control" id="formGroupExampleInput" name="id" placeholder="Household No.">
                 </div>
                 <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-5">
+                                    <label>Street<span style="color:red;">*</span></label>
                                     <input type="text" class="col-sm-6 form-control" id="exampleInputEmail1" placeholder="Street" name="street" >
                                 </div>
                                 <div class="col-sm-4">
+                                    <label>Brgy.<span style="color:red;">*</span></label>
                                     <input type="text" class="col-sm-6 form-control" id="exampleInputEmail1" placeholder="Brgy" name="brgy">
                                 </div>
                                 <div class="col-sm-3">
+                                    <label>City<span style="color:red;">*</span></label>
                                     <input type="text" class="col-sm-6 form-control" id="exampleInputEmail1" placeholder="City" name="city">
                                 </div>
                             </div>
                 </div>
                 <div class="form-group">
-                    <label for="formGroupExampleInput">Inhabitants</label>
+                    <label>Inhabitants<span style="color:red;">*</span></label>
                     <select class="form-control select2" name="inhabitantss[]" multiple="multiple">
                         @foreach($resident as $res)
                             <option value="{{$res->id}}">{{$res->firstName}} {{$res->middleName}} {{$res->lastName}}</option>

@@ -20,7 +20,7 @@ class ResidentSeeder extends Seeder
             'street' => '2844 Int. 19 Aurora Blvd.',
             'brgy' => 'Sta.cruz',
             'city' => 'Manila',
-            'citizenship' => 'By birth',
+            'citizenship' => 'Filipino',
             'religion' => 'Catholic',
             'image' => 'img/1.jpg',
             'gender' => 1,
@@ -29,6 +29,7 @@ class ResidentSeeder extends Seeder
             'periodResidence' => '7 yrs',
             'civilStatus' => 'Single',
             'isActive' => 1,
+            'contactNumber' => '09058883169',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
@@ -42,7 +43,7 @@ class ResidentSeeder extends Seeder
             'brgy' => 'National',
             'image' => 'img/2.jpg',
             'city' => 'Marikina',
-            'citizenship' => 'By birth',
+            'citizenship' => 'Filipino',
             'religion' => 'INC',
             'gender' => 2,
             'birthdate' => '1998-06-05',
@@ -50,6 +51,7 @@ class ResidentSeeder extends Seeder
             'periodResidence' => '7 yrs',
             'civilStatus' => 'Single',
             'isActive' => 1,
+            'contactNumber' => '09058883169',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
