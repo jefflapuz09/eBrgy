@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DomPDF;
 use App\Resident;
 use App\Officer;
+use App\Business;
 
 class PdfController extends Controller
 {
@@ -29,6 +30,27 @@ class PdfController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function business($id)
+    {
+        $post = Business::find($id);
+        $cman = Officer::where('position','Chairman')->first();
+        $sec = Officer::where('position','Secretary')->first();
+        $pdf = DomPDF::loadView('Forms.BusinessPermit',compact('post','cman','sec'));
+        $pdf->SetPaper('letter','portrait');;
+        return $pdf->stream();
+    }
+
+    public function indigency($id)
+    {
+        $post = Resident::find($id);
+        $cman = Officer::where('position','Chairman')->first();
+        $sec = Officer::where('position','Secretary')->first();
+        $pdf = DomPDF::loadView('Forms.CertificateIndigency',compact('post','cman','sec'));
+        $pdf->SetPaper('letter','portrait');;
+        return $pdf->stream();
+    }
+
     public function create()
     {
         //

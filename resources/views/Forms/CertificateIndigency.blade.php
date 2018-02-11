@@ -28,7 +28,8 @@
                 <div style="position:absolute; top:-30px;">
                     <p>Republic of the Philippines</p></br>
                     <p>City of Manila</p></br>
-                    <p>District III, Barangay 378</p>
+                    <p><u>OFFICE OF THE PUNONG BARANGAY</u></p></br>
+                    <p>Barangay 378 Zone 38, District III</p>
                 </div>
                 <hr style="position:absolute; top:65px; left:50px; opacity:0.75; width:85%;">
             </div>
@@ -38,44 +39,38 @@
         <div class="">
             <img src="{{ asset('img/logomanila.png') }}" height="600px" style=" z-index:-999; margin-left:-45px; margin-top:170px; opacity:0.5;">
             <div class="header" style="position:absolute; left:15px; line-height: 5px; text-align: center; margin-top:150px;">
-                <h2>Office of the Barangay Chairman</h2>
-                <h3>Barangay Certification</h3>
+                <h2>Certificate of Indigency</h2>
             </div>
             <div class="body" style="z-index:999;">
-                <div class="content" style="position:absolute; top:-550px; margin:50px;">
+                <div class="content" style="position:absolute; top:-600px; margin:50px; line-height:40px;">
                     <p>To whom it may concern:</p></br>
                     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        This is to certify that @if($post->gender == 1)Mr. @else Ms. @if($post->civilStatus == 'Married')Mrs. @endif @endif <b>{{$post->lastName}}, {{$post->firstName}} {{$post->middleName}}</b> of Legal age, is a bonafide resident of this barangay, with postal address at
-                        <b>{{$post->street}} {{$post->brgy}} {{$post->city}}</b> and known to me of good moral character.
+                        This is to certify that {{$post->lastName}}, {{$post->firstName}} {{$post->middleName}}, of legal age presently residing at 
+                        {{$post->street}} {{$post->brgy}} {{$post->city}}, is a bonafide resident of BARANGAY 378, ZONE 38, 3rd District Manila.
                     </p>
                     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        Certify further that as per records filled in the office, subject person, @if($post->isDerogatory == 1)has NO derogatory record @else had a derogatory record(/s) @endif as of this date of issue.</p>
+                        @if($post->gender == 1) He @else She @endif is know to be a person of good moral character and law abiding citizen.
+                    </p>
+
                     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        This certification is hereby issued upon the request of the above subject person in connection to @if($post->gender == 1)his @else her @endif application for:<p>
-                        <div class="row" style="z-index:999; margin-left:60px;">
-                            <div class="column" style="">
-                                <li>__Local Employment</li>
-                                <li>__Travel Abroad</li>
-                                <li>__Loan Purpose</li>
-                                <li>__Open Account</li>
-                                <li>__Tricycle Franchise</li>
-                            </div>
-                            <div class="column" style="">
-                                <li>__Local Employment</li>
-                                <li>__Travel Abroad</li>
-                                <li>__Loan Purpose</li>
-                                <li>__Open Account</li>
-                                <li>__Tricycle Franchise</li>
-                            </div>
-                        </div><br><br><br><br><br><br>
+                        For further information _____________________ belongs to the indigent families of this barangay.
+                    </p>
+
                     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        Given this <b>{{ Carbon\Carbon::now()->toFormattedDateString()  }}</b> at Barangay 378, city of Manila, Philippines</p>
-                    <p align="center">NOT VALID WITHOUT THE BARANGAY DRY SEAL.</p>
+                        This certification was issued upon the bearer's request for whatever legal purposes it may serve best.
+                    </p>
+                    
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Issued on <b>{{ Carbon\Carbon::now()->toFormattedDateString()  }}</b> at Barangay 378, city of Manila, Philippines</p>
+                    
+                    <div class="foot2nd" style="position:absolute; top:700px; left:110px;">
+                        <small>*This certification is not valid without the official seal of this barangay.</small>
+                    </div>
                     <div class="footer" style="position:absolute; top:600px;">
-                        <div style="float:left; line-height: 5px;">
+                        {{--  <div style="float:left; line-height: 5px;">
                             <p>{{$sec->Resident->lastName}}, {{$sec->Resident->firstName}} {{$sec->Resident->middleName}}</p>
                             <p style="margin-left:50px;">{{$sec->position}}</p>
-                        </div>
+                        </div>  --}}
                         <div style="float:right; line-height: 5px;">
                             <p>{{$cman->Resident->lastName}}, {{$cman->Resident->firstName}} {{$cman->Resident->middleName}}</p>
                             <p style="margin-left:60px;">{{$cman->position}}</p>

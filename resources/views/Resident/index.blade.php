@@ -66,6 +66,9 @@
                         <a href="{{ url('/BarangayClearance/Print/'.$posts->id) }}"  target="_blank" type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Print">
                             <i class="fa fa-print" aria-hidden="true"></i>
                         </a>
+                        <a href="{{ url('/CertificateIndigency/Print/'.$posts->id) }}"  target="_blank" type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Print">
+                            <i class="fa fa-print" aria-hidden="true"></i>
+                        </a>
                     </td>
                 </tr>
                 @endforeach
