@@ -64,6 +64,11 @@
                         <a href="{{ url('/Blotter/Deactivate/id='.$posts->id) }}"  onclick="return deleteForm()" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Deactivate record">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
+                        @if($posts->status == 4)
+                        <a href="{{ url('/FiletoAction/Print/'.$posts->id) }}"  target="_blank" type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="File to Action">
+                            <i class="fa fa-print" aria-hidden="true"></i>
+                        </a>
+                        @endif
                     </td>
                 </tr>
                 @endforeach

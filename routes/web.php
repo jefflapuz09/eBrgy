@@ -110,3 +110,4 @@ Route::post('/Business/Update/id={id}','BusinessController@update');
 Route::get('/BarangayClearance/Print/{id}','PdfController@index');
 Route::get('/BusinessPermit/Print/{id}','PdfController@business');
 Route::get('/CertificateIndigency/Print/{id}','PdfController@indigency');
+Route::get('/FiletoAction/Print/{id}','PdfController@file');

@@ -7,6 +7,7 @@ use DomPDF;
 use App\Resident;
 use App\Officer;
 use App\Business;
+use App\Blotter;
 
 class PdfController extends Controller
 {
@@ -51,6 +52,15 @@ class PdfController extends Controller
         return $pdf->stream();
     }
 
+    public function file($id)
+    {
+        $post = Blotter::find($id);
+        $cman = Officer::where('position','Chairman')->first();
+        $sec = Officer::where('position','Secretary')->first();
+        $pdf = DomPDF::loadView('Forms.FiletoAction',compact('post','cman','sec'));
+        $pdf->SetPaper('letter','portrait');;
+        return $pdf->stream();
+    }
     public function create()
     {
         //

@@ -47,7 +47,7 @@
                         <a href="{{ url('/Business/Deactivate/id='.$posts->id) }}"  onclick="return deleteForm()" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Deactivate record">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
-                        <a href="{{ url('/BusinessPermit/Print/'.$posts->id) }}"  target="_blank" type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Print">
+                        <a href="{{ url('/BusinessPermit/Print/'.$posts->id) }}"  target="_blank" type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Barangay Clearance">
                             <i class="fa fa-print" aria-hidden="true"></i>
                         </a>
                     </td>

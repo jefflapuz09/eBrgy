@@ -63,10 +63,10 @@
                         <a href="{{ url('/Resident/Deactivate/id='.$posts->id) }}"  onclick="return deleteForm()" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Deactivate record">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
-                        <a href="{{ url('/BarangayClearance/Print/'.$posts->id) }}"  target="_blank" type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Print">
+                        <a href="{{ url('/BarangayClearance/Print/'.$posts->id) }}"  target="_blank" type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Barangay Certification">
                             <i class="fa fa-print" aria-hidden="true"></i>
                         </a>
-                        <a href="{{ url('/CertificateIndigency/Print/'.$posts->id) }}"  target="_blank" type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Print">
+                        <a href="{{ url('/CertificateIndigency/Print/'.$posts->id) }}"  target="_blank" type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Certificate of Indigency">
                             <i class="fa fa-print" aria-hidden="true"></i>
                         </a>
                     </td>
