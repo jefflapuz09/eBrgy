@@ -416,7 +416,28 @@ class residentController extends Controller
                     'fatherLastName' => $request->fatherLastName,
                 ]);
             }
+
+            if(count($chkParent)==0)
+            {
+                parentModel::create([
+                    'residentId' => $request->residentId,
+                    'motherFirstName' => $request->motherFirstName,
+                    'motherMiddleName' => $request->motherMiddleName,
+                    'motherLastName' => $request->motherLastName,
+                    'fatherFirstName' => $request->fatherFirstName,
+                    'fatherMiddleName' => $request->fatherMiddleName,
+                    'fatherLastName' => $request->fatherLastName,
+                ]);
+            }
             
+            if(count($chkVoter) == 0)
+            {
+                Voter::create([
+                    'residentId' => $request->residentId,
+                    'voterId' => $request->voterId,
+                    'precintNo' => $request->precintNo
+                ]);
+            }
 
             if(count($chkVoter) != 0)
             {
@@ -545,6 +566,27 @@ class residentController extends Controller
                 ]);
             }
             
+            if(count($chkParent)==0)
+            {
+                parentModel::create([
+                    'residentId' => $request->residentId,
+                    'motherFirstName' => $request->motherFirstName,
+                    'motherMiddleName' => $request->motherMiddleName,
+                    'motherLastName' => $request->motherLastName,
+                    'fatherFirstName' => $request->fatherFirstName,
+                    'fatherMiddleName' => $request->fatherMiddleName,
+                    'fatherLastName' => $request->fatherLastName,
+                ]);
+            }
+            
+            if(count($chkVoter) == 0)
+            {
+                Voter::create([
+                    'residentId' => $request->residentId,
+                    'voterId' => $request->voterId,
+                    'precintNo' => $request->precintNo
+                ]);
+            }
 
             if(count($chkVoter) != 0)
             {

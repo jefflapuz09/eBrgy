@@ -53,10 +53,7 @@
                 <p>{{Auth::user()->Officer->position}}</p>
               </li>
               <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
+                <div class="text-center">
                   <a href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
@@ -105,7 +102,7 @@
   </div>
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <div id="timediv"></div>
+        {{ Carbon\Carbon::now()->toFormattedDateString()  }}<div id="timediv"></div>
     </div>
     <strong>Copyright &copy; 2018 Lapuz Family.</strong> All rights
     reserved.
@@ -122,6 +119,7 @@
 <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('js/select2.min.js') }}"></script>
 <script src="{{ asset('js/clockpicker.js') }}"></script>
+<script src="{{ asset('input-mask/jquery.inputmask.bundle.js') }}"></script>
 <script>
     $(document).ready(function() {
          $('#example').DataTable( {

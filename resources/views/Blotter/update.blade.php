@@ -36,7 +36,7 @@
                             <div class="col-sm-8">
                                 <div class="form-group">
                                     <label><span style="color:red;">Case No.*</span></label>
-                                    <input type="text" class="form-control" value="{{$post->id}}" placeholder="Case No." name="id">
+                                    <input type="text" class="form-control" maxlength="50" value="{{$post->id}}" placeholder="Case No." name="id">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -78,7 +78,7 @@
                 </div>
                 <div class="col-sm-6">
                     <label for="comment">Description<span style="color:Red;">*</span></label>
-                    <textarea class="form-control" rows="5" name="description" id="comment">{{$post->description}}</textarea>
+                    <textarea class="form-control" rows="5" maxlength="150" name="description" id="comment">{{$post->description}}</textarea>
                 </div>
                 <div class="form-group">
                     <div class="pull-right">

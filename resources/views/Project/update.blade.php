@@ -32,12 +32,12 @@
                 {{csrf_field()}}
                 <div class="form-group" style="margin-top:20px;">
                     <label>Project Name<span style="color:Red;">*</span></label>
-                    <input type="text" class="form-control" name="projectName" value="{{$post->projectName}}" placeholder="Project Name">
+                    <input type="text" class="form-control" name="projectName" maxlength="100" value="{{$post->projectName}}" placeholder="Project Name">
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <label>Project Developer<span style="color:Red;">*</span></label>
-                        <input type="text" class="form-control" name="projectDev" value="{{$post->projectDev}}" placeholder="Project Developer">
+                        <input type="text" class="form-control" name="projectDev" maxlength="100" value="{{$post->projectDev}}" placeholder="Project Developer">
                     </div>
                     <div class="col-sm-6">
                         <label>Officer-in-Charge<span style="color:Red;">*</span></label>
@@ -75,7 +75,7 @@
                     </div>
                 </div>
                 <label>Description<span style="color:Red;"></span></label>
-                <textarea class="form-control" rows="5" name="description" placeholder="Project Description" id="comment">{{$post->description}}</textarea>
+                <textarea class="form-control" rows="5" name="description" maxlength="150" placeholder="Project Description" id="comment">{{$post->description}}</textarea>
                 <div class="pull-right">
                         <button class="btn btn-primary" style="margin-right:10px; margin-top:20px;">Submit</a>
                 </div>

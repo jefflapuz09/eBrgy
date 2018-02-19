@@ -34,7 +34,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label>Business Name<span style="color:red;">*</span></label>
-                                <input type="text" class="form-control" value="{{$post->name}}" placeholder="Business Name" name="name">
+                                <input type="text" class="form-control" maxlength="70" value="{{$post->name}}" placeholder="Business Name" name="name">
                             </div>
                             <div class="col-sm-6">
                                 <label>Owner<span style="color:red;">*</span></label>
@@ -50,20 +50,20 @@
                         <div class="row">
                             <div class="col-sm-5">
                                 <label>Street<span style="color:red;">*</span></label>
-                                <input type="text" class="form-control" value="{{$post->street}}" placeholder="Street" name="street">
+                                <input type="text" class="form-control" value="{{$post->street}}" maxlength="70" placeholder="Street" name="street">
                             </div>
                             <div class="col-sm-3">
                                 <label>Brgy<span style="color:red;">*</span></label>
-                                <input type="text" class="form-control" value="{{$post->brgy}}" placeholder="Brgy" name="brgy">
+                                <input type="text" class="form-control" value="{{$post->brgy}}" maxlength="50" placeholder="Brgy" name="brgy">
                             </div>
                             <div class="col-sm-4">
                                 <label>City<span style="color:red;">*</span></label>
-                                <input type="text" class="form-control" value="{{$post->city}}" placeholder="City" name="city">
+                                <input type="text" class="form-control" value="{{$post->city}}" maxlength="50" placeholder="City" name="city">
                             </div>
                         </div>
                     </div>
                     <label>Description</label>
-                    <textarea class="form-control" name="description" rows="5" placeholder="description">{{$post->description}}</textarea>
+                    <textarea class="form-control" name="description" maxlength="150" rows="5" placeholder="description">{{$post->description}}</textarea>
                     <div class="pull-right">
                         <button class="btn btn-primary" style="margin-right:10px; margin-top:20px;">Submit</a>
                     </div>

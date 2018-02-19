@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Voter;
+use App\Blotter;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('in');
+        $post = Blotter::where('isActive',1)->where('isActive',1)->get();
+        $blotter = Blotter::where('isActive',1)->where('status',1)->get();
+        $voter = Voter::where('isActive',1)->get();
+        return view('in',compact('voter','blotter','post'));
     }
 }

@@ -49,15 +49,15 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label>First Name<span style="color:red;">*</span></label>
-                                <input type="text" class="col-sm-6 form-control" value="{{$post->firstName}}" id="exampleInputEmail1" placeholder="First Name" name="firstName">
+                                <input type="text" class="col-sm-6 form-control" maxlength="70" value="{{$post->firstName}}" id="exampleInputEmail1" placeholder="First Name" name="firstName">
                             </div>
                             <div class="col-sm-3">
                                 <label>Middle Name<span style="color:red;"></span></label>
-                                <input type="text" class="col-sm-6 form-control" value="{{$post->middleName}}" id="exampleInputEmail1" placeholder="Middle Name" name="middleName">
+                                <input type="text" class="col-sm-6 form-control" maxlength="20" value="{{$post->middleName}}" id="exampleInputEmail1" placeholder="Middle Name" name="middleName">
                             </div>
                             <div class="col-sm-3">
                                 <label>Last Name<span style="color:red;">*</span></label>
-                                <input type="text" class="col-sm-6 form-control" value="{{$post->lastName}}" id="exampleInputEmail1" placeholder="Last Name" name="lastName">
+                                <input type="text" class="col-sm-6 form-control" maxlength="50" value="{{$post->lastName}}" id="exampleInputEmail1" placeholder="Last Name" name="lastName">
                             </div>
                         </div>
                     </div>
@@ -65,15 +65,15 @@
                             <div class="row">
                                 <div class="col-sm-5">
                                     <label>Street<span style="color:red;">*</span></label>
-                                    <input type="text" class="col-sm-6 form-control" value="{{$post->street}}" id="exampleInputEmail1" placeholder="Street" name="street" >
+                                    <input type="text" class="col-sm-6 form-control" maxlength="70" value="{{$post->street}}" id="exampleInputEmail1" placeholder="Street" name="street" >
                                 </div>
                                 <div class="col-sm-4">
                                     <label>Brgy.<span style="color:red;">*</span></label>
-                                    <input type="text" class="col-sm-6 form-control" value="{{$post->brgy}}" id="exampleInputEmail1" placeholder="Brgy" name="brgy">
+                                    <input type="text" class="col-sm-6 form-control" maxlength="50" value="{{$post->brgy}}" id="exampleInputEmail1" placeholder="Brgy" name="brgy">
                                 </div>
                                 <div class="col-sm-3">
                                     <label>City<span style="color:red;">*</span></label>
-                                    <input type="text" class="col-sm-6 form-control" value="{{$post->city}}" id="exampleInputEmail1" placeholder="City" name="city">
+                                    <input type="text" class="col-sm-6 form-control" maxlength="50" value="{{$post->city}}" id="exampleInputEmail1" placeholder="City" name="city">
                                 </div>
                             </div>
                     </div>
@@ -81,7 +81,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label>Province<span style="color:red;"></span></label>
-                                    <input type="text" class="col-sm-6 form-control" value="{{$post->province}}" id="exampleInputEmail1" placeholder="Province" name="province">
+                                    <input type="text" class="col-sm-6 form-control" maxlength="100" value="{{$post->province}}" id="exampleInputEmail1" placeholder="Province" name="province">
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Citizenship<span style="color:red;">*</span></label>
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Religion<span style="color:red;">*</span></label>
-                                    <input type="text" class="col-sm-6 form-control" value="{{$post->religion}}" id="exampleInputEmail1" placeholder="Religion" name="religion">
+                                    <input type="text" class="col-sm-6 form-control" maxlength="50" value="{{$post->religion}}" id="exampleInputEmail1" placeholder="Religion" name="religion">
                                 </div>
                             </div>
                     </div>
@@ -118,7 +118,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Birthplace<span style="color:red;">*</span></label>
-                                    <input type="text" name="birthPlace" class="col-sm-6 form-control" value="{{$post->birthPlace}}" id="exampleInputEmail1" placeholder="Place of Birth">
+                                    <input type="text" name="birthPlace" maxlength="100" class="col-sm-6 form-control" value="{{$post->birthPlace}}" id="exampleInputEmail1" placeholder="Place of Birth">
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Civil Status<span style="color:red;">*</span></label>
@@ -136,15 +136,15 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label>Profession/Occupation<span style="color:red;"></span></label>
-                                    <input type="text" class="col-sm-6 form-control" name="occupation" value="{{$post->occupation}}" id="exampleInputEmail1" placeholder="Profession/Occupation">
+                                    <input type="text" class="col-sm-6 form-control" maxlength="70" name="occupation" value="{{$post->occupation}}" id="exampleInputEmail1" placeholder="Profession/Occupation">
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Tin No.<span style="color:red;"></span></label>
-                                    <input type="text" class="col-sm-6 form-control" name="tinNo" value="{{$post->tinNo}}" id="exampleInputEmail1" placeholder="Tin No.">
+                                    <input type="text" class="col-sm-6 form-control" name="tinNo" value="{{$post->tinNo}}" id="tin" placeholder="Tin No.">
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Period of Residence<span style="color:red;">*</span></label>
-                                    <input type="text" class="col-sm-6 form-control" name="periodResidence" value="{{$post->periodResidence}}" id="exampleInputEmail1" placeholder="Period of Residence">
+                                    <input type="text" class="col-sm-6 form-control" maxlength="50" name="periodResidence" value="{{$post->periodResidence}}" id="exampleInputEmail1" placeholder="Period of Residence">
                                 </div>
                             </div>
                     </div>
@@ -152,16 +152,16 @@
                         <div class="row">
                             <div class="col-sm-4">
                                     <label>Contact Number<span style="color:red;">*</span></label>
-                                    <input type="text" class="col-sm-6 form-control" name="contactNumber" value="{{$post->contactNumber}}" id="exampleInputEmail1" placeholder="Contact Number">
+                                    <input type="text" class="col-sm-6 form-control" maxlength="50"name="contactNumber" value="{{$post->contactNumber}}" id="contactNumber" placeholder="Contact Number">
                             </div>
                            
                             <div class="col-sm-4">
                                     <label>Voter's Id No.<span style="color:red;"></span></label>
-                                    <input type="text" class="col-sm-6 form-control" name="voterId" @foreach($post->Voter as $voter) value='{{$voter->voterId}}' @endforeach id="exampleInputEmail1" placeholder="Voter's Id No.">
+                                    <input type="text" class="col-sm-6 form-control"  maxlength="50" name="voterId" @foreach($post->Voter as $voter) value='{{$voter->voterId}}' @endforeach id="exampleInputEmail1" placeholder="Voter's Id No.">
                             </div>
                             <div class="col-sm-4">
                                     <label>Precint Assignment No.<span style="color:red;"></span></label>
-                                    <input type="text" class="col-sm-6 form-control" name="precintNo" @foreach($post->Voter as $voter) value="{{$voter->precintNo}}" @endforeach id="exampleInputEmail1" placeholder="Precint Assignment No.">
+                                    <input type="text" class="col-sm-6 form-control" maxlength="50" name="precintNo" @foreach($post->Voter as $voter) value="{{$voter->precintNo}}" @endforeach id="precint" placeholder="Precint Assignment No.">
                             </div>
                             
                         </div>
@@ -174,15 +174,15 @@
                         @foreach($post->Parents as $parent)
                             <div class="col-sm-6">
                                 <label>First Name<span style="color:red;">*</span></label>
-                                <input type="text" class="col-sm-6 form-control" name="motherFirstName" value="{{$parent->motherfirstName}}" id="exampleInputEmail1" placeholder="First Name">
+                                <input type="text" class="col-sm-6 form-control" maxlength="70" name="motherFirstName" value="{{$parent->motherfirstName}}" id="exampleInputEmail1" placeholder="First Name">
                             </div>
                             <div class="col-sm-3">
                                 <label>Middle Name<span style="color:red;"></span></label>
-                                <input type="text" class="col-sm-6 form-control" name="motherMiddleName" value="{{$parent->mothermiddleName}}" id="exampleInputEmail1" placeholder="Middle Name">
+                                <input type="text" class="col-sm-6 form-control" maxlength="20" name="motherMiddleName" value="{{$parent->mothermiddleName}}" id="exampleInputEmail1" placeholder="Middle Name">
                             </div>
                             <div class="col-sm-3">
                                 <label>Last Name<span style="color:red;">*</span></label>
-                                <input type="text" class="col-sm-6 form-control" name="motherLastName" value="{{$parent->motherlastName}}" id="exampleInputEmail1" placeholder="Last Name">
+                                <input type="text" class="col-sm-6 form-control" maxlength="50" name="motherLastName" value="{{$parent->motherlastName}}" id="exampleInputEmail1" placeholder="Last Name">
                             </div>
                         @endforeach
                     </div>
@@ -195,15 +195,15 @@
                             @foreach($post->Parents as $parent)
                             <div class="col-sm-6">
                                 <label>First Name<span style="color:red;">*</span></label>
-                                <input type="text" class="col-sm-6 form-control" name="fatherFirstName" value="{{$parent->fatherfirstName}}" id="exampleInputEmail1" placeholder="First Name">
+                                <input type="text" class="col-sm-6 form-control" maxlength="70" name="fatherFirstName" value="{{$parent->fatherfirstName}}" id="exampleInputEmail1" placeholder="First Name">
                             </div>
                             <div class="col-sm-3">
                                 <label>Middle Name<span style="color:red;"></span></label>
-                                <input type="text" class="col-sm-6 form-control" name="fatherMiddleName" value="{{$parent->fathermiddleName}}" id="exampleInputEmail1" placeholder="Middle Name">
+                                <input type="text" class="col-sm-6 form-control" maxlength="20" name="fatherMiddleName" value="{{$parent->fathermiddleName}}" id="exampleInputEmail1" placeholder="Middle Name">
                             </div>
                             <div class="col-sm-3">
                                 <label>Last Name<span style="color:red;">*</span></label>
-                                <input type="text" class="col-sm-6 form-control" name="fatherLastName" value="{{$parent->fatherlastName}}" id="exampleInputEmail1" placeholder="Last Name">
+                                <input type="text" class="col-sm-6 form-control" maxlength="50" name="fatherLastName" value="{{$parent->fatherlastName}}" id="exampleInputEmail1" placeholder="Last Name">
                             </div>
                             @endforeach
                     </div>
@@ -222,6 +222,11 @@
 
 @section('script')
     <script>
+            $(document).ready(function(){
+                $('#tin').inputmask("99-9999999");
+                $('#contactNumber').inputmask("9999-999-9999");
+                $('#precint').inputmask('9999a');
+              });
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
