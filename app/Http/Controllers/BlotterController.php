@@ -50,7 +50,7 @@ class BlotterController extends Controller
             'complainant' => 'required',
             'complainedResident' => 'required',
             'officerCharge' => 'required',
-            'description' => 'required',
+            'description' => 'required|max:150',
             'created_at' => 'required'
         ];
         $messages = [
@@ -128,7 +128,7 @@ class BlotterController extends Controller
             'complainant' => 'required',
             'complainedResident' => 'required',
             'officerCharge' => 'required',
-            'description' => 'required',
+            'description' => 'required|max:150',
             'created_at' => 'required'
         ];
         $messages = [

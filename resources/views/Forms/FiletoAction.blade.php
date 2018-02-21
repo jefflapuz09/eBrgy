@@ -53,7 +53,7 @@
                         Complainant
                     </div>
                     <div style="position:absolute; top: 800px; left:-750px; text-align:center; line-height:5px;">
-                        {{$post->officerCharge}}<br>
+                        {{$post->comRes->lastName}} {{$post->comRes->firstName}}<br>
                         <p style="margin-left:160px;">Respondent</p>
                     </div>
                     <div style="position: absolute; top:850px; left:150px;">

@@ -42,9 +42,9 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'projectName' => ['required','unique:projects'],
-            'projectDev'=> 'required',
-            'description' => 'nullable',
+            'projectName' => ['required','unique:projects','max:150'],
+            'projectDev'=> 'required|max:150',
+            'description' => 'nullable|max:150',
             'officerCharge' =>  'required',
             'dateStarted' => 'required',
             'dateEnded' => 'nullable'
@@ -117,9 +117,9 @@ class ProjectController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'projectName' => ['required',Rule::unique('projects')->ignore($id)],
-            'projectDev'=> 'required',
-            'description' => 'nullable',
+            'projectName' => ['required',Rule::unique('projects')->ignore($id),'max:150'],
+            'projectDev'=> 'required|max:150',
+            'description' => 'nullable|max:150',
             'officerCharge' =>  'required',
             'dateStarted' => 'required',
             'dateEnded' => 'nullable'

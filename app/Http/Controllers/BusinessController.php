@@ -42,12 +42,12 @@ class BusinessController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => ['required','unique:businesses'],
+            'name' => ['required','unique:businesses','max:150'],
             'residentId' => 'required',
-            'street' => 'required',
-            'brgy' => 'required',
-            'city' => 'required',
-            'description' => 'nullable'
+            'street' => 'required|max:70',
+            'brgy' => 'required|max:50',
+            'city' => 'required|max:50',
+            'description' => 'nullable|max:50'
         ];
         $messages = [
             'unique' => ':attribute already exists.',
@@ -110,12 +110,12 @@ class BusinessController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'name' => ['required','unique:businesses'],
+            'name' => ['required',Rule::unique('businesses')->ignore($id),'max:150'],
             'residentId' => 'required',
-            'street' => 'required',
-            'brgy' => 'required',
-            'city' => 'required',
-            'description' => 'nullable'
+            'street' => 'required|max:70',
+            'brgy' => 'required|max:50',
+            'city' => 'required|max:50',
+            'description' => 'nullable|max:50'
         ];
         $messages = [
             'unique' => ':attribute already exists.',

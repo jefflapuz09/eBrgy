@@ -51,9 +51,9 @@ class HouseholdController extends Controller
     {
         $rules = [
             'id' => ['required','unique:households'],
-            'street' => 'required',
-            'brgy' => 'required',
-            'city' => 'required'
+            'street' => 'required|max:70',
+            'brgy' => 'required|max:50',
+            'city' => 'required|max:50'
         ];
         $messages = [
             'unique' => ':attribute already exists.',
@@ -140,9 +140,9 @@ class HouseholdController extends Controller
     {
         $rules = [
             'id' => ['required',Rule::unique('households')->ignore($id)],
-            'street' => 'required',
-            'brgy' => 'required',
-            'city' => 'required'
+            'street' => 'required|max:70',
+            'brgy' => 'required|max:50',
+            'city' => 'required|max:50'
         ];
         $messages = [
             'unique' => ':attribute already exists.',

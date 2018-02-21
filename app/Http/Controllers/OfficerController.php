@@ -46,7 +46,7 @@ class OfficerController extends Controller
         $rules = [
             'residentId' => ['required','unique:officers'],
             'position' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
             'conpassword' => 'required',
         ];
@@ -128,7 +128,7 @@ class OfficerController extends Controller
         $rules = [
             'residentId' => ['required',Rule::unique('officers')->ignore($id)],
             'position' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
             'conpassword' => 'required',
         ];

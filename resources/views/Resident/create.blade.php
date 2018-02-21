@@ -222,9 +222,40 @@
 
 @section('script')
     <script>
+        $(document).on('focus','#contactNumber',function(){
+        $(this).popover({
+            trigger: 'manual',
+            content: function(){
+                var content = '<button type="button" id="cp" class="btn btn-primary col-md-12">Mobile No.</button><button type="button" id="tp" class="btn btn-primary col-md-12">Telephone No.</button>';
+                return content;
+            },
+            html: true,
+            placement: function(){
+                var placement = 'top';
+                return placement;
+            },
+            template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+            title: function(){
+                var title = 'Choose a format:';
+                return title;
+            }
+        });
+        $(this).popover('show');
+        });
+        $(document).on('focusout','#contactNumber',function(){
+            $(this).popover('hide');
+        });
+        $(document).on('click','#cp',function(){
+            $('#contactNumber').val('');
+            $('#contactNumber').inputmask("9999-999-9999");
+        });
+        $(document).on('click','#tp',function(){
+            $('#contactNumber').val('');
+            $('#contactNumber').inputmask("(02) 999 9999");
+        });
+
         $(document).ready(function(){
           $('#tin').inputmask("99-9999999");
-          $('#contactNumber').inputmask("9999-999-9999");
           $('#precint').inputmask('9999a');
           $('#voterId').inputmask('9999-9999a-a999aaa99999-9');
         });
