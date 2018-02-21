@@ -110,7 +110,7 @@
                                 <div class="col-sm-3">
                                     <label>Birthdate<span style="color:red;">*</span></label>
                                     <div class='input-group date' id='datetimepicker1'>
-                                        <input type='text' name="birthdate" placeholder="YYYY-MM-DD" value="{{$post->birthdate}}" class="form-control" />
+                                        <input type='text' name="birthdate" id="bday" placeholder="YYYY-MM-DD" value="{{$post->birthdate}}" class="form-control" />
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
@@ -121,20 +121,24 @@
                                     <input type="text" name="birthPlace" maxlength="100" class="col-sm-6 form-control" value="{{$post->birthPlace}}" id="exampleInputEmail1" placeholder="Place of Birth">
                                 </div>
                                 <div class="col-sm-3">
-                                    <label>Civil Status<span style="color:red;">*</span></label>
-                                    <select class="form-control select" name="civilStatus">
-                                        <option value="0" disabled>Please select your civil status</option>
-                                        <option value="Single">Single</option>
-                                        <option value="Married">Married</option>
-                                        <option value="Widow/er">Widow/er</option>
-                                        <option value="Legally Separated">Legally Separated</option>
-                                    </select>
+                                    <label>Age<span style="color:red;"></span></label>
+                                    <input type="text" value="18" id="age" class="form-control" disabled>
                                 </div>
                             </div>
                     </div>
                     <div class="form-group">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
+                                        <label>Civil Status<span style="color:red;">*</span></label>
+                                        <select class="form-control select" name="civilStatus">
+                                            <option value="0" disabled>Please select your civil status</option>
+                                            <option value="Single">Single</option>
+                                            <option value="Married">Married</option>
+                                            <option value="Widow/er">Widow/er</option>
+                                            <option value="Legally Separated">Legally Separated</option>
+                                        </select>
+                                </div>
+                                <div class="col-sm-3">
                                     <label>Profession/Occupation<span style="color:red;"></span></label>
                                     <input type="text" class="col-sm-6 form-control" maxlength="70" name="occupation" value="{{$post->occupation}}" id="exampleInputEmail1" placeholder="Profession/Occupation">
                                 </div>
@@ -222,11 +226,41 @@
 
 @section('script')
     <script>
-            $(document).ready(function(){
-                $('#tin').inputmask("99-9999999");
-                $('#contactNumber').inputmask("9999-999-9999");
-                $('#precint').inputmask('9999a');
-              });
+        $(document).ready(function(){
+          $('#tin').inputmask("99-9999999");
+          $('#contactNumber').inputmask("9999-999-9999");
+          $('#precint').inputmask('9999a');
+
+            today = new Date();
+            birthDate = new Date($('#bday').val());
+            age = today.getFullYear() - birthDate.getFullYear();
+            m = today.getMonth() - birthDate.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
+                {
+                    age--;
+                }
+                $('#age').val(age);
+        });
+
+        $('#bday').on('change',function(){
+            today = new Date();
+            birthDate = new Date($('#bday').val());
+            age = today.getFullYear() - birthDate.getFullYear();
+            m = today.getMonth() - birthDate.getMonth();
+            if(birthDate >= today)
+            {
+                alert('Invalid Birthdate');
+            }
+            else
+            {
+                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
+                {
+                    age--;
+                }
+                $('#age').val(age);
+            }
+        });
+        
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();

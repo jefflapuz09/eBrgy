@@ -55,7 +55,7 @@
                         <div class="form-group">
                             <label>Project Started<span style="color:Red;">*</span></label>
                             <div class='input-group date' id="">
-                                    <input type='text' name="dateStarted" value="{{$post->dateStarted}}" placeholder="Date Started"  class="form-control" />
+                                    <input type='text' name="dateStarted" id="start" value="{{$post->dateStarted}}" placeholder="Date Started"  class="form-control" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -66,7 +66,7 @@
                         <div class="form-group">
                             <label>Project Ended<span style="color:Red;">*</span></label>
                             <div class='input-group date' id="">
-                                    <input type='text' name="dateEnded" placeholder="Date Ended"  value="{{$post->dateEnded}}" class="form-control" />
+                                    <input type='text' name="dateEnded" id="end" placeholder="Date Ended"  value="{{$post->dateEnded}}" class="form-control" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -87,5 +87,14 @@
 @endsection
 
 @section('script')
-
+<script>
+        $('#end').on('change',function(){
+            var start = $('#start').val();
+            var end = $('#end').val();
+            if(start > end)
+            {
+                alert('Invalid End date');
+            }
+        });
+</script>
 @stop
