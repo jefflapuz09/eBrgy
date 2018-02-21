@@ -15,7 +15,8 @@ class Business extends Model
         'brgy',
         'city',
         'description',
-        'isActive'
+        'isActive',
+        'created_at'
     ];
 
     public function Resident()

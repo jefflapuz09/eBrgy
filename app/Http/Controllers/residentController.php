@@ -71,7 +71,14 @@ class residentController extends Controller
             'tinNo' => 'nullable',
             'periodResidence' => 'required',
             'image' => 'nullable',
-            'contactNumber' => 'nullable'
+            'contactNumber' => 'nullable',
+            'created_at' => 'required',
+            'motherFirstName' => 'required',
+            'motherMiddleName' => 'nullable',
+            'motherLastName' => 'required',
+            'fatherFirstName' => 'required',
+            'fatherMiddleName' => 'nullable',
+            'fatherLastName' => 'required'
         ];
         $messages = [
             'unique' => ':attribute already exists.',
@@ -97,7 +104,8 @@ class residentController extends Controller
             'tinNo' => 'Tin No.',
             'periodResidence' => 'Period of Residence',
             'image' => 'Image',
-            'contactNumber' => 'Contact Number'
+            'contactNumber' => 'Contact Number',
+            'created_at' => 'Date of Registration'
         ];
         $validator = Validator::make($request->all(),$rules,$messages);
         $validator->setAttributeNames($niceNames); 
@@ -136,7 +144,8 @@ class residentController extends Controller
                 'tinNo' => $request->tinNo,
                 'periodResidence' => $request->periodResidence,
                 'image' => $pic,
-                'contactNumber' => $request->contactNumber
+                'contactNumber' => $request->contactNumber,
+                'created_at' => $request->created_at
             ]);
 
             parentModel::create([
@@ -149,11 +158,17 @@ class residentController extends Controller
                 'fatherLastName' => $request->fatherLastName,
             ]);
 
-            Voter::create([
-                'residentId' => $resident->id,
-                'voterId' => $request->voterId,
-                'precintNo' => $request->precintNo
-            ]);
+            if($request->filled('voterId'))
+            {
+                Voter::create([
+                    'residentId' => $resident->id,
+                    'voterId' => $request->voterId,
+                    'precintNo' => $request->precintNo
+                ]);
+            }
+          
+
+            
 
             return redirect('/Resident')->withSuccess('Successfully inserted into the database.');
         }
@@ -259,11 +274,14 @@ class residentController extends Controller
                 'fatherLastName' => $request->fatherLastName,
             ]);
 
+            if($request->filled('voterId'))
+            {
             Voter::create([
                 'residentId' => $resident->id,
                 'voterId' => $request->voterId,
                 'precintNo' => $request->precintNo
             ]);
+            }
 
             return redirect('/Resident/NotResident')->withSuccess('Successfully inserted into the database.');
         }
@@ -430,22 +448,25 @@ class residentController extends Controller
                 ]);
             }
             
-            if(count($chkVoter) == 0)
+            if($request->filled('voterId'))
             {
-                Voter::create([
-                    'residentId' => $request->residentId,
-                    'voterId' => $request->voterId,
-                    'precintNo' => $request->precintNo
-                ]);
-            }
+                if(count($chkVoter) == 0)
+                {
+                    Voter::create([
+                        'residentId' => $request->residentId,
+                        'voterId' => $request->voterId,
+                        'precintNo' => $request->precintNo
+                    ]);
+                }
 
-            if(count($chkVoter) != 0)
-            {
-                Voter::find($request->vId)->updateOrCreate([
-                    'residentId' => $request->residentId,
-                    'voterId' => $request->voterId,
-                    'precintNo' => $request->precintNo
-                ]);
+                if(count($chkVoter) != 0)
+                {
+                    Voter::find($request->vId)->updateOrCreate([
+                        'residentId' => $request->residentId,
+                        'voterId' => $request->voterId,
+                        'precintNo' => $request->precintNo
+                    ]);
+                }
             }
 
             return redirect('/Resident')->withSuccess('Successfully updated into the database.');
@@ -579,23 +600,26 @@ class residentController extends Controller
                 ]);
             }
             
-            if(count($chkVoter) == 0)
+            if($request->filled('voterId'))
             {
-                Voter::create([
-                    'residentId' => $request->residentId,
-                    'voterId' => $request->voterId,
-                    'precintNo' => $request->precintNo
-                ]);
-            }
+                if(count($chkVoter) == 0)
+                {
+                    Voter::create([
+                        'residentId' => $request->residentId,
+                        'voterId' => $request->voterId,
+                        'precintNo' => $request->precintNo
+                    ]);
+                }
 
-            if(count($chkVoter) != 0)
-            {
-                Voter::find($request->vId)->updateOrCreate([
-                    'residentId' => $request->residentId,
-                    'voterId' => $request->voterId,
-                    'precintNo' => $request->precintNo
-                ]);
-            }
+                if(count($chkVoter) != 0)
+                {
+                    Voter::find($request->vId)->updateOrCreate([
+                        'residentId' => $request->residentId,
+                        'voterId' => $request->voterId,
+                        'precintNo' => $request->precintNo
+                    ]);
+                }
+             }
 
             return redirect('/Resident/NotResident')->withSuccess('Successfully updated into the database.');
         }

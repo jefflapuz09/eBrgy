@@ -32,7 +32,8 @@ class Resident extends Model
         'isActive',
         'isRegistered',
         'isDerogatory',
-        'contactNumber'
+        'contactNumber',
+        'created_at'
     ];
 
     public function Parents(){

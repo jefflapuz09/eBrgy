@@ -15,7 +15,8 @@ class Blotter extends Model
         'officerCharge',
         'description',
         'status',
-        'isActive'
+        'isActive',
+        'created_at'
     ];
 
     public function comRes(){

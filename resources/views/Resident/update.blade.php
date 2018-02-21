@@ -31,6 +31,15 @@
                     <b><label style="margin-top:20px;" for="exampleInputFile">Photo Upload</label></b>
                     <input type="file" class="form-control-file" name="image" onChange="readURL(this)" id="exampleInputFile" aria-describedby="fileHelp">
                 </div>
+                <div class="form-group">
+                        <label>Date of Registration<span style="color:red;">*</span></label>
+                        <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' name="created_at" placeholder="YYYY-MM-DD" id=""  class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                        </div>
+                </div>
             </div>
             <div class="col-sm-9">
                 {{ csrf_field() }}
