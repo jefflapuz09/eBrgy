@@ -29,9 +29,7 @@
                 <div class="form-group">
                     <label>Position<span style="color:Red;">*</span></label>
                     <select class="form-control" name="position">
-                        <option value="Chairman" @if($post->position == 'Chairman') selected @endif>Chairman</option>
                         <option value="Kagawad" @if($post->position == 'Kagawad') selected @endif>Kagawad</option>
-                        <option value="Secretary" @if($post->position == 'Secretary') selected @endif>Secretary</option>
                         <option value="Tanod" @if($post->position == 'Tanod') selected @endif>Tanod</option>
                     </select>
                 </div>

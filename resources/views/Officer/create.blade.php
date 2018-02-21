@@ -29,9 +29,7 @@
                 <div class="form-group">
                     <label>Position<span style="color:Red;">*</span></label>
                     <select class="form-control" name="position">
-                        <option value="Chairman">Chairman</option>
                         <option value="Kagawad">Kagawad</option>
-                        <option value="Secretary">Secretary</option>
                         <option value="Tanod">Tanod</option>
                     </select>
                 </div>

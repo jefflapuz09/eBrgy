@@ -17,9 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/admin','HomeController@index');
-
+Route::group(['middleware' => 'App\Http\Middleware\adminMiddleware'], function () {
 //Residents
 Route::get('/Resident','ResidentController@index');
 Route::get('/Resident/NotResident','ResidentController@index2');
@@ -51,17 +49,6 @@ Route::get('/Household/Reactivate/id={id}', 'HouseholdController@reactivate');
 Route::post('/Household/Store','HouseholdController@store');
 Route::post('/Household/Update/id={id}','HouseholdController@update');
 
-//Blotter
-Route::get('/Blotter','BlotterController@index');
-Route::get('/Blotter/Create','BlotterController@create');
-Route::get('/Blotter/Edit/id={id}','BlotterController@edit');
-Route::get('/Blotter/Deactivate/id={id}', 'BlotterController@destroy');
-Route::get('/Blotter/Soft', 'BlotterController@soft');
-Route::get('/Blotter/Reactivate/id={id}', 'BlotterController@reactivate');
-
-Route::post('/Blotter/Store','BlotterController@store');
-Route::post('/Blotter/Update/id={id}','BlotterController@update');
-
 //Officer
 Route::get('/Officer','OfficerController@index');
 Route::get('/Officer/Create','OfficerController@create');
@@ -84,6 +71,33 @@ Route::get('/Project/Reactivate/id={id}', 'ProjectController@reactivate');
 Route::post('/Project/Store','ProjectController@store');
 Route::post('/Project/Update/id={id}','ProjectController@update');
 
+//Business
+Route::get('/Business','BusinessController@index');
+Route::get('/Business/Create','BusinessController@create');
+Route::get('/Business/Edit/id={id}','BusinessController@edit');
+Route::get('/Business/Deactivate/id={id}', 'BusinessController@destroy');
+Route::get('/Business/Soft', 'BusinessController@soft');
+Route::get('/Business/Reactivate/id={id}', 'BusinessController@reactivate');
+
+Route::post('/Business/Store','BusinessController@store');
+Route::post('/Business/Update/id={id}','BusinessController@update');
+});
+
+Route::group(['middleware' => 'App\Http\Middleware\officerMiddleware'], function () {
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin','HomeController@index');
+
+//Blotter
+Route::get('/Blotter','BlotterController@index');
+Route::get('/Blotter/Create','BlotterController@create');
+Route::get('/Blotter/Edit/id={id}','BlotterController@edit');
+Route::get('/Blotter/Deactivate/id={id}', 'BlotterController@destroy');
+Route::get('/Blotter/Soft', 'BlotterController@soft');
+Route::get('/Blotter/Reactivate/id={id}', 'BlotterController@reactivate');
+
+Route::post('/Blotter/Store','BlotterController@store');
+Route::post('/Blotter/Update/id={id}','BlotterController@update');
+
 //Schedule
 Route::get('/Schedule','ScheduleController@index');
 Route::get('/Schedule/Create','ScheduleController@create');
@@ -95,19 +109,22 @@ Route::get('/Schedule/Reactivate/id={id}', 'ScheduleController@reactivate');
 Route::post('/Schedule/Store','ScheduleController@store');
 Route::post('/Schedule/Update/id={id}','ScheduleController@update');
 
-//Business
-Route::get('/Business','BusinessController@index');
-Route::get('/Business/Create','BusinessController@create');
-Route::get('/Business/Edit/id={id}','BusinessController@edit');
-Route::get('/Business/Deactivate/id={id}', 'BusinessController@destroy');
-Route::get('/Business/Soft', 'BusinessController@soft');
-Route::get('/Business/Reactivate/id={id}', 'BusinessController@reactivate');
-
-Route::post('/Business/Store','BusinessController@store');
-Route::post('/Business/Update/id={id}','BusinessController@update');
-
 //Forms
 Route::get('/BarangayClearance/Print/{id}','PdfController@index');
 Route::get('/BusinessPermit/Print/{id}','PdfController@business');
 Route::get('/CertificateIndigency/Print/{id}','PdfController@indigency');
 Route::get('/FiletoAction/Print/{id}','PdfController@file');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+

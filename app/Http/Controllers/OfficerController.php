@@ -74,13 +74,15 @@ class OfficerController extends Controller
             {
                 $officer = Officer::create([
                     'residentId' => $request->residentId,
-                    'position' => $request->position
+                    'position' => $request->position,
+                    'userRole' => 2
                 ]);
     
                 User::create([
                     'officerId' => $officer->id,
                     'email' => $request->email,
-                    'password' => bcrypt($request->password)
+                    'password' => bcrypt($request->password),
+                    'userRole' => 2
                 ]);
 
                 return redirect('/Officer')->withSuccess('Successfully inserted into the database.');
@@ -162,7 +164,8 @@ class OfficerController extends Controller
                 User::find($request->userId)->update([
                     'officerId' => $request->officerId,
                     'email' => $request->email,
-                    'password' => bcrypt($request->password)
+                    'password' => bcrypt($request->password),
+                    'userRole' => 2
                 ]);
 
                 return redirect('/Officer')->withSuccess('Successfully inserted into the database.');

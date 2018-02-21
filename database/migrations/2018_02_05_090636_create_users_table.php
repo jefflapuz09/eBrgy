@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->foreign('officerId')->references('id')->on('officers');
             $table->string('email')->unique();
             $table->string('password');
+            $table->integer('userRole')->default(1);
             $table->boolean('isActive')->default(1);
             $table->rememberToken();
             $table->timestamps();

@@ -41,14 +41,14 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{ asset(Auth::user()->Officer->Resident->image) }}" class="user-image" alt="User Image">
-              <span class="hidden-xs">{{Auth::user()->Officer->Resident->firstName}} {{Auth::user()->Officer->Resident->middleName}} {{Auth::user()->Officer->Resident->lastName}}</span>
+              <span class="hidden-xs">{{Auth::user()->Officer->Resident->firstName}} {{Auth::user()->Officer->Resident->lastName}}</span>
             </a>
             <ul class="dropdown-menu">
               <li class="user-header">
                 <img src="{{ asset(Auth::user()->Officer->Resident->image) }}" class="img-circle" alt="User Image">
                 
                 <p>
-                  {{Auth::user()->Officer->Resident->firstName}} {{Auth::user()->Officer->Resident->middleName}} {{Auth::user()->Officer->Resident->lastName}}
+                  {{Auth::user()->Officer->Resident->firstName}}  {{Auth::user()->Officer->Resident->lastName}}
                 </p>
                 <p>{{Auth::user()->Officer->position}}</p>
               </li>
@@ -73,11 +73,12 @@
           <img src="{{ asset(Auth::user()->Officer->Resident->image) }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>{{Auth::user()->Officer->Resident->firstName}} {{Auth::user()->Officer->Resident->middleName}} {{Auth::user()->Officer->Resident->lastName}}</p>
+          <p>{{Auth::user()->Officer->Resident->firstName}} {{Auth::user()->Officer->Resident->lastName}}</p>
           <a href="#"><i class="fa fa-circle text-success"></i>{{Auth::user()->Officer->position}}</a>
         </div>
       </div>
       <ul class="sidebar-menu" data-widget="tree">
+        @if(Auth::user()->userRole == 1)
         <li><a href="{{ url('/admin') }}"><i class="fa fa-bar-chart"></i> <span>Dashboard</span></a></li>
         <li class="header">Resident Profiling</li>
         <li><a class="active" href="{{ url('/Resident') }}"><i class="fa fa-book"></i> <span>Constituent</span></a></li>
@@ -91,6 +92,13 @@
         <li class="header">Others</li>
         <li><a href="{{ url('/Resident/NotResident') }}"><i class="fa fa-book"></i> <span>Non-resident</span></a></li>
         <li><a href="{{ url('/Officer') }}"><i class="fa fa-user"></i> <span>Officers</span></a></li>
+        @else
+        <li><a href="{{ url('/admin') }}"><i class="fa fa-bar-chart"></i> <span>Dashboard</span></a></li>
+        <li class="header">Barangay Issues</li>
+        <li><a href="{{ url('/Blotter') }}"><i class="fa fa-file"></i> <span>Blotter</span></a></li>
+        <li class="header">Management</li>
+        <li><a href="{{ url('/Schedule') }}"><i class="fa fa-calendar"></i> <span>Court Schedule</span></a></li>
+        @endif
       </ul>
     </section>
   </aside>
