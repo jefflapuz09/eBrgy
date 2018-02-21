@@ -31,6 +31,7 @@
                     <th>Business</th>
                     <th>Address</th>
                     <th>Owner</th>
+                    <th>Date of Registration</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -40,6 +41,7 @@
                     <td>{{$posts->name}}</td>
                     <td>{{$posts->street}} {{$posts->brgy}} {{$posts->city}}</td>
                     <td>{{$posts->Resident->firstName}} {{$posts->Resident->lastName}}</td>
+                    <td>{{ Carbon\Carbon::parse($posts->created_at)->toFormattedDateString()  }}</td>
                     <td>
                             <a href="{{ url('/Business/Reactivate/id='.$posts->id) }}"  onclick="return reacForm()"  type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Reactivate record">
                                 <i class="fa fa-recycle" aria-hidden="true"></i>

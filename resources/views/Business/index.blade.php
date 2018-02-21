@@ -31,6 +31,7 @@
                     <th>Business</th>
                     <th>Address</th>
                     <th>Owner</th>
+                    <th>Date of Registration</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -40,6 +41,7 @@
                     <td>{{$posts->name}}</td>
                     <td>{{$posts->street}} {{$posts->brgy}} {{$posts->city}}</td>
                     <td>{{$posts->Resident->firstName}} {{$posts->Resident->lastName}}</td>
+                    <td>{{ Carbon\Carbon::parse($posts->created_at)->toFormattedDateString()  }}</td>
                     <td>
                         <a href="{{ url('/Business/Edit/id='.$posts->id) }}" onclick="return updateForm()" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Update record">
                             <i class="fa fa-edit" aria-hidden="true"></i>

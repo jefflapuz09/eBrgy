@@ -50,7 +50,8 @@ class BlotterController extends Controller
             'complainant' => 'required',
             'complainedResident' => 'required',
             'officerCharge' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'created_at' => 'required'
         ];
         $messages = [
             'unique' => ':attribute already exists.',
@@ -63,7 +64,8 @@ class BlotterController extends Controller
             'complainant' => 'Complainant',
             'complainedResident' => 'Complained Resident',
             'officerCharge' => 'Officer-in-Charge',
-            'description' => 'Description'
+            'description' => 'Description',
+            'created_at' => 'Date of Filing'
         ];
         $validator = Validator::make($request->all(),$rules,$messages);
         $validator->setAttributeNames($niceNames); 
@@ -78,6 +80,7 @@ class BlotterController extends Controller
                 'complainedResident' => $request->complainedResident,
                 'officerCharge' => $request->officerCharge,
                 'description' => $request->description,
+                'created_at' => $request->created_at
             ]);
 
             Resident::find($request->complainedResident)->update(['isDerogatory' => 0 ]);
@@ -125,7 +128,8 @@ class BlotterController extends Controller
             'complainant' => 'required',
             'complainedResident' => 'required',
             'officerCharge' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'created_at' => 'required'
         ];
         $messages = [
             'unique' => ':attribute already exists.',
@@ -138,7 +142,8 @@ class BlotterController extends Controller
             'complainant' => 'Complainant',
             'complainedResident' => 'Complained Resident',
             'officerCharge' => 'Officer-in-Charge',
-            'description' => 'Description'
+            'description' => 'Description',
+            'created_at' => 'Date of Filing'
         ];
         $validator = Validator::make($request->all(),$rules,$messages);
         $validator->setAttributeNames($niceNames); 
@@ -156,7 +161,8 @@ class BlotterController extends Controller
                 'complainedResident' => $request->complainedResident,
                 'officerCharge' => $request->officerCharge,
                 'description' => $request->description,
-                'status' => $request->status
+                'status' => $request->status,
+                'created_at' => $request->created_at
             ]);
             
             

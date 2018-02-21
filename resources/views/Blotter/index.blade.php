@@ -41,7 +41,8 @@
             <tbody>
                 @foreach($post as $posts)
                 <tr>
-                    <td><span style="color:red;">000{{$posts->id}}</span></td>
+                    <?php $caseNo = str_pad($posts->id, 5, '0', STR_PAD_LEFT); ?>
+                    <td><span style="color:red;">{{$caseNo}}</span></td>
                     <td>{{$posts->com->firstName}} {{$posts->com->middleName}} {{$posts->com->lastName}}</td>
                     <td>{{$posts->comRes->firstName}} {{$posts->comRes->middleName}} {{$posts->comRes->lastName}}</td>                    
                     <td>{{ Carbon\Carbon::parse($posts->created_at)->toFormattedDateString()  }}</td>

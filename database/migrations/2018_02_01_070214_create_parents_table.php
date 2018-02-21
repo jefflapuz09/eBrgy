@@ -18,12 +18,12 @@ class CreateParentsTable extends Migration
             $table->increments('id');
             $table->integer('residentId')->unsigned();	
             $table->foreign('residentId')->references('id')->on('residents');
-            $table->string('motherfirstName');
+            $table->string('motherfirstName')->nullable();
             $table->string('mothermiddleName')->nullable();
-            $table->string('motherlastName');
-            $table->string('fatherfirstName');
+            $table->string('motherlastName')->nullable();
+            $table->string('fatherfirstName')->nullable();
             $table->string('fathermiddleName')->nullable();
-            $table->string('fatherlastName');
+            $table->string('fatherlastName')->nullable();
             $table->boolean('isActive')->default(1);
             $table->timestamps();
         });

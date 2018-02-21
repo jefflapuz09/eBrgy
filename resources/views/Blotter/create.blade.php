@@ -32,6 +32,15 @@
                     <div class="" style="padding:10px; background:#252525; color:white; margin-bottom:20px;">
                     Blotter Information
                     </div>
+                    <div class="form-group">
+                            <label>Date of Filing<span style="color:red;">*</span></label>
+                            <div class='input-group date' id='datetimepicker1'>
+                                    <input type='text' name="created_at" placeholder="YYYY-MM-DD" id="date"  class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-8">
                             <div class="form-group">
@@ -105,5 +114,16 @@
                 reader.readAsDataURL(input.files[0]);
             }
             }
+
+            $('#date').on('change',function(){
+            today = new Date();
+            date = new Date($('#date').val());
+            age = today.getFullYear() - date.getFullYear();
+            m = today.getMonth() - date.getMonth();
+            if(date >= today)
+            {
+                alert('Invalid Date');
+            }
+        });
 </script>
 @stop

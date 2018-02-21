@@ -73,12 +73,12 @@ class residentController extends Controller
             'image' => 'nullable',
             'contactNumber' => 'nullable',
             'created_at' => 'required',
-            'motherFirstName' => 'required',
+            'motherFirstName' => 'nullable',
             'motherMiddleName' => 'nullable',
-            'motherLastName' => 'required',
-            'fatherFirstName' => 'required',
+            'motherLastName' => 'nullable',
+            'fatherFirstName' => 'nullable',
             'fatherMiddleName' => 'nullable',
-            'fatherLastName' => 'required'
+            'fatherLastName' => 'nullable'
         ];
         $messages = [
             'unique' => ':attribute already exists.',
@@ -105,7 +105,13 @@ class residentController extends Controller
             'periodResidence' => 'Period of Residence',
             'image' => 'Image',
             'contactNumber' => 'Contact Number',
-            'created_at' => 'Date of Registration'
+            'created_at' => 'Date of Registration',
+            'motherFirstName' => 'Mother First Name',
+            'motherMiddleName' => 'Mother Middle Name',
+            'motherLastName' => 'Mother Last Name',
+            'fatherFirstName' => 'Father First Name',
+            'fatherMiddleName' => 'Father Middle Name',
+            'fatherLastName' => 'Father Last Name'
         ];
         $validator = Validator::make($request->all(),$rules,$messages);
         $validator->setAttributeNames($niceNames); 
@@ -195,7 +201,14 @@ class residentController extends Controller
             'tinNo' => 'nullable',
             'periodResidence' => 'required',
             'image' => 'nullable',
-            'contactNumber' => 'nullable'
+            'contactNumber' => 'nullable',
+            'created_at' => 'required',
+            'motherFirstName' => 'nullable',
+            'motherMiddleName' => 'nullable',
+            'motherLastName' => 'nullable',
+            'fatherFirstName' => 'nullable',
+            'fatherMiddleName' => 'nullable',
+            'fatherLastName' => 'nullable',
         ];
         $messages = [
             'unique' => ':attribute already exists.',
@@ -221,7 +234,14 @@ class residentController extends Controller
             'tinNo' => 'Tin No.',
             'periodResidence' => 'Period of Residence',
             'image' => 'Image',
-            'contactNumber' => 'Contact Number'
+            'contactNumber' => 'Contact Number',
+            'created_at' => 'Date of Registration',
+            'motherFirstName' => 'Mother First Name',
+            'motherMiddleName' => 'Mother Middle Name',
+            'motherLastName' => 'Mother Last Name',
+            'fatherFirstName' => 'Father First Name',
+            'fatherMiddleName' => 'Father Middle Name',
+            'fatherLastName' => 'Father Last Name'
         ];
         $validator = Validator::make($request->all(),$rules,$messages);
         $validator->setAttributeNames($niceNames); 
@@ -261,7 +281,8 @@ class residentController extends Controller
                 'periodResidence' => $request->periodResidence,
                 'image' => $pic,
                 'isRegistered' => 0,
-                'contactNumber' => $request->contactNumber
+                'contactNumber' => $request->contactNumber,
+                'created_at' => $request->created_at
             ]);
 
             parentModel::create([
@@ -342,7 +363,14 @@ class residentController extends Controller
             'tinNo' => 'nullable',
             'periodResidence' => 'required',
             'image' => 'nullable',
-            'contactNumber' => 'nullable'
+            'contactNumber' => 'nullable',
+            'created_at' => 'required',
+            'motherFirstName' => 'nullable',
+            'motherMiddleName' => 'nullable',
+            'motherLastName' => 'nullable',
+            'fatherFirstName' => 'nullable',
+            'fatherMiddleName' => 'nullable',
+            'fatherLastName' => 'nullable'
         ];
         $messages = [
             'unique' => ':attribute already exists.',
@@ -368,7 +396,14 @@ class residentController extends Controller
             'tinNo' => 'Tin No.',
             'periodResidence' => 'Period of Residence',
             'image' => 'Image',
-            'contactNumber' => 'Contact Number'
+            'contactNumber' => 'Contact Number',
+            'created_at' => 'Date of Registration',
+            'motherFirstName' => 'Mother First Name',
+            'motherMiddleName' => 'Mother Middle Name',
+            'motherLastName' => 'Mother Last Name',
+            'fatherFirstName' => 'Father First Name',
+            'fatherMiddleName' => 'Father Middle Name',
+            'fatherLastName' => 'Father Last Name'
         ];
         $validator = Validator::make($request->all(),$rules,$messages);
         $validator->setAttributeNames($niceNames); 
@@ -407,7 +442,8 @@ class residentController extends Controller
                 'occupation' => $request->occupation,
                 'tinNo' => $request->tinNo,
                 'periodResidence' => $request->periodResidence,
-                'image' => $pic
+                'image' => $pic,
+                'created_at' => $request->created_at
             ]);
 
             $chkVoter = DB::table('residents as r')
@@ -494,7 +530,14 @@ class residentController extends Controller
             'tinNo' => 'nullable',
             'periodResidence' => 'required',
             'image' => 'nullable',
-            'contactNumber' => 'nullable'
+            'contactNumber' => 'nullable',
+            'created_at' => 'required',
+            'motherFirstName' => 'nullable',
+            'motherMiddleName' => 'nullable',
+            'motherLastName' => 'nullable',
+            'fatherFirstName' => 'nullable',
+            'fatherMiddleName' => 'nullable',
+            'fatherLastName' => 'nullable'
         ];
         $messages = [
             'unique' => ':attribute already exists.',
@@ -520,7 +563,14 @@ class residentController extends Controller
             'tinNo' => 'Tin No.',
             'periodResidence' => 'Period of Residence',
             'image' => 'Image',
-            'contactNumber' => 'Contact Number'
+            'contactNumber' => 'Contact Number',
+            'created_at' => 'Date of Registration',
+            'motherFirstName' => 'Mother First Name',
+            'motherMiddleName' => 'Mother Middle Name',
+            'motherLastName' => 'Mother Last Name',
+            'fatherFirstName' => 'Father First Name',
+            'fatherMiddleName' => 'Father Middle Name',
+            'fatherLastName' => 'Father Last Name'
         ];
         $validator = Validator::make($request->all(),$rules,$messages);
         $validator->setAttributeNames($niceNames); 
@@ -559,7 +609,8 @@ class residentController extends Controller
                 'occupation' => $request->occupation,
                 'tinNo' => $request->tinNo,
                 'periodResidence' => $request->periodResidence,
-                'image' => $pic
+                'image' => $pic,
+                'created_at' => $request->created_at
             ]);
 
             $chkVoter = DB::table('residents as r')

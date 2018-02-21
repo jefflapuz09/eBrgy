@@ -31,6 +31,15 @@
                 <form action="{{ url('/Business/Update/id='.$post->id) }}" method="post">
                     {{csrf_field()}}
                     <div class="form-group">
+                            <label>Date of Registration<span style="color:red;">*</span></label>
+                            <div class='input-group date' id='datetimepicker1'>
+                                    <input type='text' name="created_at" placeholder="YYYY-MM-DD" id="date"  class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </div>
+                    </div>
+                    <div class="form-group">
                         <div class="row">
                             <div class="col-sm-6">
                                 <label>Business Name<span style="color:red;">*</span></label>
@@ -75,5 +84,16 @@
 @endsection
 
 @section('script')
-
+<script>
+        $('#date').on('change',function(){
+                today = new Date();
+                date = new Date($('#date').val());
+                age = today.getFullYear() - date.getFullYear();
+                m = today.getMonth() - date.getMonth();
+                if(date >= today)
+                {
+                    alert('Invalid Date');
+                }
+            });
+    </script>
 @stop

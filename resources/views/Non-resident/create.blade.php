@@ -34,7 +34,7 @@
                 <div class="form-group">
                         <label>Date of Registration<span style="color:red;">*</span></label>
                         <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' name="created_at" placeholder="YYYY-MM-DD" id=""  class="form-control" />
+                                <input type='text' name="created_at" placeholder="YYYY-MM-DD" id="date"  class="form-control" />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -162,7 +162,7 @@
                             </div>
                             <div class="col-sm-4">
                                     <label>Voter's Id No.<span style="color:red;"></span></label>
-                                    <input type="text" class="col-sm-6 form-control" maxlength="50" name="voterId" id="exampleInputEmail1" placeholder="Voter's Id No.">
+                                    <input type="text" class="col-sm-6 form-control" maxlength="50" name="voterId" id="voterId" placeholder="Voter's Id No.">
                             </div>
                             <div class="col-sm-4">
                                     <label>Precint Assignment No.<span style="color:red;"></span></label>
@@ -222,10 +222,23 @@
 
 @section('script')
     <script>
+
+    $('#date').on('change',function(){
+            today = new Date();
+            date = new Date($('#date').val());
+            age = today.getFullYear() - date.getFullYear();
+            m = today.getMonth() - date.getMonth();
+            if(date >= today)
+            {
+                alert('Invalid Date');
+            }
+        });
+
             $(document).ready(function(){
                 $('#tin').inputmask("99-9999999");
                 $('#contactNumber').inputmask("9999-999-9999");
                 $('#precint').inputmask('9999a');
+                $('#voterId').inputmask('9999-9999a-a999aaa99999-9');
               });
 
               $('#bday').on('change',function(){

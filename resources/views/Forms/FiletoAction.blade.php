@@ -45,7 +45,8 @@
             <div class="body" style="z-index:999;">
                 <div class="content" style="position:absolute; top:-600px; margin:50px; line-height:40px;">
                     <div style="position: absolute; top:600px; left:230px;">
-                        <p>Barangay Case No.<span style="color:Red;">000{{$post->id}}</span></p>
+                        <?php $caseNo = str_pad($post->id, 5, '0', STR_PAD_LEFT); ?>
+                        <p>Barangay Case No.<span style="color:Red;">{{$caseNo}}</span></p>
                     </div> 
                     <div style="position:absolute; top: 700px; left:-150px; text-align:center; line-height:20px;">
                         {{$post->com->lastName}}, {{$post->com->firstName}}<br>
