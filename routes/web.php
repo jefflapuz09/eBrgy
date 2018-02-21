@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/Restricted','Homecontroller@error');
+Route::get('/RestrictedAuth','Homecontroller@error2');
+
 Auth::routes();
 
 Route::group(['middleware' => 'App\Http\Middleware\adminMiddleware'], function () {

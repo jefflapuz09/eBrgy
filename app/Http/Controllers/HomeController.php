@@ -30,4 +30,14 @@ class HomeController extends Controller
         $voter = Voter::where('isActive',1)->get();
         return view('in',compact('voter','blotter','post'));
     }
+
+    public function error()
+    {
+        return view('errors.notauth');
+    }
+
+    public function error2()
+    {
+        return view('errors.notallowed');
+    }
 }

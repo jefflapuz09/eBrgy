@@ -17,20 +17,25 @@ class officerMiddleware
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if($request->user()->userRole == 2) {
-            // return redirect('/admin');
-             return $next($request);
+        if(Auth::guest())
+        {
+            return redirect('/Restricted');
         }
         else
         {
-            return $next($request);
+            if($request->user()->userRole == 2) {
+                // return redirect('/admin');
+                 return $next($request);
+            }
+            else
+            {
+                return $next($request);
+            }
         }
+        
         
 
 
-    if(Auth::guest())
-    {
-        return redirect('/Restricted');
-    }
+    
     }
 }
