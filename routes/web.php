@@ -89,6 +89,7 @@ Route::post('/Business/Update/id={id}','BusinessController@update');
 Route::group(['middleware' => 'App\Http\Middleware\officerMiddleware'], function () {
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin','HomeController@index');
+Route::get('/month','HomeController@month');
 
 //Blotter
 Route::get('/Blotter','BlotterController@index');

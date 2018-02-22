@@ -37,6 +37,15 @@
                                         </table>
                             </div>
                         </div>
+
+                        <div class="box box-solid box-primary">
+                            <div class="box-header">
+                                    <h3 class="box-title">Filed Cases as of this year {{Carbon\Carbon::now()->year}}</h3>
+                            </div>
+                        <div class="box-body">
+                                <div id="line-example"></div>
+                            </div>
+                        </div>
                 </div>
                  <div class="col-sm-4">
                         <div class="info-box bg-green">
@@ -56,12 +65,130 @@
                                       <span class="info-box-number">{{count($blotter)}}</span>
                                     </div>
                                     <!-- /.info-box-content -->
-                                  </div>
+                            </div>
+                            <div class="info-box bg-blue">
+                                    <!-- Apply any bg-* class to to the icon to color it -->
+                                    <span class="info-box-icon bg-white"><i class="fa fa-star-o"></i></span>
+                                    <div class="info-box-content">
+                                      <span class="info-box-text">No. of Male Residents</span>
+                                      <span class="info-box-number">{{count($male)}}</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                            </div>
+                            <div class="info-box bg-blue">
+                                    <!-- Apply any bg-* class to to the icon to color it -->
+                                    <span class="info-box-icon bg-white"><i class="fa fa-star-o"></i></span>
+                                    <div class="info-box-content">
+                                      <span class="info-box-text">No. of Female Residents</span>
+                                      <span class="info-box-number">{{count($female)}}</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                            </div>
+                            <div class="info-box bg-blue">
+                                    <!-- Apply any bg-* class to to the icon to color it -->
+                                    <span class="info-box-icon bg-white"><i class="fa fa-star-o"></i></span>
+                                    <div class="info-box-content">
+                                      <span class="info-box-text">No. of Residents with Record</span>
+                                      <span class="info-box-number">{{count($record)}}</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                            </div>
+                            <div class="info-box bg-blue">
+                                    <!-- Apply any bg-* class to to the icon to color it -->
+                                    <span class="info-box-icon bg-white"><i class="fa fa-star-o"></i></span>
+                                    <div class="info-box-content">
+                                      <span class="info-box-text">No. of Businesses within the Barangay</span>
+                                      <span class="info-box-number">{{count($business)}}</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                            </div>
+                            <div class="info-box bg-blue">
+                                <!-- Apply any bg-* class to to the icon to color it -->
+                                <span class="info-box-icon bg-white"><i class="fa fa-star-o"></i></span>
+                                <div class="info-box-content">
+                                  <span class="info-box-text">Population</span>
+                                  <span class="info-box-number">{{count($po)}}</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                        </div>
+                            
                 </div>
             </div>
         </div>
     </div>
 @endsection
 @section('script')
-    
+<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script>
+        $(document).ready(function(){
+        $.ajax({   
+            type: "GET",
+            url: "/month",             
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",                  
+            success: function(response){                    
+            console.log(response);
+            var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            var currentYear = (new Date).getFullYear();
+            Morris.Line({
+            element: 'line-example',
+            data: [{
+                m: '2015-01', // <-- valid timestamp strings
+                a: response.jan
+            }, {
+                m: '2015-02',
+                a: response.feb
+            }, {
+                m: '2015-03',
+                a: response.mar
+            }, {
+                m: '2015-04',
+                a: response.apr
+            }, {
+                m: '2015-05',
+                a: response.may
+            }, {
+                m: '2015-06',
+                a: response.jun
+            }, {
+                m: '2015-07',
+                a: response.jul
+            }, {
+                m: '2015-08',
+                a: response.aug
+            }, {
+                m: '2015-09',
+                a: response.sep
+            }, {
+                m: '2015-10',
+                a: response.oct
+            }, {
+                m: '2015-11',
+                a: response.nov
+            }, {
+                m: '2015-12',
+                a: response.dec
+            }, ],
+            xkey: 'm',
+            ykeys: ['a'],
+            labels: [currentYear],
+            xLabelFormat: function(x) { // <--- x.getMonth() returns valid index
+                var month = months[x.getMonth()];
+                return month;
+            },
+            dateFormat: function(x) {
+                var month = months[new Date(x).getMonth()];
+                return month;
+            },
+            });
+            }
+
+        });
+    });
+       
+
+
+
+    </script>
 @stop
