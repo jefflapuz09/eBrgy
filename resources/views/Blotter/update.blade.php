@@ -35,7 +35,7 @@
                     <div class="form-group">
                             <label>Date of Filing<span style="color:red;">*</span></label>
                             <div class='input-group date' id='datetimepicker1'>
-                                    <input type='text' name="created_at" placeholder="YYYY-MM-DD" id="date"  class="form-control" />
+                            <input type='text' name="created_at" placeholder="YYYY-MM-DD" id="date" value="{{$post->created_at}}" class="form-control" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -52,10 +52,10 @@
                                     <div class="form-group">
                                             <label>Status<span style="color:Red;">*</span></label>
                                             <select class="form-control" name="status">
-                                                <option value="1">Pending</option>
-                                                <option value="2">Ongoing</option>
-                                                <option value="3">Resolved Issue</option>
-                                                <option value="4">File to Action</option>
+                                                <option value="1" @if($post->status == 1) selected="selected" @endif>Pending</option>
+                                                <option value="2" @if($post->status == 2) selected="selected" @endif>Ongoing</option>
+                                                <option value="3" @if($post->status == 3) selected="selected" @endif>Resolved Issue</option>
+                                                <option value="4" @if($post->status == 4) selected="selected" @endif>File to Action</option>
                                             </select>
                                     </div>
                             </div>
@@ -273,6 +273,10 @@
                 reader.readAsDataURL(input.files[0]);
             }
             }
+
+            $(document).ready(function(){
+                $('#date').inputmask('9999-99-99');
+            });
 
             $('#date').on('change',function(){
             today = new Date();

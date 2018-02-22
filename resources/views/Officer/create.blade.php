@@ -50,15 +50,15 @@
                 </div>
                 <div class="form-group">
                     <label>Email Address<span style="color:Red;">*</span></label>
-                    <input type="text" class="form-control" name="email" placeholder="Email Address">
+                    <input type="text" class="form-control" value="{{ old('email') }}"name="email" placeholder="Email Address">
                 </div>
                 <div class="form-group">
                     <label>Password<span style="color:Red;">*</span></label>
-                    <input type="password" class="form-control" name="password" placeholder="Password">
+                    <input type="password" class="form-control" value="{{ old('password') }}" name="password" placeholder="Password">
                 </div>
                 <div class="form-group">
                     <label>Confirm Password<span style="color:Red;">*</span></label>
-                    <input type="password" class="form-control" name="conpassword" placeholder="Confirm Password">
+                    <input type="password" class="form-control" value="{{ old('conpassword') }}" name="conpassword" placeholder="Confirm Password">
                 </div>
                     <div class="pull-right">
                         <button class="btn btn-primary" type="submit">Submit</button>

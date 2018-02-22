@@ -35,7 +35,7 @@
                     <div class="form-group">
                             <label>Date of Filing<span style="color:red;">*</span></label>
                             <div class='input-group date' id='datetimepicker1'>
-                                    <input type='text' name="created_at" placeholder="YYYY-MM-DD" id="date"  class="form-control" />
+                            <input type='text' name="created_at" placeholder="YYYY-MM-DD" id="date"  value="{{ old('created_at') }}" class="form-control" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -45,7 +45,7 @@
                         <div class="col-sm-8">
                             <div class="form-group">
                                 <label><span style="color:red;">Case No.*</span></label>
-                                <input type="text" class="form-control" maxlength="50" placeholder="Case No." name="id">
+                                <input type="text" class="form-control" maxlength="50" value="{{ old('id') }}" placeholder="Case No." name="id">
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -114,6 +114,10 @@
                 reader.readAsDataURL(input.files[0]);
             }
             }
+
+            $(document).ready(function(){
+                $('#date').inputmask('9999-99-99');
+            });
 
             $('#date').on('change',function(){
             today = new Date();

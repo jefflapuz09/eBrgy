@@ -31,21 +31,21 @@
                 </div>
                 <div class="form-group" style="margin-top:20px;">
                     <label>Household No.<span style="color:red;">*</span></label>
-                    <input type="text" class="form-control" id="no" maxlength="50" name="id" placeholder="Household No.">
+                <input type="text" class="form-control" value="{{old('id')}}"  id="no" maxlength="50" name="id" placeholder="Household No.">
                 </div>
                 <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-5">
                                     <label>Street<span style="color:red;">*</span></label>
-                                    <input type="text" class="col-sm-6 form-control" maxlength="70" id="exampleInputEmail1" placeholder="Street" name="street" >
+                                    <input type="text" value="{{old('street')}}" class="col-sm-6 form-control" maxlength="70" id="exampleInputEmail1" placeholder="Street" name="street" >
                                 </div>
                                 <div class="col-sm-4">
                                     <label>Brgy.<span style="color:red;">*</span></label>
-                                    <input type="text" class="col-sm-6 form-control" maxlength="50" id="exampleInputEmail1" placeholder="Brgy" name="brgy">
+                                    <input type="text" value="{{old('brgy')}}" class="col-sm-6 form-control" maxlength="50" id="exampleInputEmail1" placeholder="Brgy" name="brgy">
                                 </div>
                                 <div class="col-sm-3">
                                     <label>City<span style="color:red;">*</span></label>
-                                    <input type="text" class="col-sm-6 form-control" maxlength="50" id="exampleInputEmail1" placeholder="City" name="city">
+                                    <input type="text" value="{{old('city')}}" class="col-sm-6 form-control" maxlength="50" id="exampleInputEmail1" placeholder="City" name="city">
                                 </div>
                             </div>
                 </div>

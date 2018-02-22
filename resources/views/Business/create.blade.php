@@ -33,7 +33,7 @@
                     <div class="form-group">
                             <label>Date of Registration<span style="color:red;">*</span></label>
                             <div class='input-group date' id='datetimepicker1'>
-                                    <input type='text' name="created_at" placeholder="YYYY-MM-DD" id="date"  class="form-control" />
+                            <input type='text' name="created_at" placeholder="YYYY-MM-DD" value="{{ old('created_at') }}"  id="date"  class="form-control" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -43,7 +43,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label>Business Name<span style="color:red;">*</span></label>
-                                <input type="text" maxlength="70" class="form-control" placeholder="Business Name" name="name">
+                                <input type="text" maxlength="70" value="{{ old('name') }}" class="form-control" placeholder="Business Name" name="name">
                             </div>
                             <div class="col-sm-6">
                                 <label>Owner<span style="color:red;">*</span></label>
@@ -59,15 +59,15 @@
                         <div class="row">
                             <div class="col-sm-5">
                                 <label>Street<span style="color:red;">*</span></label>
-                                <input type="text" class="form-control" maxlength="70" placeholder="Street" name="street">
+                                <input type="text" value="{{ old('street') }}" class="form-control" maxlength="70" placeholder="Street" name="street">
                             </div>
                             <div class="col-sm-3">
                                 <label>Brgy<span style="color:red;">*</span></label>
-                                <input type="text" class="form-control" maxlength="50" placeholder="Brgy" name="brgy">
+                                <input type="text" value="{{ old('brgy') }}" class="form-control" maxlength="50" placeholder="Brgy" name="brgy">
                             </div>
                             <div class="col-sm-4">
                                 <label>City<span style="color:red;">*</span></label>
-                                <input type="text" class="form-control" maxlength="50" placeholder="City" name="city">
+                                <input type="text" value="{{ old('city') }}" class="form-control" maxlength="50" placeholder="City" name="city">
                             </div>
                         </div>
                     </div>
@@ -95,5 +95,9 @@
                 alert('Invalid Date');
             }
         });
+
+        $(document).ready(function(){
+                $('#date').inputmask('9999-99-99');
+            });
 </script>
 @stop

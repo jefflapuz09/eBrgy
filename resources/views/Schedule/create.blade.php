@@ -41,7 +41,7 @@
                         <div class="form-group">
                              <label>Date<span style="color:red;">*</span></label>
                               <div class='input-group date' id='datetimepicker1'>
-                                      <input type='text' name="date" placeholder="YYYY-MM-DD"  class="form-control" />
+                                      <input type='text' name="date" id="date" value="{{ old('date') }}" placeholder="YYYY-MM-DD"  class="form-control" />
                                       <span class="input-group-addon">
                                           <span class="glyphicon glyphicon-calendar"></span>
                                       </span>
@@ -50,7 +50,7 @@
                         <div class="form-group">
                                 <label>Start<span style="color:red;">*</span></label>
                               <div class="input-group clockpicker">
-                                    <input type="text" name="start" class="form-control">
+                                    <input type="text" name="start" value="{{ old('start') }}" class="form-control">
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-time"></span>
                                     </span>
@@ -59,7 +59,7 @@
                           <div class="form-group">
                               <label>End<span style="color:red;">*</span></label>
                             <div class="input-group clockpicker">
-                                  <input type="text" class="form-control" name="end">
+                                  <input type="text" class="form-control" value="{{ old('end') }}" name="end">
                                   <span class="input-group-addon">
                                       <span class="glyphicon glyphicon-time"></span>
                                   </span>
@@ -84,5 +84,9 @@
 @endsection
 
 @section('script')
-
+<script>
+    $(document).ready(function(){
+        $('#date').inputmask('9999-99-99');
+    });
+</script>
 @stop

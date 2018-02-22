@@ -34,7 +34,7 @@
                 <div class="form-group">
                         <label>Date of Registration<span style="color:red;">*</span></label>
                         <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' name="created_at" placeholder="YYYY-MM-DD" id="date"  class="form-control" />
+                        <input type='text' name="created_at" placeholder="YYYY-MM-DD" value="{{$post->created_at}}" id="date"  class="form-control" />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -270,6 +270,7 @@
                 $('#tin').inputmask("99-9999999");
                 $('#precint').inputmask('9999a');
                 $('#voterId').inputmask('9999-9999a-a999aaa99999-9');
+                $('#date').inputmask('9999-99-99');
 
                 today = new Date();
             birthDate = new Date($('#bday').val());

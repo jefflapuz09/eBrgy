@@ -33,7 +33,7 @@
                     <div class="form-group">
                             <label>Date of Registration<span style="color:red;">*</span></label>
                             <div class='input-group date' id='datetimepicker1'>
-                                    <input type='text' name="created_at" placeholder="YYYY-MM-DD" id="date"  class="form-control" />
+                            <input type='text' name="created_at" value="{{$post->created_at}}" placeholder="YYYY-MM-DD" id="date"  class="form-control" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -94,6 +94,10 @@
                 {
                     alert('Invalid Date');
                 }
+            });
+
+            $(document).ready(function(){
+                $('#date').inputmask('9999-99-99');
             });
     </script>
 @stop

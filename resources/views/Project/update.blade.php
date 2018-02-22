@@ -55,7 +55,7 @@
                         <div class="form-group">
                             <label>Project Started<span style="color:Red;">*</span></label>
                             <div class='input-group date' id="">
-                                    <input type='text' name="dateStarted" id="start" value="{{$post->dateStarted}}" placeholder="Date Started"  class="form-control" />
+                                    <input type='text' name="dateStarted" id="start" value="{{$post->dateStarted}}" placeholder="Date Started"  class="form-control datemask" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -66,7 +66,7 @@
                         <div class="form-group">
                             <label>Project Ended<span style="color:Red;">*</span></label>
                             <div class='input-group date' id="">
-                                    <input type='text' name="dateEnded" id="end" placeholder="Date Ended"  value="{{$post->dateEnded}}" class="form-control" />
+                                    <input type='text' name="dateEnded" id="end" placeholder="Date Ended"  value="{{$post->dateEnded}}" class="form-control datemask" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -96,5 +96,9 @@
                 alert('Invalid End date');
             }
         });
+
+        $(document).ready(function(){
+        $('.datemask').inputmask('9999-99-99');
+         });
 </script>
 @stop

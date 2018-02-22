@@ -32,12 +32,12 @@
                 {{csrf_field()}}
                 <div class="form-group" style="margin-top:20px;">
                     <label>Project Name<span style="color:Red;">*</span></label>
-                    <input type="text" class="form-control" maxlength="100" name="projectName" placeholder="Project Name">
+                <input type="text" class="form-control" value="{{ old('projectName') }}" maxlength="100" name="projectName" placeholder="Project Name">
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <label>Project Developer<span style="color:Red;">*</span></label>
-                        <input type="text" class="form-control" maxlength="100" name="projectDev" placeholder="Project Developer">
+                        <input type="text" class="form-control" value="{{ old('projectDev') }}" maxlength="100" name="projectDev" placeholder="Project Developer">
                     </div>
                     <div class="col-sm-6">
                         <label>Officer-in-Charge<span style="color:Red;">*</span></label>
@@ -55,7 +55,7 @@
                         <div class="form-group">
                             <label>Project Started<span style="color:Red;">*</span></label>
                             <div class='input-group date' id="">
-                                    <input type='text' name="dateStarted" id="start" placeholder="Date Started"  class="form-control" />
+                                    <input type='text' name="dateStarted" id="start" placeholder="Date Started" value="{{ old('dateStarted') }}" class="form-control datemask" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -66,7 +66,7 @@
                         <div class="form-group">
                             <label>Project Ended<span style="color:Red;">*</span></label>
                             <div class='input-group date' id="">
-                                    <input type='text' name="dateEnded" placeholder="Date Ended"  id="end" class="form-control" />
+                                    <input type='text' name="dateEnded" placeholder="Date Ended" value="{{ old('dateEnded') }}" id="end" class="form-control datemask" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -96,5 +96,9 @@
                 alert('Invalid End date');
             }
         });
+
+        $(document).ready(function(){
+        $('.datemask').inputmask('9999-99-99');
+         });
 </script>
 @stop

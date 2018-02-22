@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <label>Date<span style="color:red;">*</span></label>
                               <div class='input-group date' id='datetimepicker1'>
-                                      <input type='text' name="date" value="{{$post->date}}" placeholder="YYYY-MM-DD"  class="form-control" />
+                                      <input type='text' id="date" name="date" value="{{$post->date}}" placeholder="YYYY-MM-DD"  class="form-control" />
                                       <span class="input-group-addon">
                                           <span class="glyphicon glyphicon-calendar"></span>
                                       </span>
@@ -84,5 +84,9 @@
 @endsection
 
 @section('script')
-
+<script>
+     $(document).ready(function(){
+        $('#date').inputmask('9999-99-99');
+    });
+</script>
 @stop
