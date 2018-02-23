@@ -92,6 +92,7 @@
         <li class="header">Others</li>
         <li><a href="{{ url('/Resident/NotResident') }}"><i class="fa fa-book"></i> <span>Non-resident</span></a></li>
         <li><a href="{{ url('/Officer') }}"><i class="fa fa-user"></i> <span>Officers</span></a></li>
+        <li><a href="{{ url('/Query') }}"><i class="fa fa-list"></i> <span>Queries</span></a></li>
         @else
         <li><a href="{{ url('/admin') }}"><i class="fa fa-bar-chart"></i> <span>Dashboard</span></a></li>
         <li class="header">Barangay Issues</li>

@@ -85,6 +85,9 @@ Route::get('/Business/Reactivate/id={id}', 'BusinessController@reactivate');
 
 Route::post('/Business/Store','BusinessController@store');
 Route::post('/Business/Update/id={id}','BusinessController@update');
+
+//Queries
+Route::get('/Query','QueryController@index');
 });
 
 Route::group(['middleware' => 'App\Http\Middleware\officerMiddleware'], function () {

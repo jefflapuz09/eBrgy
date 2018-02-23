@@ -14,4 +14,8 @@ class Voter extends Model
         'precintNo',
         'isActive'
     ];
+
+    public function Resident(){
+        return $this->belongsTo('App\Resident','residentId');
+    }
 }
