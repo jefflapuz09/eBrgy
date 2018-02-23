@@ -118,8 +118,8 @@
     </div>
 @endsection
 @section('script')
-<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<script src="{{ asset('js/raphael-min.js') }}"></script>
+<script src="{{ asset('js/morris.min.js') }}"></script>
     <script>
         $(document).ready(function(){
         $.ajax({   
