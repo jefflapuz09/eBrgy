@@ -40,6 +40,7 @@ Route::post('/Resident/NotResident/Store','ResidentController@notResident');
 Route::post('/Resident/Update/id={id}','ResidentController@update');
 Route::post('/Resident/NotResident/Update/id={id}','ResidentController@update2');
 
+Route::get('/Resident/Mass','ResidentController@remove');
 //Household
 Route::get('/Household','HouseholdController@index');
 Route::get('/Household/Create','HouseholdController@create');

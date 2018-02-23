@@ -50,7 +50,7 @@
                 </div>
                 <div class="form-group">
                     <label>Email Address<span style="color:Red;">*</span></label>
-                    <input type="text" class="form-control" value="{{ old('email') }}"name="email" placeholder="Email Address">
+                    <input type="text" class="form-control" value="{{ old('email') }}" name="email" id="email" placeholder="Email Address">
                 </div>
                 <div class="form-group">
                     <label>Password<span style="color:Red;">*</span></label>
@@ -74,6 +74,8 @@
 
 @section('script')
     <script>
+        $('#email').inputmask('email');
+
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();

@@ -74,16 +74,24 @@ class BlotterController extends Controller
         }
         else
         {
-            Blotter::create([
-                'id' => $request->id,
-                'complainant' => $request->complainant,
-                'complainedResident' => $request->complainedResident,
-                'officerCharge' => $request->officerCharge,
-                'description' => $request->description,
-                'created_at' => $request->created_at
-            ]);
+            try
+            {
+                Blotter::create([
+                    'id' => $request->id,
+                    'complainant' => $request->complainant,
+                    'complainedResident' => $request->complainedResident,
+                    'officerCharge' => $request->officerCharge,
+                    'description' => $request->description,
+                    'created_at' => $request->created_at
+                ]);
 
-            Resident::find($request->complainedResident)->update(['isDerogatory' => 0 ]);
+                Resident::find($request->complainedResident)->update(['isDerogatory' => 0 ]);
+            }
+            catch(\Illuminate\Database\QueryException $e){
+                DB::rollBack();
+                $errMess = $e->getMessage();
+                return Redirect::back()->withErrors($errMess);
+            }
 
             return redirect('/Blotter')->withSuccess('Successfully inserted into the database.');
         }
@@ -152,22 +160,30 @@ class BlotterController extends Controller
         }
         else
         {
-             DB::table('residents')->where('id',$request->complainant)->update(['isDerogatory' => 1]);
-             DB::table('residents')->where('id',$request->complainedResident)->update(['isDerogatory' => 1]);
-        
-            Blotter::find($id)->update([
-                'id' => $request->id,
-                'complainant' => $request->complainant,
-                'complainedResident' => $request->complainedResident,
-                'officerCharge' => $request->officerCharge,
-                'description' => $request->description,
-                'status' => $request->status,
-                'created_at' => $request->created_at
-            ]);
+            try
+            {
+                DB::table('residents')->where('id',$request->complainant)->update(['isDerogatory' => 1]);
+                DB::table('residents')->where('id',$request->complainedResident)->update(['isDerogatory' => 1]);
             
-            
+                Blotter::find($id)->update([
+                    'id' => $request->id,
+                    'complainant' => $request->complainant,
+                    'complainedResident' => $request->complainedResident,
+                    'officerCharge' => $request->officerCharge,
+                    'description' => $request->description,
+                    'status' => $request->status,
+                    'created_at' => $request->created_at
+                ]);
+                
+                
 
-            Resident::find($request->complainedResident)->update(['isDerogatory' => 0 ]);
+                Resident::find($request->complainedResident)->update(['isDerogatory' => 0 ]);
+            }
+            catch(\Illuminate\Database\QueryException $e){
+                DB::rollBack();
+                $errMess = $e->getMessage();
+                return Redirect::back()->withErrors($errMess);
+            }
 
             return redirect('/Blotter')->withSuccess('Successfully updated into the database.');
         }

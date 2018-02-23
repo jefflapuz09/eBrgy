@@ -70,14 +70,21 @@ class ScheduleController extends Controller
         }
         else
         {
-            Schedule::create([
-                'residentId' => $request->residentId,
-                'officerId' => $request->officerId,
-                'date' => $request->date,
-                'start' => $request->start,
-                'end' => $request->end
-            ]);
-
+            try
+            {
+                Schedule::create([
+                    'residentId' => $request->residentId,
+                    'officerId' => $request->officerId,
+                    'date' => $request->date,
+                    'start' => $request->start,
+                    'end' => $request->end
+                ]);
+            }
+            catch(\Illuminate\Database\QueryException $e){
+                DB::rollBack();
+                $errMess = $e->getMessage();
+                return Redirect::back()->withErrors($errMess);
+            }
             return redirect('/Schedule')->withSuccess('Successfully inserted into the database.');
         }
     }
@@ -143,14 +150,21 @@ class ScheduleController extends Controller
         }
         else
         {
-            Schedule::find($id)->update([
-                'residentId' => $request->residentId,
-                'officerId' => $request->officerId,
-                'date' => $request->date,
-                'start' => $request->start,
-                'end' => $request->end
-            ]);
-
+            try
+            {
+                Schedule::find($id)->update([
+                    'residentId' => $request->residentId,
+                    'officerId' => $request->officerId,
+                    'date' => $request->date,
+                    'start' => $request->start,
+                    'end' => $request->end
+                ]);
+            }
+            catch(\Illuminate\Database\QueryException $e){
+                DB::rollBack();
+                $errMess = $e->getMessage();
+                return Redirect::back()->withErrors($errMess);
+            }
             return redirect('/Schedule')->withSuccess('Successfully updated into the database.');
         }
     }

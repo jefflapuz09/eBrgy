@@ -45,7 +45,7 @@
                         <div class="col-sm-8">
                             <div class="form-group">
                                 <label><span style="color:red;">Case No.*</span></label>
-                                <input type="text" class="form-control" maxlength="50" value="{{ old('id') }}" placeholder="Case No." name="id">
+                                <input type="number" class="form-control" maxlength="10" value="{{ old('id') }}" placeholder="Case No." name="id">
                             </div>
                         </div>
                         <div class="col-sm-4">

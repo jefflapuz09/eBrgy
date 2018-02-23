@@ -48,18 +48,18 @@
                         </div>
                 </div>
                  <div class="col-sm-4">
-                        <div class="info-box bg-green">
+                        <div class="info-box bg-blue">
                                 <!-- Apply any bg-* class to to the icon to color it -->
-                                <span class="info-box-icon bg-white"><i class="fa fa-star-o"></i></span>
+                                <span class="info-box-icon bg-white"><i class="fa fa-registered"></i></span>
                                 <div class="info-box-content">
                                   <span class="info-box-text">No. of Registered Voters</span>
                                   <span class="info-box-number">{{count($voter)}}</span>
                                 </div>
                                 <!-- /.info-box-content -->
                               </div>
-                              <div class="info-box bg-red">
+                              <div class="info-box bg-blue">
                                     <!-- Apply any bg-* class to to the icon to color it -->
-                                    <span class="info-box-icon bg-white"><i class="fa fa-star-o"></i></span>
+                                    <span class="info-box-icon bg-white"><i class="fa fa-briefcase"></i></span>
                                     <div class="info-box-content">
                                       <span class="info-box-text">No. of Pending Cases</span>
                                       <span class="info-box-number">{{count($blotter)}}</span>
@@ -68,7 +68,7 @@
                             </div>
                             <div class="info-box bg-blue">
                                     <!-- Apply any bg-* class to to the icon to color it -->
-                                    <span class="info-box-icon bg-white"><i class="fa fa-star-o"></i></span>
+                                    <span class="info-box-icon bg-white"><i class="fa fa-male"></i></span>
                                     <div class="info-box-content">
                                       <span class="info-box-text">No. of Male Residents</span>
                                       <span class="info-box-number">{{count($male)}}</span>
@@ -77,7 +77,7 @@
                             </div>
                             <div class="info-box bg-blue">
                                     <!-- Apply any bg-* class to to the icon to color it -->
-                                    <span class="info-box-icon bg-white"><i class="fa fa-star-o"></i></span>
+                                    <span class="info-box-icon bg-white"><i class="fa fa-female"></i></span>
                                     <div class="info-box-content">
                                       <span class="info-box-text">No. of Female Residents</span>
                                       <span class="info-box-number">{{count($female)}}</span>
@@ -86,7 +86,7 @@
                             </div>
                             <div class="info-box bg-blue">
                                     <!-- Apply any bg-* class to to the icon to color it -->
-                                    <span class="info-box-icon bg-white"><i class="fa fa-star-o"></i></span>
+                                    <span class="info-box-icon bg-white"><i class="fa fa-archive"></i></span>
                                     <div class="info-box-content">
                                       <span class="info-box-text">No. of Residents with Record</span>
                                       <span class="info-box-number">{{count($record)}}</span>
@@ -95,7 +95,7 @@
                             </div>
                             <div class="info-box bg-blue">
                                     <!-- Apply any bg-* class to to the icon to color it -->
-                                    <span class="info-box-icon bg-white"><i class="fa fa-star-o"></i></span>
+                                    <span class="info-box-icon bg-white"><i class="fa fa-cart-arrow-down"></i></span>
                                     <div class="info-box-content">
                                       <span class="info-box-text">No. of Businesses within the Barangay</span>
                                       <span class="info-box-number">{{count($business)}}</span>
@@ -104,7 +104,7 @@
                             </div>
                             <div class="info-box bg-blue">
                                 <!-- Apply any bg-* class to to the icon to color it -->
-                                <span class="info-box-icon bg-white"><i class="fa fa-star-o"></i></span>
+                                <span class="info-box-icon bg-white"><i class="fa fa-users"></i></span>
                                 <div class="info-box-content">
                                   <span class="info-box-text">Population</span>
                                   <span class="info-box-number">{{count($po)}}</span>
@@ -172,6 +172,7 @@
             }, ],
             xkey: 'm',
             ykeys: ['a'],
+            lineColors: ['red'],
             labels: [currentYear],
             xLabelFormat: function(x) { // <--- x.getMonth() returns valid index
                 var month = months[x.getMonth()];

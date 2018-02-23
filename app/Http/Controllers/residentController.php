@@ -120,60 +120,67 @@ class residentController extends Controller
         }
         else
         {
-            $file = $request->file('image');
-            $pic = "";
-            if($file == '' || $file == null){
-                $pic = "img/steve.jpg";
-            }else{
-                $date = date("Ymdhis");
-                $extension = $request->file('image')->getClientOriginalExtension();
-                $pic = "img/".$date.'.'.$extension;
-                $request->file('image')->move("img",$pic);    
-                // $request->file('photo')->move(public_path("/uploads"), $newfilename);
-            }
-
-            $resident = Resident::create([
-                'firstName' => $request->firstName,
-                'middleName' => $request->middleName,
-                'lastName' => $request->lastName,
-                'street' => $request->street,
-                'brgy' => $request->brgy,
-                'city' => $request->city,
-                'gender' => $request->gender,
-                'province' => $request->province,
-                'citizenship' => $request->citizenship,
-                'religion' => $request->religion,
-                'birthdate' => $request->birthdate,
-                'birthPlace' => $request->birthPlace,
-                'civilStatus' => $request->civilStatus,
-                'occupation' => $request->occupation,
-                'tinNo' => $request->tinNo,
-                'periodResidence' => $request->periodResidence,
-                'image' => $pic,
-                'contactNumber' => $request->contactNumber,
-                'created_at' => $request->created_at
-            ]);
-
-            parentModel::create([
-                'residentId' => $resident->id,
-                'motherFirstName' => $request->motherFirstName,
-                'motherMiddleName' => $request->motherMiddleName,
-                'motherLastName' => $request->motherLastName,
-                'fatherFirstName' => $request->fatherFirstName,
-                'fatherMiddleName' => $request->fatherMiddleName,
-                'fatherLastName' => $request->fatherLastName,
-            ]);
-
-            if($request->filled('voterId'))
+            try 
             {
-                Voter::create([
-                    'residentId' => $resident->id,
-                    'voterId' => $request->voterId,
-                    'precintNo' => $request->precintNo
-                ]);
-            }
-          
+                $file = $request->file('image');
+                $pic = "";
+                if($file == '' || $file == null){
+                    $pic = "img/steve.jpg";
+                }else{
+                    $date = date("Ymdhis");
+                    $extension = $request->file('image')->getClientOriginalExtension();
+                    $pic = "img/".$date.'.'.$extension;
+                    $request->file('image')->move("img",$pic);    
+                    // $request->file('photo')->move(public_path("/uploads"), $newfilename);
+                }
 
+                $resident = Resident::create([
+                    'firstName' => $request->firstName,
+                    'middleName' => $request->middleName,
+                    'lastName' => $request->lastName,
+                    'street' => $request->street,
+                    'brgy' => $request->brgy,
+                    'city' => $request->city,
+                    'gender' => $request->gender,
+                    'province' => $request->province,
+                    'citizenship' => $request->citizenship,
+                    'religion' => $request->religion,
+                    'birthdate' => $request->birthdate,
+                    'birthPlace' => $request->birthPlace,
+                    'civilStatus' => $request->civilStatus,
+                    'occupation' => $request->occupation,
+                    'tinNo' => $request->tinNo,
+                    'periodResidence' => $request->periodResidence,
+                    'image' => $pic,
+                    'contactNumber' => $request->contactNumber,
+                    'created_at' => $request->created_at
+                ]);
+
+                parentModel::create([
+                    'residentId' => $resident->id,
+                    'motherFirstName' => $request->motherFirstName,
+                    'motherMiddleName' => $request->motherMiddleName,
+                    'motherLastName' => $request->motherLastName,
+                    'fatherFirstName' => $request->fatherFirstName,
+                    'fatherMiddleName' => $request->fatherMiddleName,
+                    'fatherLastName' => $request->fatherLastName,
+                ]);
+
+                if($request->filled('voterId'))
+                {
+                    Voter::create([
+                        'residentId' => $resident->id,
+                        'voterId' => $request->voterId,
+                        'precintNo' => $request->precintNo
+                    ]);
+                }
+          
+            }
+            catch(\Illuminate\Database\QueryException $e){
+                DB::rollBack();
+                $errMess = $e->getMessage();
+                return Redirect::back()->withErrors($errMess);
+            }
             
 
             return redirect('/Resident')->withSuccess('Successfully inserted into the database.');
@@ -250,60 +257,67 @@ class residentController extends Controller
         }
         else
         {
-            $file = $request->file('image');
-            $pic = "";
-            if($file == '' || $file == null){
-                $pic = "img/steve.jpg";
-            }else{
-                $date = date("Ymdhis");
-                $extension = $request->file('image')->getClientOriginalExtension();
-                $pic = "img/".$date.'.'.$extension;
-                $request->file('image')->move("img",$pic);    
-                // $request->file('photo')->move(public_path("/uploads"), $newfilename);
-            }
-
-            $resident = Resident::create([
-                'firstName' => $request->firstName,
-                'middleName' => $request->middleName,
-                'lastName' => $request->lastName,
-                'street' => $request->street,
-                'brgy' => $request->brgy,
-                'city' => $request->city,
-                'gender' => $request->gender,
-                'province' => $request->province,
-                'citizenship' => $request->citizenship,
-                'religion' => $request->religion,
-                'birthdate' => $request->birthdate,
-                'birthPlace' => $request->birthPlace,
-                'civilStatus' => $request->civilStatus,
-                'occupation' => $request->occupation,
-                'tinNo' => $request->tinNo,
-                'periodResidence' => $request->periodResidence,
-                'image' => $pic,
-                'isRegistered' => 0,
-                'contactNumber' => $request->contactNumber,
-                'created_at' => $request->created_at
-            ]);
-
-            parentModel::create([
-                'residentId' => $resident->id,
-                'motherFirstName' => $request->motherFirstName,
-                'motherMiddleName' => $request->motherMiddleName,
-                'motherLastName' => $request->motherLastName,
-                'fatherFirstName' => $request->fatherFirstName,
-                'fatherMiddleName' => $request->fatherMiddleName,
-                'fatherLastName' => $request->fatherLastName,
-            ]);
-
-            if($request->filled('voterId'))
+            try
             {
-            Voter::create([
-                'residentId' => $resident->id,
-                'voterId' => $request->voterId,
-                'precintNo' => $request->precintNo
-            ]);
-            }
+                $file = $request->file('image');
+                $pic = "";
+                if($file == '' || $file == null){
+                    $pic = "img/steve.jpg";
+                }else{
+                    $date = date("Ymdhis");
+                    $extension = $request->file('image')->getClientOriginalExtension();
+                    $pic = "img/".$date.'.'.$extension;
+                    $request->file('image')->move("img",$pic);    
+                    // $request->file('photo')->move(public_path("/uploads"), $newfilename);
+                }
 
+                $resident = Resident::create([
+                    'firstName' => $request->firstName,
+                    'middleName' => $request->middleName,
+                    'lastName' => $request->lastName,
+                    'street' => $request->street,
+                    'brgy' => $request->brgy,
+                    'city' => $request->city,
+                    'gender' => $request->gender,
+                    'province' => $request->province,
+                    'citizenship' => $request->citizenship,
+                    'religion' => $request->religion,
+                    'birthdate' => $request->birthdate,
+                    'birthPlace' => $request->birthPlace,
+                    'civilStatus' => $request->civilStatus,
+                    'occupation' => $request->occupation,
+                    'tinNo' => $request->tinNo,
+                    'periodResidence' => $request->periodResidence,
+                    'image' => $pic,
+                    'isRegistered' => 0,
+                    'contactNumber' => $request->contactNumber,
+                    'created_at' => $request->created_at
+                ]);
+
+                parentModel::create([
+                    'residentId' => $resident->id,
+                    'motherFirstName' => $request->motherFirstName,
+                    'motherMiddleName' => $request->motherMiddleName,
+                    'motherLastName' => $request->motherLastName,
+                    'fatherFirstName' => $request->fatherFirstName,
+                    'fatherMiddleName' => $request->fatherMiddleName,
+                    'fatherLastName' => $request->fatherLastName,
+                ]);
+
+                if($request->filled('voterId'))
+                {
+                Voter::create([
+                    'residentId' => $resident->id,
+                    'voterId' => $request->voterId,
+                    'precintNo' => $request->precintNo
+                ]);
+                }
+            }
+            catch(\Illuminate\Database\QueryException $e){
+                DB::rollBack();
+                $errMess = $e->getMessage();
+                return Redirect::back()->withErrors($errMess);
+            }
             return redirect('/Resident/NotResident')->withSuccess('Successfully inserted into the database.');
         }
     }
@@ -412,99 +426,106 @@ class residentController extends Controller
         }
         else
         {
-            $file = $request->file('image');
-            $pic = "";
-            if($file == '' || $file == null){
-                $nullpic = Resident::find($id);
-                $pic = $nullpic->image;
-            }else{
-                $date = date("Ymdhis");
-                $extension = $request->file('image')->getClientOriginalExtension();
-                $pic = "img/".$date.'.'.$extension;
-                $request->file('image')->move("img",$pic);    
-                // $request->file('photo')->move(public_path("/uploads"), $newfilename);
-            }
-
-            $resident = Resident::find($id)->update([
-                'firstName' => $request->firstName,
-                'middleName' => $request->middleName,
-                'lastName' => $request->lastName,
-                'street' => $request->street,
-                'brgy' => $request->brgy,
-                'city' => $request->city,
-                'gender' => $request->gender,
-                'province' => $request->province,
-                'citizenship' => $request->citizenship,
-                'religion' => $request->religion,
-                'birthdate' => $request->birthdate,
-                'birthPlace' => $request->birthPlace,
-                'civilStatus' => $request->civilStatus,
-                'occupation' => $request->occupation,
-                'tinNo' => $request->tinNo,
-                'periodResidence' => $request->periodResidence,
-                'image' => $pic,
-                'created_at' => $request->created_at
-            ]);
-
-            $chkVoter = DB::table('residents as r')
-            ->join('voters as v','v.residentId','r.id')
-            ->select('r.*')
-            ->where('r.id',$id)
-            ->get();
-
-            $chkParent = DB::table('residents as r')
-            ->join('parents as p','p.residentId','r.id')
-            ->select('r.*')
-            ->where('r.id',$id)
-            ->get();
-
-            if(count($chkParent)!=0)
+            try
             {
-                parentModel::find($request->parentid)->updateOrCreate([
-                    'residentId' => $request->residentId,
-                    'motherFirstName' => $request->motherFirstName,
-                    'motherMiddleName' => $request->motherMiddleName,
-                    'motherLastName' => $request->motherLastName,
-                    'fatherFirstName' => $request->fatherFirstName,
-                    'fatherMiddleName' => $request->fatherMiddleName,
-                    'fatherLastName' => $request->fatherLastName,
+                $file = $request->file('image');
+                $pic = "";
+                if($file == '' || $file == null){
+                    $nullpic = Resident::find($id);
+                    $pic = $nullpic->image;
+                }else{
+                    $date = date("Ymdhis");
+                    $extension = $request->file('image')->getClientOriginalExtension();
+                    $pic = "img/".$date.'.'.$extension;
+                    $request->file('image')->move("img",$pic);    
+                    // $request->file('photo')->move(public_path("/uploads"), $newfilename);
+                }
+
+                $resident = Resident::find($id)->update([
+                    'firstName' => $request->firstName,
+                    'middleName' => $request->middleName,
+                    'lastName' => $request->lastName,
+                    'street' => $request->street,
+                    'brgy' => $request->brgy,
+                    'city' => $request->city,
+                    'gender' => $request->gender,
+                    'province' => $request->province,
+                    'citizenship' => $request->citizenship,
+                    'religion' => $request->religion,
+                    'birthdate' => $request->birthdate,
+                    'birthPlace' => $request->birthPlace,
+                    'civilStatus' => $request->civilStatus,
+                    'occupation' => $request->occupation,
+                    'tinNo' => $request->tinNo,
+                    'periodResidence' => $request->periodResidence,
+                    'image' => $pic,
+                    'created_at' => $request->created_at
                 ]);
-            }
 
-            if(count($chkParent)==0)
-            {
-                parentModel::create([
-                    'residentId' => $request->residentId,
-                    'motherFirstName' => $request->motherFirstName,
-                    'motherMiddleName' => $request->motherMiddleName,
-                    'motherLastName' => $request->motherLastName,
-                    'fatherFirstName' => $request->fatherFirstName,
-                    'fatherMiddleName' => $request->fatherMiddleName,
-                    'fatherLastName' => $request->fatherLastName,
-                ]);
-            }
-            
-            if($request->filled('voterId'))
-            {
-                if(count($chkVoter) == 0)
+                $chkVoter = DB::table('residents as r')
+                ->join('voters as v','v.residentId','r.id')
+                ->select('r.*')
+                ->where('r.id',$id)
+                ->get();
+
+                $chkParent = DB::table('residents as r')
+                ->join('parents as p','p.residentId','r.id')
+                ->select('r.*')
+                ->where('r.id',$id)
+                ->get();
+
+                if(count($chkParent)!=0)
                 {
-                    Voter::create([
+                    parentModel::find($request->parentid)->updateOrCreate([
                         'residentId' => $request->residentId,
-                        'voterId' => $request->voterId,
-                        'precintNo' => $request->precintNo
+                        'motherFirstName' => $request->motherFirstName,
+                        'motherMiddleName' => $request->motherMiddleName,
+                        'motherLastName' => $request->motherLastName,
+                        'fatherFirstName' => $request->fatherFirstName,
+                        'fatherMiddleName' => $request->fatherMiddleName,
+                        'fatherLastName' => $request->fatherLastName,
                     ]);
                 }
 
-                if(count($chkVoter) != 0)
+                if(count($chkParent)==0)
                 {
-                    Voter::find($request->vId)->updateOrCreate([
+                    parentModel::create([
                         'residentId' => $request->residentId,
-                        'voterId' => $request->voterId,
-                        'precintNo' => $request->precintNo
+                        'motherFirstName' => $request->motherFirstName,
+                        'motherMiddleName' => $request->motherMiddleName,
+                        'motherLastName' => $request->motherLastName,
+                        'fatherFirstName' => $request->fatherFirstName,
+                        'fatherMiddleName' => $request->fatherMiddleName,
+                        'fatherLastName' => $request->fatherLastName,
                     ]);
                 }
-            }
+                
+                if($request->filled('voterId'))
+                {
+                    if(count($chkVoter) == 0)
+                    {
+                        Voter::create([
+                            'residentId' => $request->residentId,
+                            'voterId' => $request->voterId,
+                            'precintNo' => $request->precintNo
+                        ]);
+                    }
 
+                    if(count($chkVoter) != 0)
+                    {
+                        Voter::find($request->vId)->updateOrCreate([
+                            'residentId' => $request->residentId,
+                            'voterId' => $request->voterId,
+                            'precintNo' => $request->precintNo
+                        ]);
+                    }
+                }
+            }
+            catch(\Illuminate\Database\QueryException $e){
+                DB::rollBack();
+                $errMess = $e->getMessage();
+                return Redirect::back()->withErrors($errMess);
+            }
             return redirect('/Resident')->withSuccess('Successfully updated into the database.');
         }
     }
@@ -579,99 +600,106 @@ class residentController extends Controller
         }
         else
         {
-            $file = $request->file('image');
-            $pic = "";
-            if($file == '' || $file == null){
-                $nullpic = Resident::find($id);
-                $pic = $nullpic->image;
-            }else{
-                $date = date("Ymdhis");
-                $extension = $request->file('image')->getClientOriginalExtension();
-                $pic = "img/".$date.'.'.$extension;
-                $request->file('image')->move("img",$pic);    
-                // $request->file('photo')->move(public_path("/uploads"), $newfilename);
-            }
-
-            Resident::find($id)->update([
-                'firstName' => $request->firstName,
-                'middleName' => $request->middleName,
-                'lastName' => $request->lastName,
-                'street' => $request->street,
-                'brgy' => $request->brgy,
-                'city' => $request->city,
-                'gender' => $request->gender,
-                'province' => $request->province,
-                'citizenship' => $request->citizenship,
-                'religion' => $request->religion,
-                'birthdate' => $request->birthdate,
-                'birthPlace' => $request->birthPlace,
-                'civilStatus' => $request->civilStatus,
-                'occupation' => $request->occupation,
-                'tinNo' => $request->tinNo,
-                'periodResidence' => $request->periodResidence,
-                'image' => $pic,
-                'created_at' => $request->created_at
-            ]);
-
-            $chkVoter = DB::table('residents as r')
-            ->join('voters as v','v.residentId','r.id')
-            ->select('r.*')
-            ->where('r.id',$id)
-            ->get();
-
-            $chkParent = DB::table('residents as r')
-            ->join('parents as p','p.residentId','r.id')
-            ->select('r.*')
-            ->where('r.id',$id)
-            ->get();
-
-            if(count($chkParent)!=0)
+            try
             {
-                parentModel::find($request->parentid)->updateOrCreate([
-                    'residentId' => $request->residentId,
-                    'motherFirstName' => $request->motherFirstName,
-                    'motherMiddleName' => $request->motherMiddleName,
-                    'motherLastName' => $request->motherLastName,
-                    'fatherFirstName' => $request->fatherFirstName,
-                    'fatherMiddleName' => $request->fatherMiddleName,
-                    'fatherLastName' => $request->fatherLastName,
-                ]);
-            }
-            
-            if(count($chkParent)==0)
-            {
-                parentModel::create([
-                    'residentId' => $request->residentId,
-                    'motherFirstName' => $request->motherFirstName,
-                    'motherMiddleName' => $request->motherMiddleName,
-                    'motherLastName' => $request->motherLastName,
-                    'fatherFirstName' => $request->fatherFirstName,
-                    'fatherMiddleName' => $request->fatherMiddleName,
-                    'fatherLastName' => $request->fatherLastName,
-                ]);
-            }
-            
-            if($request->filled('voterId'))
-            {
-                if(count($chkVoter) == 0)
-                {
-                    Voter::create([
-                        'residentId' => $request->residentId,
-                        'voterId' => $request->voterId,
-                        'precintNo' => $request->precintNo
-                    ]);
+                $file = $request->file('image');
+                $pic = "";
+                if($file == '' || $file == null){
+                    $nullpic = Resident::find($id);
+                    $pic = $nullpic->image;
+                }else{
+                    $date = date("Ymdhis");
+                    $extension = $request->file('image')->getClientOriginalExtension();
+                    $pic = "img/".$date.'.'.$extension;
+                    $request->file('image')->move("img",$pic);    
+                    // $request->file('photo')->move(public_path("/uploads"), $newfilename);
                 }
 
-                if(count($chkVoter) != 0)
+                Resident::find($id)->update([
+                    'firstName' => $request->firstName,
+                    'middleName' => $request->middleName,
+                    'lastName' => $request->lastName,
+                    'street' => $request->street,
+                    'brgy' => $request->brgy,
+                    'city' => $request->city,
+                    'gender' => $request->gender,
+                    'province' => $request->province,
+                    'citizenship' => $request->citizenship,
+                    'religion' => $request->religion,
+                    'birthdate' => $request->birthdate,
+                    'birthPlace' => $request->birthPlace,
+                    'civilStatus' => $request->civilStatus,
+                    'occupation' => $request->occupation,
+                    'tinNo' => $request->tinNo,
+                    'periodResidence' => $request->periodResidence,
+                    'image' => $pic,
+                    'created_at' => $request->created_at
+                ]);
+
+                $chkVoter = DB::table('residents as r')
+                ->join('voters as v','v.residentId','r.id')
+                ->select('r.*')
+                ->where('r.id',$id)
+                ->get();
+
+                $chkParent = DB::table('residents as r')
+                ->join('parents as p','p.residentId','r.id')
+                ->select('r.*')
+                ->where('r.id',$id)
+                ->get();
+
+                if(count($chkParent)!=0)
                 {
-                    Voter::find($request->vId)->updateOrCreate([
+                    parentModel::find($request->parentid)->updateOrCreate([
                         'residentId' => $request->residentId,
-                        'voterId' => $request->voterId,
-                        'precintNo' => $request->precintNo
+                        'motherFirstName' => $request->motherFirstName,
+                        'motherMiddleName' => $request->motherMiddleName,
+                        'motherLastName' => $request->motherLastName,
+                        'fatherFirstName' => $request->fatherFirstName,
+                        'fatherMiddleName' => $request->fatherMiddleName,
+                        'fatherLastName' => $request->fatherLastName,
                     ]);
                 }
-             }
+                
+                if(count($chkParent)==0)
+                {
+                    parentModel::create([
+                        'residentId' => $request->residentId,
+                        'motherFirstName' => $request->motherFirstName,
+                        'motherMiddleName' => $request->motherMiddleName,
+                        'motherLastName' => $request->motherLastName,
+                        'fatherFirstName' => $request->fatherFirstName,
+                        'fatherMiddleName' => $request->fatherMiddleName,
+                        'fatherLastName' => $request->fatherLastName,
+                    ]);
+                }
+                
+                if($request->filled('voterId'))
+                {
+                    if(count($chkVoter) == 0)
+                    {
+                        Voter::create([
+                            'residentId' => $request->residentId,
+                            'voterId' => $request->voterId,
+                            'precintNo' => $request->precintNo
+                        ]);
+                    }
 
+                    if(count($chkVoter) != 0)
+                    {
+                        Voter::find($request->vId)->updateOrCreate([
+                            'residentId' => $request->residentId,
+                            'voterId' => $request->voterId,
+                            'precintNo' => $request->precintNo
+                        ]);
+                    }
+                }
+            }
+            catch(\Illuminate\Database\QueryException $e){
+                DB::rollBack();
+                $errMess = $e->getMessage();
+                return Redirect::back()->withErrors($errMess);
+            }
             return redirect('/Resident/NotResident')->withSuccess('Successfully updated into the database.');
         }
     }
@@ -717,5 +745,10 @@ class residentController extends Controller
     {
         Resident::find($id)->update(['isActive' => 1]);
         return redirect('/Resident/NotResident');
+    }
+
+    public function remove($id)
+    {
+
     }
 }

@@ -72,19 +72,26 @@ class OfficerController extends Controller
         {
             if($request->password && $request->conpassword)
             {
-                $officer = Officer::create([
-                    'residentId' => $request->residentId,
-                    'position' => $request->position,
-                    'userRole' => 2
-                ]);
-    
-                User::create([
-                    'officerId' => $officer->id,
-                    'email' => $request->email,
-                    'password' => bcrypt($request->password),
-                    'userRole' => 2
-                ]);
-
+                try
+                {
+                    $officer = Officer::create([
+                        'residentId' => $request->residentId,
+                        'position' => $request->position,
+                        'userRole' => 2
+                    ]);
+        
+                    User::create([
+                        'officerId' => $officer->id,
+                        'email' => $request->email,
+                        'password' => bcrypt($request->password),
+                        'userRole' => 2
+                    ]);
+                }
+                catch(\Illuminate\Database\QueryException $e){
+                    DB::rollBack();
+                    $errMess = $e->getMessage();
+                    return Redirect::back()->withErrors($errMess);
+                }
                 return redirect('/Officer')->withSuccess('Successfully inserted into the database.');
             }
             else
@@ -156,18 +163,25 @@ class OfficerController extends Controller
         {
             if($request->password && $request->conpassword)
             {
-                $officer = Officer::find($id)->update([
-                    'residentId' => $request->residentId,
-                    'position' => $request->position
-                ]);
-    
-                User::find($request->userId)->update([
-                    'officerId' => $request->officerId,
-                    'email' => $request->email,
-                    'password' => bcrypt($request->password),
-                    'userRole' => 2
-                ]);
-
+                try
+                {
+                    $officer = Officer::find($id)->update([
+                        'residentId' => $request->residentId,
+                        'position' => $request->position
+                    ]);
+        
+                    User::find($request->userId)->update([
+                        'officerId' => $request->officerId,
+                        'email' => $request->email,
+                        'password' => bcrypt($request->password),
+                        'userRole' => 2
+                    ]);
+                }
+                catch(\Illuminate\Database\QueryException $e){
+                    DB::rollBack();
+                    $errMess = $e->getMessage();
+                    return Redirect::back()->withErrors($errMess);
+                }
                 return redirect('/Officer')->withSuccess('Successfully inserted into the database.');
             }
             else

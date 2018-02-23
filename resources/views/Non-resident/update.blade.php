@@ -271,6 +271,7 @@
                 $('#precint').inputmask('9999a');
                 $('#voterId').inputmask('9999-9999a-a999aaa99999-9');
                 $('#date').inputmask('9999-99-99');
+                $('#bday').inputmask('9999-99-99');
 
                 today = new Date();
             birthDate = new Date($('#bday').val());

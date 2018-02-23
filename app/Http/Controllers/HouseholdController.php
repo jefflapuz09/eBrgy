@@ -74,30 +74,37 @@ class HouseholdController extends Controller
         }
         else
         {
-            $household = Household::create([
-                'id' => $request->id,
-                'street' => $request->street,
-                'brgy' => $request->brgy,
-                'city' => $request->city,
-            ]);
-
-            $id = DB::table('households')
-                ->select('id')
-                ->orderBy('id', 'desc')
-                ->limit(1)
-                ->get();
-            
-            foreach($id as $id2)
+            try
             {
-                foreach($request->inhabitantss as $inhabitant)
+                $household = Household::create([
+                    'id' => $request->id,
+                    'street' => $request->street,
+                    'brgy' => $request->brgy,
+                    'city' => $request->city,
+                ]);
+
+                $id = DB::table('households')
+                    ->select('id')
+                    ->orderBy('id', 'desc')
+                    ->limit(1)
+                    ->get();
+                
+                foreach($id as $id2)
                 {
-                    Inhabitant::create([
-                        'residentId' => $inhabitant,
-                        'householdId' => $id2->id
-                    ]);
+                    foreach($request->inhabitantss as $inhabitant)
+                    {
+                        Inhabitant::create([
+                            'residentId' => $inhabitant,
+                            'householdId' => $id2->id
+                        ]);
+                    }
                 }
             }
-
+            catch(\Illuminate\Database\QueryException $e){
+                DB::rollBack();
+                $errMess = $e->getMessage();
+                return Redirect::back()->withErrors($errMess);
+            }
             return redirect('/Household')->withSuccess('Successfully inserted into the database.');
         }
         
@@ -163,24 +170,32 @@ class HouseholdController extends Controller
         }
         else
         {
-            $household = Household::find($id)->update([
-                'id' => $request->id,
-                'street' => $request->street,
-                'brgy' => $request->brgy,
-                'city' => $request->city,
-            ]);
-
-            $id = $request->householdId;
-            $resid = $request->inhabitantId;
-
-            Inhabitant::where('householdId',$id)->delete();
-
-            foreach($request->inhabitantss as $inhabitant)
+            try
             {
-                    Inhabitant::updateOrCreate([
-                        'residentId' => $inhabitant,
-                        'householdId' => $id
-                    ]);
+                $household = Household::find($id)->update([
+                    'id' => $request->id,
+                    'street' => $request->street,
+                    'brgy' => $request->brgy,
+                    'city' => $request->city,
+                ]);
+
+                $id = $request->householdId;
+                $resid = $request->inhabitantId;
+
+                Inhabitant::where('householdId',$id)->delete();
+
+                foreach($request->inhabitantss as $inhabitant)
+                {
+                        Inhabitant::updateOrCreate([
+                            'residentId' => $inhabitant,
+                            'householdId' => $id
+                        ]);
+                }
+            }
+            catch(\Illuminate\Database\QueryException $e){
+                DB::rollBack();
+                $errMess = $e->getMessage();
+                return Redirect::back()->withErrors($errMess);
             }
             return redirect('/Household')->withSuccess('Successfully updated into the database.');
         }

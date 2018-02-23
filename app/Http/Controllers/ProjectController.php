@@ -70,15 +70,22 @@ class ProjectController extends Controller
         }
         else
         {
-            Project::create([
-                'projectName' => $request->projectName,
-                'projectDev'=> $request->projectDev,
-                'description' => $request->description,
-                'officerCharge' =>  $request->officerCharge,
-                'dateStarted' => $request->dateStarted,
-                'dateEnded' => $request->dateEnded
-            ]);
-
+            try
+            {
+                Project::create([
+                    'projectName' => $request->projectName,
+                    'projectDev'=> $request->projectDev,
+                    'description' => $request->description,
+                    'officerCharge' =>  $request->officerCharge,
+                    'dateStarted' => $request->dateStarted,
+                    'dateEnded' => $request->dateEnded
+                ]);
+            }
+            catch(\Illuminate\Database\QueryException $e){
+                DB::rollBack();
+                $errMess = $e->getMessage();
+                return Redirect::back()->withErrors($errMess);
+            }
             return redirect('/Project')->withSuccess('Successfully inserted into the database.');
         }
     }
@@ -145,15 +152,22 @@ class ProjectController extends Controller
         }
         else
         {
-            Project::find($id)->update([
-                'projectName' => $request->projectName,
-                'projectDev'=> $request->projectDev,
-                'description' => $request->description,
-                'officerCharge' =>  $request->officerCharge,
-                'dateStarted' => $request->dateStarted,
-                'dateEnded' => $request->dateEnded
-            ]);
-
+            try
+            {
+                Project::find($id)->update([
+                    'projectName' => $request->projectName,
+                    'projectDev'=> $request->projectDev,
+                    'description' => $request->description,
+                    'officerCharge' =>  $request->officerCharge,
+                    'dateStarted' => $request->dateStarted,
+                    'dateEnded' => $request->dateEnded
+                ]);
+            }
+            catch(\Illuminate\Database\QueryException $e){
+                DB::rollBack();
+                $errMess = $e->getMessage();
+                return Redirect::back()->withErrors($errMess);
+            }
             return redirect('/Project')->withSuccess('Successfully updated into the database.');
         }
     }

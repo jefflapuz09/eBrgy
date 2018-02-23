@@ -70,7 +70,15 @@ class BusinessController extends Controller
         }
         else
         {
-            Business::create($request->all());
+            try
+            {
+             Business::create($request->all());
+            }
+            catch(\Illuminate\Database\QueryException $e){
+                DB::rollBack();
+                $errMess = $e->getMessage();
+                return Redirect::back()->withErrors($errMess);
+            }
 
             return redirect('/Business')->withSuccess('Successfully inserted into the database');
         }
@@ -138,8 +146,15 @@ class BusinessController extends Controller
         }
         else
         {
-            Business::find($id)->update($request->all());
-
+            try
+            {
+                Business::find($id)->update($request->all());
+            }
+            catch(\Illuminate\Database\QueryException $e){
+                DB::rollBack();
+                $errMess = $e->getMessage();
+                return Redirect::back()->withErrors($errMess);
+            }
             return redirect('/Business')->withSuccess('Successfully updated into the database');
         }
     }

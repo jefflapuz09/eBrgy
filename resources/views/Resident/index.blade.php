@@ -93,7 +93,7 @@
      }
 
      function deleteForm(){
-        var x = confirm("Are you sure you want to deactivate this record? All items included in this record will also be deactivated.");
+        var x = confirm("Are you sure you want to deactivate this record? All items included in this record will also be deactivated. Note: Deactivating the record means the resident they're now transferring their record.");
         if (x)
           return true;
         else
