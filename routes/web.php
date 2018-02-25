@@ -88,6 +88,11 @@ Route::post('/Business/Update/id={id}','BusinessController@update');
 
 //Queries
 Route::get('/Query','QueryController@index');
+
+//Reports
+Route::get('/Report','ReportController@index');
+Route::get('/Report/Table/{start}/{end}','ReportController@table');
+Route::get('/Report/Pdf/{start}/{end}','ReportController@pdf');
 });
 
 Route::group(['middleware' => 'App\Http\Middleware\officerMiddleware'], function () {
