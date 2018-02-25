@@ -77,14 +77,13 @@ class OfficerController extends Controller
                     $officer = Officer::create([
                         'residentId' => $request->residentId,
                         'position' => $request->position,
-                        'userRole' => 2
                     ]);
         
                     User::create([
                         'officerId' => $officer->id,
                         'email' => $request->email,
                         'password' => bcrypt($request->password),
-                        'userRole' => 2
+                        'userRole' => 1
                     ]);
                 }
                 catch(\Illuminate\Database\QueryException $e){
@@ -174,7 +173,7 @@ class OfficerController extends Controller
                         'officerId' => $request->officerId,
                         'email' => $request->email,
                         'password' => bcrypt($request->password),
-                        'userRole' => 2
+                        'userRole' => 1
                     ]);
                 }
                 catch(\Illuminate\Database\QueryException $e){

@@ -30,10 +30,8 @@
                     <select id="queryId" name="queryId" class="form-control">
                         <option></option>
                         <option value="1">List of Registered Voters</option>
-                        <option value="2">List of Male Residents</option>
-                        <option value="3">List of Female Residents</option>
-                        <option value="4">List of Filed to Action Blotters</option>
-                        <option value="5">List of Senior Citizen that is Registered in the Barangay</option>
+                        <option value="2">List of Filed to Action Blotters</option>
+                        <option value="3">List of Senior Citizen that is Registered in the Barangay</option>
                     </select>
                 </div>
                 <div class="panel panel-primary pan1 hidden">
@@ -68,66 +66,6 @@
                     </div>
 
                     <div class="panel panel-primary pan2 hidden">
-                            <div class="panel-heading">List of Male Residents</div>
-                            <div class="panel-body">
-                                <table id="list2" class="table table-striped table-bordered responsive">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Gender</th>
-                                            <th>Civil Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($male as $m)
-                                            <tr>
-                                            <td>{{$m->firstName}} {{$m->lastName}}</td>
-                                            <td>
-                                                @if($m->gender == 1)
-                                                Male
-                                                @else
-                                                Female
-                                                @endif
-                                                
-                                            </td>
-                                            <td>{{$m->civilStatus}}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                 <div class="panel panel-primary pan3 hidden">
-                            <div class="panel-heading">List of Female Residents</div>
-                            <div class="panel-body">
-                                <table id="list2" class="table table-striped table-bordered responsive">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Gender</th>
-                                            <th>Civil Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($female as $f)
-                                            <tr>
-                                            <td>{{$f->firstName}} {{$f->lastName}}</td>
-                                            <td>
-                                                @if($f->gender == 1)
-                                                Male
-                                                @else
-                                                Female
-                                                @endif
-                                                
-                                            </td>
-                                            <td>{{$f->civilStatus}}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    <div class="panel panel-primary pan4 hidden">
                             <div class="panel-heading">List of Filed to Action Blotters</div>
                             <div class="panel-body">
                                 <table id="list2" class="table table-striped table-bordered responsive">
@@ -152,7 +90,7 @@
                                 </table>
                             </div>
                         </div>
-                    <div class="panel panel-primary pan5 hidden">
+                    <div class="panel panel-primary pan3 hidden">
                             <div class="panel-heading">List of Senior Citizen that is Registered in the Barangay</div>
                             <div class="panel-body">
                                 <table id="list2" class="table table-striped table-bordered responsive">
