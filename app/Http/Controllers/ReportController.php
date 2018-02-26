@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Blotter;
 use DomPDF;
+use DB;
 
 class ReportController extends Controller
 {
@@ -20,8 +21,14 @@ class ReportController extends Controller
 
     public function table($start,$end)
     {
-       $post = Blotter::whereBetween('created_at', [$start,$end])->get();
-       return Response()->json($post);
+
+       $post = DB::table('blotters as b')
+       ->join('residents as r','r.id','b.complainant')
+       ->join('residents as res','res.id','b.complainedResident')
+       ->whereBetween('b.created_at', [$start,$end])
+       ->select('b.id',DB::raw('CONCAT(r.lastName, ", ", r.firstName) AS complainant'),DB::raw('CONCAT(res.lastName, ", ", res.firstName) AS complainedResident'),'b.created_at as date')
+       ->get();
+       return Response()->json(['data'=>$post]);
     }
     /**
      * Show the form for creating a new resource.

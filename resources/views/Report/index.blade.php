@@ -48,10 +48,10 @@
                             </div>
                         </div>
                         <div class="col-sm-1">
-                            <button type="submit" id="gen" class="btn btn-success" style="margin-top:25px;">Generate</button>
+                            <button type="submit" id="gen" class="btn btn-primary" style="margin-top:25px;" title="Generate Report">Generate</button>
                         </div>
                         <div class="col-sm-1">
-                            <a id="pdf" target="_blank" class="btn btn-success" style="margin-top:25px;">Pdf</a>
+                            <a id="pdf" target="_blank" class="btn btn-success" style="margin-top:25px;" title="Export "><i aria-hidden="true" class="fa fa-file"></i></a>
                         </div>
               
               </div>
@@ -62,6 +62,9 @@
                             <thead>
                                 <tr>
                                     <th>CaseNo</th>
+                                    <th>Complainant</th>
+                                    <th>Complained Resident</th>
+                                    <th>Date of Filing</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -77,28 +80,33 @@
 
 @section('script')
 <script>
-    $('#list1').DataTable({
-            responsive: true,
+    // $('#list1').DataTable({
+    //         responsive: true,
+    //     });
+        $('#start').inputmask('9999-99-99');
+        $('#end').inputmask('9999-99-99');
+
+        $('#end').on('change',function(){
+            var start = $('#start').val();
+            var end = $('#end').val();
+            if(start > end)
+            {
+                alert('Invalid End date');
+            }
         });
 
         $('#gen').on('click',function(){
            var start = $('#start').val();
            var end = $('#end').val();
 
-           $.ajax({   
-            type: "get",
-            url: "/Report/Table/"+start+"/"+end,             
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",                  
-            success: function(data)
-                {   
-                    $('#list1').DataTable( {
-                        columns: [{
-                            "data" : "data.firstName"
-                        }]
-                    
-                    });
-                }
+           $('#list1').DataTable( {
+                "ajax": "/Report/Table/"+start+"/"+end, 
+                "columns": [
+                    { data : 'id' },
+                    { data : 'complainant' },
+                    { data : 'complainedResident' },
+                    { data : 'date' },
+                ] 
             });
         });
 
@@ -106,16 +114,7 @@
             var start = $('#start').val();
             var end = $('#end').val();
 
-            $.ajax({   
-            type: "get",
-            url: "/Report/Pdf/"+start+"/"+end,             
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",                  
-            success: function(data)
-                {   
-                   console.log('success');
-                }
-            });
+            window.open("/Report/Pdf/"+start+"/"+end, '_blank');
         });
 </script>
 @stop
