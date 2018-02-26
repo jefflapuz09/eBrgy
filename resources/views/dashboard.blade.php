@@ -89,12 +89,12 @@
         <li><a href="{{ url('/Business') }}"><i class="fa fa-briefcase"></i> <span>Business</span></a></li>
         <li><a href="{{ url('/Project') }}"><i class="fa fa-cogs"></i> <span>Barangay Projects</span></a></li>
         <li><a href="{{ url('/Schedule') }}"><i class="fa fa-calendar"></i> <span>Court Schedule</span></a></li>
-        <li class="header">Others</li>
-        <li><a href="{{ url('/Resident/NotResident') }}"><i class="fa fa-book"></i> <span>Non-resident</span></a></li>
-        <li><a href="{{ url('/Officer') }}"><i class="fa fa-user"></i> <span>Officers</span></a></li>
         <li class="header">Queries & Reports</li>
         <li><a href="{{ url('/Query') }}"><i class="fa fa-list"></i> <span>Queries</span></a></li>
         <li><a href="{{ url('/Report') }}"><i class="fa fa-file"></i> <span>Reports</span></a></li>
+        <li class="header">Utilities</li>
+        <li><a href="{{ url('/Resident/NotResident') }}"><i class="fa fa-book"></i> <span>Non-resident</span></a></li>
+        <li><a href="{{ url('/Officer') }}"><i class="fa fa-user"></i> <span>Officers</span></a></li>
         @else
         <li><a href="{{ url('/admin') }}"><i class="fa fa-bar-chart"></i> <span>Dashboard</span></a></li>
         <li class="header">Barangay Issues</li>
