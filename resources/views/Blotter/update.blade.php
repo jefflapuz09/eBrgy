@@ -71,8 +71,8 @@
                     <div class="form-group">
                             <label>Complained Resident<span style="color:Red;">*</span></label>
                             <select class="form-control select2" name="complainedResident">
-                                @foreach($resident2 as $res)
-                                    <option value="{{$res->id}}" @if($post->complainant == $res->id) selected="selected" @endif>{{$res->firstName}} {{$res->middleName}} {{$res->lastName}}</option>
+                                @foreach($resident2 as $res2)
+                                    <option value="{{$res2->id}}" @if($post->complainedResident == $res2->id) selected="selected" @endif>{{$res2->firstName}} {{$res2->middleName}} {{$res2->lastName}}</option>
                                 @endforeach
                             </select>
                     </div>
