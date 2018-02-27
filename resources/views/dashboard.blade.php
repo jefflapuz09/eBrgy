@@ -95,6 +95,7 @@
         <li class="header">Utilities</li>
         <li><a href="{{ url('/Resident/NotResident') }}"><i class="fa fa-book"></i> <span>Non-resident</span></a></li>
         <li><a href="{{ url('/Officer') }}"><i class="fa fa-user"></i> <span>Officers</span></a></li>
+        <li><a href="{{ url('/Backup/Create') }}"><i class="fa fa-database"></i> <span>Back-up Database</span></a></li>
         @else
         <li><a href="{{ url('/admin') }}"><i class="fa fa-bar-chart"></i> <span>Dashboard</span></a></li>
         <li class="header">Barangay Issues</li>

@@ -93,6 +93,12 @@ Route::get('/Query','QueryController@index');
 Route::get('/Report','ReportController@index');
 Route::get('/Report/Table/{start}/{end}','ReportController@table');
 Route::get('/Report/Pdf/{start}/{end}','ReportController@pdf');
+
+//Backup
+// Route::get('/Backup','BackupController@index');
+Route::get('/Backup/Create','BackupController@create');
+// Route::get('/Backup/Download','BackupController@download');
+// Route::get('/Backup/Delete','BackupController@delete');
 });
 
 Route::group(['middleware' => 'App\Http\Middleware\officerMiddleware'], function () {
