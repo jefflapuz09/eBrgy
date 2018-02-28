@@ -79,8 +79,8 @@
                     <div class="form-group">
                         <label>Officer-in-charge<span style="color:Red;">*</span></label>
                         <select class="form-control select2" name="officerCharge">
-                                @foreach($resident2 as $res)
-                                    <option value="{{$res->firstName}} {{$res->middleName}} {{$res->lastName}}">{{$res->firstName}} {{$res->middleName}} {{$res->lastName}}</option>
+                                @foreach($officer as $o)
+                                    <option value="{{$o->firstName}} {{$o->Resident->middleName}} {{$o->Resident->lastName}}">{{$o->Resident->firstName}} {{$o->middleName}} {{$o->lastName}}</option>
                                 @endforeach
                         </select>
                     </div>

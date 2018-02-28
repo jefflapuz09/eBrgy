@@ -119,7 +119,8 @@ class BlotterController extends Controller
         $post = Blotter::find($id);
         $resident = Resident::where('isActive',1)->get();
         $resident2 = Resident::where('isActive',1)->orderBy('id', 'desc')->get();
-        return view('Blotter.update',compact('resident','resident2','post'));
+        $officer = Officer::where('isActive',1)->get();
+        return view('Blotter.update',compact('resident','resident2','post','officer'));
     }
 
     /**
@@ -197,7 +198,7 @@ class BlotterController extends Controller
      */
     public function destroy($id)
     {
-
+        
         Blotter::find($id)->update(['isActive' => 0]);
             return redirect('/Blotter');    
     }
