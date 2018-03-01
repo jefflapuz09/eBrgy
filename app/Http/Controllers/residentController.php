@@ -10,6 +10,7 @@ use App\Schedule;
 use App\Resident;
 use App\parentModel;
 use App\Voter;
+use App\Officer;
 use DB;
 use Validator;
 use Redirect;
@@ -759,8 +760,9 @@ class residentController extends Controller
         $chkBlotter = Blotter::where('complainant',$id)->orWhere('complainedResident', $id)->get();
         $chkBusiness = Business::where('residentId',$id)->get();
         $chkSchedule = Schedule::where('residentId',$id)->get();
+        $chkOfficer = Officer::where('residentId',$id)->get();
 
-        if(count($chkHousehold) > 0 || count($chkBlotter) > 0 || count($chkBusiness) > 0 || count($chkSchedule) > 0)
+        if(count($chkHousehold) > 0 || count($chkBlotter) > 0 || count($chkBusiness) > 0 || count($chkSchedule) > 0 || count($chkOfficer) > 0)
         {
             return redirect('/Resident')->withError('It seems that the record is still being used in other items. Deletion failed.');
         }
@@ -786,20 +788,33 @@ class residentController extends Controller
     public function remove2($id)
     {
         $post = Resident::find($id);
+        
+        $chkHousehold = Inhabitant::where('residentId',$id)->get();
+        $chkBlotter = Blotter::where('complainant',$id)->orWhere('complainedResident', $id)->get();
+        $chkBusiness = Business::where('residentId',$id)->get();
+        $chkSchedule = Schedule::where('residentId',$id)->get();
+        $chkOfficer = Officer::where('residentId',$id)->get();
 
-        if(count($post->Parents)!=0)
+        if(count($chkHousehold) > 0 || count($chkBlotter) > 0 || count($chkBusiness) > 0 || count($chkSchedule) > 0 || count($chkOfficer) > 0)
         {
-            $parent = parentModel::where('residentId',$post->id)->first();
-            $parent->delete();
+            return redirect('/Resident/NotResident')->withError('It seems that the record is still being used in other items. Deletion failed.');
         }
-
-        if(count($post->Voter)!=0)
+        else
         {
-            $voter = Voter::where('residentId',$post->id)->first();
-            $voter->delete();
+            if(count($post->Parents)!=0)
+            {
+                $parent = parentModel::where('residentId',$post->id)->first();
+                $parent->delete();
+            }
+    
+            if(count($post->Voter)!=0)
+            {
+                $voter = Voter::where('residentId',$post->id)->first();
+                $voter->delete();
+            }
+    
+            $post->delete();
+            return redirect('/Resident/NotResident/Soft');
         }
-
-        $post->delete();
-        return redirect('/Resident/NotResident/Soft');
     }
 }

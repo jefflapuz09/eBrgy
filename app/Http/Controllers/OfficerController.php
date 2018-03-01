@@ -214,4 +214,27 @@ class OfficerController extends Controller
         Officer::find($id)->update(['isActive' => 1]);
         return redirect('/Officer');
     }
+
+    public function remove($id)
+    {
+        $post = Officer::find($id);
+        $chkChairman = Officer::find($id)->where('position','Chairman')->get();
+        $chkSec = Officer::find($id)->where('position','Secretary')->get();
+
+        if(count($chkChairman) > 0 || count($chkSec) > 0)
+        {
+            return redirect('/Officer')->withError('Your account could not be deleted. Because, it is necessary in the forms.');
+        }
+        else
+        {
+            if(count($post->User)!=0)
+            {
+                $user = User::where('officerId',$id)->first();
+                $user->delete();
+            }
+
+            $post->delete();
+            return redirect('/Officer/Soft');
+        }
+    }
 }

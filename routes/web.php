@@ -66,6 +66,8 @@ Route::get('/Officer/Deactivate/id={id}', 'OfficerController@destroy');
 Route::get('/Officer/Soft', 'OfficerController@soft');
 Route::get('/Officer/Reactivate/id={id}', 'OfficerController@reactivate');
 
+Route::get('/Officer/Remove/id={id}','OfficerController@remove');
+
 Route::post('/Officer/Store','OfficerController@store');
 Route::post('/Officer/Update/id={id}','OfficerController@update');
 
