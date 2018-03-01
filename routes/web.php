@@ -35,6 +35,9 @@ Route::get('/Resident/NotResident/Soft', 'ResidentController@soft2');
 Route::get('/Resident/Reactivate/id={id}', 'ResidentController@reactivate');
 Route::get('/Resident/NotResident/Reactivate/id={id}', 'ResidentController@reactivate2');
 
+Route::get('/Resident/Remove/id={id}','ResidentController@remove');
+Route::get('/Resident/NotResident/Remove/id={id}','ResidentController@remove2');
+
 Route::post('/Resident/Store','ResidentController@store');
 Route::post('/Resident/NotResident/Store','ResidentController@notResident');
 Route::post('/Resident/Update/id={id}','ResidentController@update');
@@ -49,6 +52,8 @@ Route::get('/Household/Edit/id={id}','HouseholdController@edit');
 Route::get('/Household/Deactivate/id={id}', 'HouseholdController@destroy');
 Route::get('/Household/Soft', 'HouseholdController@soft');
 Route::get('/Household/Reactivate/id={id}', 'HouseholdController@reactivate');
+
+Route::get('/Household/Remove/id={id}','HouseholdController@remove');
 
 Route::post('/Household/Store','HouseholdController@store');
 Route::post('/Household/Update/id={id}','HouseholdController@update');
@@ -72,6 +77,8 @@ Route::get('/Project/Deactivate/id={id}', 'ProjectController@destroy');
 Route::get('/Project/Soft', 'ProjectController@soft');
 Route::get('/Project/Reactivate/id={id}', 'ProjectController@reactivate');
 
+Route::get('/Project/Remove/id={id}','ProjectController@remove');
+
 Route::post('/Project/Store','ProjectController@store');
 Route::post('/Project/Update/id={id}','ProjectController@update');
 
@@ -82,6 +89,8 @@ Route::get('/Business/Edit/id={id}','BusinessController@edit');
 Route::get('/Business/Deactivate/id={id}', 'BusinessController@destroy');
 Route::get('/Business/Soft', 'BusinessController@soft');
 Route::get('/Business/Reactivate/id={id}', 'BusinessController@reactivate');
+
+Route::get('/Business/Remove/id={id}','BusinessController@remove');
 
 Route::post('/Business/Store','BusinessController@store');
 Route::post('/Business/Update/id={id}','BusinessController@update');
@@ -114,6 +123,8 @@ Route::get('/Blotter/Deactivate/id={id}', 'BlotterController@destroy');
 Route::get('/Blotter/Soft', 'BlotterController@soft');
 Route::get('/Blotter/Reactivate/id={id}', 'BlotterController@reactivate');
 
+Route::get('/Blotter/Remove/id={id}','BlotterController@remove');
+
 Route::post('/Blotter/Store','BlotterController@store');
 Route::post('/Blotter/Update/id={id}','BlotterController@update');
 
@@ -124,6 +135,8 @@ Route::get('/Schedule/Edit/id={id}','ScheduleController@edit');
 Route::get('/Schedule/Deactivate/id={id}', 'ScheduleController@destroy');
 Route::get('/Schedule/Soft', 'ScheduleController@soft');
 Route::get('/Schedule/Reactivate/id={id}', 'ScheduleController@reactivate');
+
+Route::get('/Schedule/Remove/id={id}','ScheduleController@remove');
 
 Route::post('/Schedule/Store','ScheduleController@store');
 Route::post('/Schedule/Update/id={id}','ScheduleController@update');

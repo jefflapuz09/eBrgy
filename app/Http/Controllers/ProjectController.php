@@ -196,4 +196,11 @@ class ProjectController extends Controller
         Project::find($id)->update(['isActive' => 1]);
         return redirect('/Project');
     }
+
+    public function remove($id)
+    {
+        $post = Project::find($id);
+        $post->delete();
+        return redirect('/Project/Soft');
+    }
 }

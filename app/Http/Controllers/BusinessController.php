@@ -183,4 +183,11 @@ class BusinessController extends Controller
         Business::find($id)->update(['isActive' => 1]);
         return redirect('/Business');
     }
+
+    public function remove($id)
+    {
+        $post = Business::find($id);
+        $post->delete();
+        return redirect('/Business/Soft');
+    }
 }

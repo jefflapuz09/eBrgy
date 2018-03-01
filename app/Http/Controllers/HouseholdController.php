@@ -225,4 +225,23 @@ class HouseholdController extends Controller
         Household::find($id)->update(['isActive' => 1]);
         return redirect('/Household');
     }
+
+    public function remove($id)
+    {
+        $post = Household::find($id);
+
+        if(count($post->Inhabitants)!=0)
+        {
+            $inhabitant = Inhabitant::where('householdId',$post->id)->get();
+            
+            foreach($inhabitant as $ins)
+            {
+                
+                $ins->delete();
+            }
+        }
+
+        $post->delete();
+        return redirect('/Household/Soft');
+    }
 }

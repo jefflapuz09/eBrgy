@@ -44,6 +44,9 @@
                         <a href="{{ url('/Household/Reactivate/id='.$posts->id) }}"  onclick="return reacForm()"  type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Reactivate record">
                             <i class="fa fa-recycle" aria-hidden="true"></i>
                         </a>
+                        <a href="{{ url('/Household/Remove/id='.$posts->id) }}"  onclick="return deleteForm()"  type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete record">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
                     </td>
                 </tr>
                 @endforeach
@@ -61,6 +64,14 @@
     
     function reacForm(){
         var x = confirm("Are you sure you want to reactivate this record?");
+        if (x)
+          return true;
+        else
+          return false;
+     }
+
+     function deleteForm(){
+        var x = confirm("Are you sure you want to delete this record?");
         if (x)
           return true;
         else

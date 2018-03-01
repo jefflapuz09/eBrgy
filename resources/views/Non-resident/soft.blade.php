@@ -56,6 +56,9 @@
                         <a href="{{ url('/Resident/NotResident/Reactivate/id='.$posts->id) }}"  onclick="return reacForm()"  type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Reactivate record">
                             <i class="fa fa-recycle" aria-hidden="true"></i>
                         </a>
+                        <a href="{{ url('/Resident/NotResident/Remove/id='.$posts->id) }}"  onclick="return deleteForm()"  type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Reactivate record">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
                     </td>
                 </tr>
                 @endforeach
@@ -79,6 +82,13 @@
           return false;
      }
 
+     function deleteForm(){
+        var x = confirm("Are you sure you want to deactivate this record? All items included in this record will also be deactivated. Note: Deactivating the record means the resident they're now transferring their record.");
+        if (x)
+          return true;
+        else
+          return false;
+     }
 
 </script>
 @stop

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Inhabitant;
+use App\Blotter;
+use App\Business;
+use App\Schedule;
 use App\Resident;
 use App\parentModel;
 use App\Voter;
@@ -749,6 +753,53 @@ class residentController extends Controller
 
     public function remove($id)
     {
+        $post = Resident::find($id);
 
+        $chkHousehold = Inhabitant::where('residentId',$id)->get();
+        $chkBlotter = Blotter::where('complainant',$id)->orWhere('complainedResident', $id)->get();
+        $chkBusiness = Business::where('residentId',$id)->get();
+        $chkSchedule = Schedule::where('residentId',$id)->get();
+
+        if(count($chkHousehold) > 0 || count($chkBlotter) > 0 || count($chkBusiness) > 0 || count($chkSchedule) > 0)
+        {
+            return redirect('/Resident')->withError('It seems that the record is still being used in other items. Deletion failed.');
+        }
+        else
+        {
+            if(count($post->Parents)!=0)
+            {
+                $parent = parentModel::where('residentId',$post->id)->first();
+                $parent->delete();
+            }
+    
+            if(count($post->Voter)!=0)
+            {
+                $voter = Voter::where('residentId',$post->id)->first();
+                $voter->delete();
+            }
+    
+            $post->delete();
+            return redirect('/Resident/Soft');
+        }
+    }
+
+    public function remove2($id)
+    {
+        $post = Resident::find($id);
+
+        if(count($post->Parents)!=0)
+        {
+            $parent = parentModel::where('residentId',$post->id)->first();
+            $parent->delete();
+        }
+
+        if(count($post->Voter)!=0)
+        {
+            $voter = Voter::where('residentId',$post->id)->first();
+            $voter->delete();
+        }
+
+        $post->delete();
+        return redirect('/Resident/NotResident/Soft');
     }
 }

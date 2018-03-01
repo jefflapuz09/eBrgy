@@ -193,4 +193,11 @@ class ScheduleController extends Controller
         Schedule::find($id)->update(['isActive' => 1]);
         return redirect('/Schedule');
     }
+
+    public function remove($id)
+    {
+        $post = Schedule::find($id);
+        $post->delete();
+        return redirect('/Schedule/Soft');
+    }
 }

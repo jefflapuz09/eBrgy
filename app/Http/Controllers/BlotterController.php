@@ -214,4 +214,11 @@ class BlotterController extends Controller
         Blotter::find($id)->update(['isActive' => 1]);
         return redirect('/Blotter');
     }
+
+    public function remove($id)
+    {
+        $post = Blotter::find($id);
+        $post->delete();
+        return redirect('/Blotter/Soft');
+    }
 }
